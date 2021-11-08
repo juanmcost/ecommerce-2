@@ -1,15 +1,40 @@
 const express = require('express');
-const dotenv = require('dotenv');
+const session = require('express-session');
+const passport = require('passport');
+require('dotenv').config();
+const volleyball = require('volleyball');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const router = require('./routes/');
-const setupController = require('./controllers/seedController');
 const client = require('./config/db');
-dotenv.config();
+const setupController = require('./controllers/seedController');
+require('./config/passport');
 
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(volleyball);
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 3600 * 24 * 60 * 60 * 365,
+        },
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/api', router);
+
 app.get('/', (req, res, next) => {
     res.json('HOLA');
 });
@@ -17,6 +42,6 @@ app.get('/', (req, res, next) => {
 client.then(() => {
     //setupController();
     app.listen(process.env.PORT || 8080, () => {
-        console.log('app conectada en http://localhost:8080');
+        console.log('Backend server is running on http://localhost:8080');
     });
 });

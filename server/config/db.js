@@ -8,7 +8,7 @@ const client = mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(() => console.log('DB Connected'))
-    .catch((e) => console.log('DB Error: ' + e));
+    .then(() => console.log('MongoDB Connected'))
+    .catch((e) => console.log('MongoDB Error: ' + e));
 
 module.exports = client;
