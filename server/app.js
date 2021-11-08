@@ -1,13 +1,22 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+
+const router = require('./routes/');
+const setupController = require('./controllers/seedController');
+const client = require('./config/db');
+dotenv.config();
 
 const app = express();
 
-const PORT = 8080;
-
+app.use('/api', router);
 app.get('/', (req, res, next) => {
-    res.json('HOLA    ');
+    res.json('HOLA');
 });
 
-app.listen(PORT, () => {
-    console.log('app conectada en http://localhost:8080');
+client.then(() => {
+    //setupController();
+    app.listen(process.env.PORT || 8080, () => {
+        console.log('app conectada en http://localhost:8080');
+    });
 });
