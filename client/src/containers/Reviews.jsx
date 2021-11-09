@@ -7,8 +7,8 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from '@chakra-ui/react';
-import ReviewCard from '../components/ReviewCard'
-import ReviewForm from '../components/ReviewForm'
+import ReviewCard from '../components/ReviewCard';
+import ReviewForm from '../components/ReviewForm';
 
 const testimonials = [
   {
