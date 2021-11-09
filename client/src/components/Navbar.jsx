@@ -31,8 +31,8 @@ export default function Navbar() {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
     const subCategories = {
-        cellphones: ["samsung"],
-        computers: ["LG", "tu vieja"]
+        cellphones: [{name:"samsung", url:""}],
+        computers: [{name: "LG", url:""}, {name:"tu vieja", url: ""}]
     }
 
     return (
@@ -85,7 +85,7 @@ export default function Navbar() {
                         <PopoverContent>
                             <Stack>
                                 {subCategories[category].map((sub, i) => (
-                                    <Box key={i}>{sub}</Box>
+                                    <Box key={i}>{sub.name}</Box>
                                 ))}
                             </Stack>
                         </PopoverContent>
