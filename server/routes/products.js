@@ -8,7 +8,7 @@ router.get("/:tag", productsController.getTags);
 
 router.get("/:id", productsController.getProduct);
 
-router.get("/:title", productsController.getProductTitle);
+router.get("/search:title", productsController.getProductTitle);
 
 //admin
 router.post("/add", auth.checkAuth, productsController.addProduct);

@@ -22,7 +22,7 @@ class ProductController {
   static async getProductTitle(req, res) {
     try {
       //const { title } = req.body;
-      const product = await Product.findOne({ title: req.params.title });
+      const product = await Product.find({ title: { $regex: ".*" + req.params.title + ".*" } });
       res.json(product);
     } catch {
       res.status(500).json({ error });
