@@ -56,7 +56,7 @@ export default function Navbar() {
 
                     <Flex alignItems={'center'} ml="50%">
                         <Stack direction={'row'} spacing={7} alignItems={'center'}>
-                            <Button onClick={toggleColorMode} bg="none" rounded="2xl">
+                            <Button onClick={toggleColorMode} bg="none" rounded="full">
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>
 
