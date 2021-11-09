@@ -31,15 +31,18 @@ export default function Navbar() {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
 
     const subCategories = {
-        cellphones: [{name:"samsung", url:""}],
-        computers: [{name: "LG", url:""}, {name:"tu vieja", url: ""}]
+        cellphones_by_brand: ["Samsung","LG","Motorola","Apple"],
+        consoles_and_videogames: ["consoles","games","accesories","Xbox Series X"],
+        gaming_PC: ["mouses", "keyboards", "pads"],
+        informatics: ["notebooks","tablets","monitors", "printers", "cartridges", "all in one and desktop PC"],
+        computer_accessories: ["connectivity", "webcam", "speakers", "stabilizers", "backpacks and notebook bags"]
     }
 
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                    <Box>logo</Box>
+                    <Link as={ReactLink} to="/home">logo</Link>
 
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7} alignItems={'center'}>
@@ -47,7 +50,7 @@ export default function Navbar() {
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>
 
-                            <Link as={ReactLink} to="/myCart" bg="none">
+                            <Link as={ReactLink} to="/myCart">
                                 <Icon as={FaShoppingCart} />
                             </Link>
 
@@ -75,22 +78,26 @@ export default function Navbar() {
                     </Flex>
                 </Flex>
                 <Divider orientation="horizontal"/>
-                {Object.keys(subCategories).map((category, i) => (
-                    <Popover trigger={"hover"} key={i}>
-                        <PopoverTrigger bg="none" on>
-                            <Button bg="none">
-                                {category}
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                            <Stack>
-                                {subCategories[category].map((sub, i) => (
-                                    <Box key={i}>{sub.name}</Box>
-                                ))}
-                            </Stack>
-                        </PopoverContent>
-                    </Popover>
-                ))}
+                <Center>
+                    {Object.keys(subCategories).map((category, i) => (
+                        <Popover trigger={"hover"} key={i}>
+                            <PopoverTrigger bg="none" on>
+                                <Button bg="none">
+                                    {category.split("_").join(" ")}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                                <Stack align={'center'}>
+                                    {subCategories[category].map((sub, i) => (
+                                        <Link as={ReactLink} to={`/categories/${category}/${sub.split(" ").join("_")}`} style={{textDecoration: "none"}}key={i}>
+                                            {sub}
+                                        </Link>
+                                    ))}
+                                </Stack>
+                            </PopoverContent>
+                        </Popover>
+                    ))}
+                </Center>
             </Box>
         </>
     );
