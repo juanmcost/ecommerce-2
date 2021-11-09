@@ -12,6 +12,7 @@ const ShopCart = () => {
         const jsonUser = localStorage.getItem('loggedUser');
         if (jsonUser) setUser(JSON.parse(jsonUser))
     }, [])
+    
     return (
         <h1>carrito de {user.username}</h1>
     )

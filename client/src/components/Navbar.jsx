@@ -21,10 +21,13 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-    Icon
+    Icon,
+    InputGroup,
+    Input,
+    InputLeftElement
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon, CartIcon } from '@chakra-ui/icons';
-import { FaShoppingCart } from 'react-icons/fa';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { FaShoppingCart, FaSearch } from 'react-icons/fa';
 
 export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -41,10 +44,17 @@ export default function Navbar() {
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+                <Flex h={16} alignItems={'center'}>
                     <Link as={ReactLink} to="/home">logo</Link>
+                    <InputGroup ml="10"  w="35%">
+                        <InputLeftElement
+                        pointerEvents="none"
+                        children={<FaSearch color="gray.300" />}
+                        />
+                        <Input bg={useColorModeValue('gray.50', 'gray.700')} type="tel" placeholder="Search some products!" />
+                    </InputGroup>
 
-                    <Flex alignItems={'center'}>
+                    <Flex alignItems={'center'} ml="50%">
                         <Stack direction={'row'} spacing={7} alignItems={'center'}>
                             <Button onClick={toggleColorMode} bg="none" rounded="2xl">
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
