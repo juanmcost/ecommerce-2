@@ -2,6 +2,7 @@ const User = require('../models/Users');
 const bcrypt = require('bcrypt');
 
 class UserController {
+    // GET ONE
     static async getUser(req, res) {
         try {
             const user = await User.findById(req.params.id, { status: true }).select({ password: 0 });
@@ -12,6 +13,7 @@ class UserController {
         }
     }
 
+    // GET ALL
     static async getAllUsers(req, res) {
         try {
             const users = await User.find({ status: true }).select({ password: 0 });
@@ -21,10 +23,10 @@ class UserController {
         }
     }
 
+    // Update User
     static async editUser(req, res) {
         try {
             req.body.password ? (req.body.password = bcrypt.hashSync(req.body.password, 12)) : null;
-
             const user = await User.findByIdAndUpdate(
                 req.params.id,
                 {
