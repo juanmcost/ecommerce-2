@@ -1,21 +1,26 @@
 const User = require('../models/Users');
-const jwt = require('jsonwebtoken');
+const joi = require('../utils/joi');
 
 class AuthController {
     // Register
     static async register(req, res, next) {
-        const { username, password, email } = req.body;
-        const { error } = joi.validate({ username, password, email });
-
-        if (!error) {
-            const user = await UsersService.createUser(req.body);
-            return user ? res.json({ user }) : res.status(404).send('Bad Request');
+        try {
+            const { username, password, email } = req.body;
+            const { error } = joi.validate({ username, password, email });
+            if (!error) {
+                const newUser = new User(req.body);
+                const user = await newUser.save();
+                return user ? res.json(user) : res.status(500).send('Error on .save()');
+            }
+            return res.stauts(404).json('Bad Request');
+        } catch (error) {
+            return res.json(error);
         }
-        next(error);
     }
 
-    static login = (req, res) => res.send(req.user);
-    
+    static login = (req, res) => {
+        res.send(req.user);
+    };
 
     static async logOut(req, res) {
         await req.logOut();
