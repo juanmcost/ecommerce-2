@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Link as ReactLink } from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -19,9 +20,11 @@ import {
     Collapse,
     Popover,
     PopoverContent,
-    PopoverTrigger
+    PopoverTrigger,
+    Icon
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { MoonIcon, SunIcon, CartIcon } from '@chakra-ui/icons';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -39,10 +42,14 @@ export default function Navbar() {
                     <Box>logo</Box>
 
                     <Flex alignItems={'center'}>
-                        <Stack direction={'row'} spacing={7}>
-                            <Button onClick={toggleColorMode} rounded="2xl">
+                        <Stack direction={'row'} spacing={7} alignItems={'center'}>
+                            <Button onClick={toggleColorMode} bg="none" rounded="2xl">
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>
+
+                            <Link as={ReactLink} to="/myCart" bg="none">
+                                <Icon as={FaShoppingCart} />
+                            </Link>
 
                             <Menu>
                                 <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
