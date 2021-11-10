@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const client = mongoose
-    .connect(process.env.MONGODB_HOST, {
+    .connect(process.env.MONGODB_HOST_AUX, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
