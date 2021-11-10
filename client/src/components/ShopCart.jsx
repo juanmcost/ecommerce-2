@@ -12,19 +12,35 @@ const ShopCart = () => {
     useEffect(() => {
         //pa probar:
         const testObject = {username: "ale"}
-        const testCarrito = [{product: {title: "celu", price: 100}, quantity: 2},{product: {title: "monitor", price: 10}, quantity: 1}]
+        const testCarrito = {
+            list: [{product: {title: "celu", price: 100}, quantity: 2},{product: {title: "monitor", price: 10}, quantity: 1}],
+            total: 0
+        }
         localStorage.setItem('loggedUser', JSON.stringify(testObject));
         localStorage.setItem('carrito', JSON.stringify(testCarrito));
         //esto si hiría:
         const jsonUser = localStorage.getItem('loggedUser');
         const jsonCart = localStorage.getItem('carrito');
+        let carrito = JSON.parse(jsonCart);
+        console.log("carrito:",carrito);
+        carrito.list.map((cartItem, i) => {
+            carrito.total += cartItem.product.price * cartItem.quantity
+        })
+        console.log("total de carrito:", carrito.total)
         if (jsonUser) setUser(JSON.parse(jsonUser));
-        if (jsonCart) setCart(JSON.parse(jsonCart));
+        if (jsonCart) setCart(carrito);
+        console.log("")
     }, [])
     
     const changeQuantity = (moreOrLess, index) => {
         let auxCart = cart;
-        (moreOrLess === "+") ? auxCart[index].quantity+=1 : auxCart[index].quantity-=1;
+        if (moreOrLess === "+") {
+            auxCart.list[index].quantity+=1;
+            auxCart.total += auxCart.list[index].product.price
+        } else {
+            auxCart.list[index].quantity-=1;
+            auxCart.total -= auxCart.list[index].product.price
+        }
         //no se me guarda en localStorage
         localStorage.setItem('carrito', JSON.stringify(auxCart));
         setCart(auxCart);
@@ -35,15 +51,16 @@ const ShopCart = () => {
         <>
         <h1>carrito de {user.username}</h1>
         {
-        cart.map((prod, i) => (
+        cart.list?.map((prod, i) => (
             <Stack direction={"row"} align="center" h="16" spacing={7} key={i}>
                 <p>{prod.product.title}</p>
                 <Button onClick={()=>changeQuantity("-", i)}>-</Button>
-                <p>Cantidad: {prod.quantity} </p>
+                <p>Quantity: {prod.quantity} </p>
                 <Button onClick={()=>changeQuantity("+", i)}>+</Button>
-                <p>Precio: {prod.product.price}</p>
+                <p>Price: {prod.product.price}</p>
             </Stack>
         ))}
+        <h1>total: {cart.total}</h1>
         </>
     )
 }
