@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const User = new Schema(
     {
@@ -18,18 +19,37 @@ const User = new Schema(
         },
         country: {
             type: String,
-            required: true,
         },
         city: {
             type: String,
-            required: true,
         },
         phone: {
             type: Number,
         },
-        status: { type: Boolean, default: true },
+        isAdmin: {
+            type: Boolean,
+            default: false,
+        },
+        status: {
+            type: Boolean,
+            default: true,
+        },
     },
     { timestamps: true }
 );
+
+// Instance Method => check password
+User.method({
+    matchPassword: async function (password) {
+        const res = await bcrypt.compareSync(password, this.password);
+        return res;
+    },
+});
+
+//Schema Hook => hash password
+User.pre('save', async function (next) {
+    this.password = await bcrypt.hash(this.password, 12);
+    return next();
+});
 
 module.exports = model('User', User);
