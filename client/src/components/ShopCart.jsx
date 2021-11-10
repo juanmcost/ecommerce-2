@@ -1,11 +1,12 @@
 import { Button } from "@chakra-ui/react";
 import { Flex, Stack } from "@chakra-ui/layout";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const ShopCart = () => {
     const [user,setUser] = useState({});
-    const [cart,setCart] = useState([]);
+    const [cart,setCart] = useState({});
     const [aux, setAux] = useState(true);
 
 
@@ -61,6 +62,7 @@ const ShopCart = () => {
             </Stack>
         ))}
         <h1>total: {cart.total}</h1>
+        <Link to="/">proceed with order</Link>
         </>
     )
 }
