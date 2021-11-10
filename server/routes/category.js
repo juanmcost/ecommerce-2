@@ -1,11 +1,11 @@
-const router = require("express").Router();
-const auth = require("../middlewares/auth");
-const categoryControllers = require("../controllers/category");
+const router = require('express').Router();
+const { checkAuthAndAdmin, checkAuth } = require('../middlewares/auth');
+const categoryController = require('../controllers/categoryController');
 
-router.put("/add/:id", auth.checkAuthAndAdmin, categoryControllers.addCategory);
+router.put('/add/:id', checkAuthAndAdmin, categoryController.addCategory);
 
-router.delete("/remove", auth.checkAuthAndAdmin, categoryControllers.removeCategory);
+router.delete('/remove', checkAuthAndAdmin, categoryController.removeCategory);
 
-router.put("/edit/:category", auth.checkAuth, categoryControllers.editCategory);
+router.put('/edit/:category', checkAuth, categoryController.editCategory);
 
 module.exports = router;
