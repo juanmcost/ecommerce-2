@@ -9,6 +9,8 @@ import Article from './views/Article'
 import MyProducts from './views/MyProducts'
 import ProductsGrid from "./components/Grid";
 import ShopCart from "./components/ShopCart";
+import ShopCartDB from "./components/ShopCartDB";
+import Home from "./views/Home";
 
 const App = () => {
   return (
@@ -16,11 +18,10 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/articles/:id" element={<Article/>} />
-        <Route path="/home" element={<Carousel />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />
-        <Route path="/myCart" element={<></>} />
         <Route path='/myProducts' element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
         <Route
