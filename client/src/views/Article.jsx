@@ -14,7 +14,6 @@ import {
   IoLogoBitcoin,
 } from 'react-icons/io5';
 import { React, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'
 import Reviews from '../containers/Reviews'
 import Carousel from '../components/Carousel';
 
@@ -37,7 +36,7 @@ const Feature = ({ text, icon, iconBg }) => {
 
 export default function SplitWithImage() {
 	const [article, setArticle] = useState({});
-	const id = useLocation().pathname.split('/')[2]; //toDo Usar para gestionar estado de producto con redux.
+	//const id = useLocation().pathname.split('/')[2]; //toDo Usar para gestionar estado de producto con redux.
 	useEffect(() => {
     const data = {
       name: 'Acer Nitro 5', 
@@ -57,7 +56,7 @@ export default function SplitWithImage() {
       window.localStorage.setItem('product', JSON.stringify(data));
       setArticle(JSON.parse(window.localStorage.getItem('product')));
     };
-	}, []);
+	}, [article]);
 	
   return (
     <Container maxW={'95vw'} py={12}>

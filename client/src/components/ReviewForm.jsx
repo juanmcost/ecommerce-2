@@ -17,7 +17,7 @@ import { useForm } from '../hooks/useForm'
 export default function ReviewForm() {
   const { form, handleForm } = useForm();
 	// const handleSubmit = () => {
-	// 	form																//toDo handleSubmit
+	  console.log(form);																//toDo handleSubmit
 	// }
 
 	return (
