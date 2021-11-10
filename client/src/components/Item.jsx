@@ -55,7 +55,7 @@ import {
     );
   }
   
-  function Item() {
+  function Item( { item } ) {
     return (
       <Flex p={50} w="full" alignItems="center" justifyContent="center">
         <Box

@@ -71,18 +71,18 @@ export default function Component() {
               key={tid}
             >
               {breakPoint({ base: true, md: tid === 0 }) && (
-                <SimpleGrid
-                  spacingY={3}
-                  columns={{ base: 1, md: 4 }}
-                  w={{ base: 120, md: "full" }}
-                  textTransform="uppercase"
-                  bg={colorIt("gray.100", "gray.700")}
-                  color={colorIt("gray.500")}
-                  py={{ base: 1, md: 4 }}
-                  px={{ base: 2, md: 10 }}
-                  fontSize="md"
-                  fontWeight="hairline"
-                  display="table-header-group"
+								<SimpleGrid
+								spacingY={3}
+								columns={{ base: 1, md: 4 }}
+								w={{ base: 120, md: "full" }}
+								textTransform="uppercase"
+								bg={colorIt("gray.100", "gray.700")}
+								color={colorIt("gray.500")}
+								py={{ base: 1, md: 4 }}
+								px={{ base: 2, md: 10 }}
+								fontSize="md"
+								fontWeight="hairline"
+								display="table-header-group"
                 >
                   <span>Name</span>
                   <span>Created</span>
@@ -90,6 +90,7 @@ export default function Component() {
                   <chakra.span textAlign={{ md: "right" }}>Actions</chakra.span>
                 </SimpleGrid>
               )}
+							<ProductMiniature image={token.image} />
               <SimpleGrid
                 spacingY={3}
                 columns={{ base: 1, md: 4 }}
@@ -98,7 +99,6 @@ export default function Component() {
                 px={10}
                 fontWeight="hairline"
               >
-                <ProductMiniature image={token.image} />
                 <span>{token.name}</span>
                 <chakra.span
                   textOverflow="ellipsis"

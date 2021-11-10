@@ -6,6 +6,8 @@ import { SimpleCard } from "./components/Login";
 import { Route, Routes } from "react-router-dom";
 import Article from './views/Article'
 import MyProducts from './views/MyProducts'
+import ProductsGrid from "./components/Grid";
+import ShopCart from "./components/ShopCart";
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/profile" element={<SocialProfileWithImage />} />
         <Route path="/myCart" element={<></>} />
         <Route path='/myProducts' element={<MyProducts />} />
+        <Route path="/myCart" element={<ShopCart />} />
         <Route
           path={`/categories/categoryId`}
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
