@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Text, Box, Flex, useColorModeValue, Image } from '@chakra-ui/react';
 
-const Carousel = () => {
+
+const Carousel = ({slides}) => {
     const arrowStyles = {
         cursor: 'pointer',
         pos: 'absolute',
@@ -20,8 +21,6 @@ const Carousel = () => {
             bg: 'black',
         },
     };
-
-    const slides = JSON.parse(window.localStorage.getItem('product')).images
 
     const [currentSlide, setCurrentSlide] = useState(0);
 

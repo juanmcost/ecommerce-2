@@ -9,6 +9,8 @@ import Article from './views/Article'
 import MyProducts from './views/MyProducts'
 import ProductsGrid from "./components/Grid";
 import ShopCart from "./components/ShopCart";
+import { dummieData as data } from "./utils/dummieData"
+const images = data[4].images //toDo sustituir por info real
 
 const App = () => {
   return (
@@ -16,7 +18,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/articles/:id" element={<Article/>} />
-        <Route path="/home" element={<Carousel />} />
+        <Route path="/home" element={<Carousel slides={images}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />

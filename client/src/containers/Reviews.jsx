@@ -93,7 +93,7 @@ export default function Reviews() {
 					mt={16}
 					mx={'auto'}>
 					{testimonials.map((cardInfo, index) => (
-						<ReviewCard {...cardInfo} index={index} />
+						<ReviewCard {...cardInfo} key={index} index={index} />
 					))}
 				</SimpleGrid>
 				<Box>

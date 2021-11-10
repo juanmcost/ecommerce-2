@@ -7,7 +7,7 @@ import {
 
 export default function ProductMiniature({image}) {
   return (
-    <Center py={12}>
+    <Center pt={12} pb={5}>
       <Box
         role={"group"}
         p={6}
