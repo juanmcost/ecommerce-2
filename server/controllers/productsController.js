@@ -3,7 +3,7 @@ const Product = require("../models/Products");
 class ProductController {
   static async getAllProduct(req, res) {
     try {
-      const products = await Product.find({ color: "Negro" });
+      const products = await Product.find();
       res.json(products);
     } catch {
       res.status(500).json({ error });
