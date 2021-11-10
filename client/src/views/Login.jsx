@@ -1,0 +1,113 @@
+import react, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { sendLoginRequest } from "../store/auth";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Stack,
+  Link,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Redirect,
+} from "@chakra-ui/react"; // import chackra
+
+export default function Login() {
+  // export default
+
+  //-----SEND LOGIN----------------
+
+  const dispatch = useDispatch();
+
+  const [form, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [loged, setLoged] = useState("");
+
+  const handleInput = (event) => {
+    setValues({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+    const res = await dispatch(sendLoginRequest(form))
+      if(res.status === 200){
+        
+      }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+            <Text fontSize={"lg"} color={"gray.600"}></Text>
+          </Stack>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <FormControl id="email" isRequired>
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  name="email"
+                  placeholder="example@example.com"
+                  type="email"
+                  onChange={handleInput}
+                />
+              </FormControl>
+              <FormControl id="password" isRequired>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  name="password"
+                  placeholder="*******"
+                  type="password"
+                  onChange={handleInput}
+                />
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align={"start"}
+                  justify={"space-between"}
+                >
+                  <Checkbox>Remember me</Checkbox>
+                  <Link color={"blue.400"}>Forgot password?</Link>
+                </Stack>
+                <Button
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                  type="submit"
+                >
+                  Sign in
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
+        </Stack>
+        {loged ? <Redirect to="/" /> : null}
+      </Flex>
+    </form>
+  );
+}

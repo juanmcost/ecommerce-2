@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"; // import redux tool-kit
 import logger from 'redux-logger' // import redux logger
+import authReducer from './auth'
+import userReducer from './user'
 
 
 // config reducer
@@ -7,6 +9,8 @@ import logger from 'redux-logger' // import redux logger
 const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     reducer: {
+      auth: authReducer,
+      user: userReducer,
     },
   });
   

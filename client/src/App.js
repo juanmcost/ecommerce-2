@@ -2,7 +2,8 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import { SocialProfileWithImage } from "./components/Card";
 import Carousel from "./components/Carousel";
-import { SimpleCard } from "./components/Login";
+import  Login  from "./views/Login";
+import Register  from "./views/Register"
 import { Route, Routes } from "react-router-dom";
 import ProductsGrid from "./components/Grid";
 import ShopCart from "./components/ShopCart";
@@ -13,8 +14,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/home" element={<Carousel />} />
-        <Route path="/login" element={<SimpleCard />} />
-        <Route path="/signIn" element={<></>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />
         <Route path="/myCart" element={<ShopCart />} />
         <Route
