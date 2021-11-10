@@ -21,23 +21,7 @@ const Carousel = () => {
         },
     };
 
-    const slides = [
-        {
-            img: 'https://images.pexels.com/photos/2599537/pexels-photo-2599537.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-        },
-        {
-            img: 'https://images.pexels.com/photos/2714581/pexels-photo-2714581.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-        },
-        {
-            img: 'https://images.pexels.com/photos/2878019/pexels-photo-2878019.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-        },
-        {
-            img: 'https://images.pexels.com/photos/1142950/pexels-photo-1142950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-        },
-        {
-            img: 'https://images.pexels.com/photos/3124111/pexels-photo-3124111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-        },
-    ];
+    const slides = JSON.parse(window.localStorage.getItem('product')).images
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -64,7 +48,7 @@ const Carousel = () => {
                             <Text color="white" fontSize="xs" p="8px 12px" pos="absolute" top="0">
                                 {sid + 1} / {slidesCount}
                             </Text>
-                            <Image src={slide.img} boxSize="full" backgroundSize="cover" />
+                            <Image src={slide} boxSize="full" backgroundSize="cover" />
                         </Box>
                     ))}
                 </Flex>

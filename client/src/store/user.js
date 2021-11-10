@@ -3,34 +3,46 @@ import axios from "axios"; // import axios
 
 //---------------CONFIG USERS -------------- \\
 
-//--Config Login
-export const sendLoginRequest = createAsyncThenk("LOGIN", () => {
-  return axios.post("").then((res) => res.data);
+const API = "http://localhost:8080/api/user";
+
+//--GET all users
+
+export const getAllUser = createAsyncThunk("GET_ALL_USERS", (prop) => {
+  return axios.get(`${API}/`).then((res) => res.data);
 });
 
-//--Config isLogin 
+//--GET one user
 
-export const isLoginRequest = createAsyncThenk("IS_LOGIN_REQUEST", ()=> {
-  return axios.get('').then((res)=>res.data);
-})
+export const getUser = createAsyncThunk("GET_USER", (prop) => {
+  return axios.get(`${API}/${prop.id}`).then((res) => res.data);
+});
 
-//--Config Register
+//--PUT one user
 
-export const sendRegisterRequest = createAsyncThenk("REGISTER_REQUEST", ()=>{
-  return axios.post('').then((res)=>res.data);
-})
+export const editUser = createAsyncThunk("GET_USER", (prop) => {
+  return axios.put(`${API}/${prop.id}`, prop.data).then((res) => res.data);
+});
 
-//--Config Logout
+//-- PUT ADMIN USER
 
-export const sendLogoutRequest = createAsyncThenk("LOGOUT_REQUEST", ()=>{
-  return axios.post('').then((res)=>res.data);
-})
+export const adminUser = createAsyncThunk("GET_USER", (prop) => {
+  return axios.put(`${API}/admin/${prop.id}`).then((res) => res.data);
+});
+
+//--DELETE one user
+
+export const deleteUser = createAsyncThunk("GET_USER", (prop) => {
+  return axios.delete(`${API}/${prop.id}`).then((res) => res.data);
+});
 
 //--Config Reducer
 
 const userReducer = createReducer([], {
-  [sendLoginRequest.fullfilled]: (state, action) => action.payload,
-  [isLoginRequest.fullfilled]: (state, action) => action.payload,
-  [sendRegisterRequest.fullfilled]: (state, action) => action.payload,
-  [sendLogoutRequest.fullfilled]: (state, action) => action.payload,
-})
+  [getAllUser.fullfilled]: (state, action) => action.payload,
+  [getUser.fullfilled]: (state, action) => action.payload,
+  [editUser.fullfilled]: (state, action) => action.payload,
+  [adminUser.fullfilled]: (state, action) => action.payload,
+  [deleteUser.fullfilled]: (state, action) => action.payload,
+});
+
+export default userReducer;
