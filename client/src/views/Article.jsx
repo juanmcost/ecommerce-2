@@ -17,6 +17,7 @@ import Feature from "../components/Feature";
 import { dummieData as data } from "../utils/dummieData"
 
 export default function Article() {
+  const product = data[4]
   //const id = useLocation().pathname.split('/')[2]; //toDo Usar para gestionar estado de producto con redux.
   useEffect(() => {
     return "hola";
@@ -26,12 +27,12 @@ export default function Article() {
     <Container maxW={"95vw"} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Flex>
-          <Carousel slides={data.images} />
+          <Carousel slides={product.images} />
         </Flex>
         <Stack spacing={4}>
-          <Heading>{data.name}</Heading>
+          <Heading>{product.name}</Heading>
           <Text color={"gray.500"} fontSize={"lg"}>
-            {data.desciption}
+            {product.desciption}
           </Text>
           <Stack
             spacing={4}
@@ -44,21 +45,21 @@ export default function Article() {
             <Feature
               icon={<Icon as={IoLogoBitcoin} color={"green.500"} w={5} h={5} />}
               iconBg={useColorModeValue("green.100", "green.900")}
-              text={data.price}
+              text={product.price}
             />
             <Feature
               icon={
                 <Icon as={IoAnalyticsSharp} color={"yellow.500"} w={5} h={5} />
               }
               iconBg={useColorModeValue("yellow.100", "yellow.900")}
-              text={`In stock: ${data.quantity}`} //toDo cambiar icono
+              text={`In stock: ${product.quantity}`} //toDo cambiar icono
             />
             <Feature
               icon={
                 <Icon as={IoAnalyticsSharp} color={"yellow.500"} w={5} h={5} />
               }
               iconBg={useColorModeValue("yellow.100", "yellow.900")}
-              text={`Average rating: ${data.avgRating}`}
+              text={`Average rating: ${product.avgRating}`}
             />
           </Stack>
         </Stack>
