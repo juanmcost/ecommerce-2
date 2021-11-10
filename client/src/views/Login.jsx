@@ -1,9 +1,12 @@
 import react, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { sendLoginRequest } from "../store/auth";
+import { successToast, errorToast } from "../utils/toastMessages";
 import {
   Flex,
   Box,
+  useToast,
   FormControl,
   FormLabel,
   Input,
@@ -14,21 +17,23 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Redirect,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react"; // import chackra
 
 export default function Login() {
   // export default
 
   //-----SEND LOGIN----------------
-
+  const toast = useToast();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
+  const [showPassword, setShowPassword] = useState(false);
   const [form, setValues] = useState({
     email: "",
     password: "",
   });
-  const [loged, setLoged] = useState("");
 
   const handleInput = (event) => {
     setValues({
@@ -37,12 +42,25 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = async(event) => {
-    event.preventDefault();
-    const res = await dispatch(sendLoginRequest(form))
-      if(res.status === 200){
-        
-      }
+  const handleShowClick = () => setShowPassword(!showPassword);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await dispatch(sendLoginRequest(form))
+        .then((res) => {
+          if (res.payload) {
+            successToast(toast, `Welcome ${res.payload.username}`);
+            navigate('/')
+          } else {
+            errorToast(toast, `Wrong email or password`);
+          }
+        })
+
+        .catch((err) => ({ err: err.message }));
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return (
@@ -76,14 +94,21 @@ export default function Login() {
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input
-                  name="password"
-                  placeholder="*******"
-                  type="password"
-                  onChange={handleInput}
-                />
+                <InputGroup>
+                  <Input
+                    name="password"
+                    placeholder="*******"
+                    type={showPassword ? 'text' : 'password'}
+                    onChange={handleInput}
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+                      {showPassword ? "Hide" : "Show"}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
               </FormControl>
-              <Stack spacing={10}>
+              <Stack spacing={5}>
                 <Stack
                   direction={{ base: "column", sm: "row" }}
                   align={"start"}
@@ -93,20 +118,29 @@ export default function Login() {
                   <Link color={"blue.400"}>Forgot password?</Link>
                 </Stack>
                 <Button
-                  bg={"blue.400"}
+                  bg={"green.400"}
                   color={"white"}
                   _hover={{
-                    bg: "blue.500",
+                    bg: "green.500",
                   }}
                   type="submit"
                 >
                   Sign in
                 </Button>
+                <Button
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                  type="button"
+                >
+                  Sign Up
+                </Button>
               </Stack>
             </Stack>
           </Box>
         </Stack>
-        {loged ? <Redirect to="/" /> : null}
       </Flex>
     </form>
   );
