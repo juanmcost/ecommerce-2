@@ -10,7 +10,7 @@ const checkAuthAndAdmin = (req, res, next) => {
 
 const checkAuthAndAuthorization = (req, res, next) => {
     if (req.isAuthenticated()) {
-        if (req.user[0]._id === req.params.id) {
+        if (req.user[0]._id === req.params.id || req.user[0].isAdmin) {
             return next();
         }
     }

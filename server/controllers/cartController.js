@@ -3,10 +3,14 @@ const Cart = require('../models/Cart');
 class CartController {
     // Create Cart
     static async createCart(req, res) {
+        const { products } = req.body; // products must be an array
         try {
-            const cart = new Cart(req.body);
+            const cart = new Cart({
+                userId: req.user[0]._id,
+                products,
+            });
             const savedCart = await cart.save();
-            return res.status(200).json(savedCart);
+            return res.status(201).json(savedCart);
         } catch (error) {
             return res.status(500).json({ error });
         }
@@ -34,11 +38,12 @@ class CartController {
 
     // Update Cart
     static async updateCart(req, res) {
+        const { item } = req.body;
         try {
             const cart = await Cart.findByIdAndUpdate(
                 req.params.id,
                 {
-                    $set: req.body,
+                    $set: { products: item },
                 },
                 { new: true }
             );
@@ -48,6 +53,7 @@ class CartController {
         }
     }
 
+    // Delete Cart
     static async deleteCart(req, res) {
         try {
             const deleted = await Cart.findByIdAndDelete(req.params.id);

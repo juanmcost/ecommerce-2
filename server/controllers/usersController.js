@@ -7,7 +7,7 @@ class UserController {
         try {
             const user = await User.findById(req.params.id, { status: true }).select({ password: 0 });
             const { password, ...userData } = user._doc;
-            res.status(200).json(userData);
+            res.status(201).json(userData);
         } catch (error) {
             res.status(500).json({ error });
         }
