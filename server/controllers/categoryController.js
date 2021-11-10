@@ -15,7 +15,7 @@ class Category {
         { new: true }
       );
       res.status(201).json(newCategory);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }

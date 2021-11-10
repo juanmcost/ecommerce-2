@@ -5,7 +5,7 @@ class ProductController {
     try {
       const products = await Product.find();
       res.json(products);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -14,17 +14,16 @@ class ProductController {
     try {
       const product = await Product.findById(req.params.id);
       res.json(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
-  //db.people.find({"name": {$regex:".*fis", $options:"i"}},{name:1})
+
   static async getProductTitle(req, res) {
     try {
-      //const { title } = req.body;
       const product = await Product.find({ title: { $regex: ".*" + req.params.title + ".*" } });
       res.json(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -33,7 +32,7 @@ class ProductController {
     try {
       const products = await Product.find({ category: { $in: [req.params.tag] } });
       res.json(products);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -44,7 +43,7 @@ class ProductController {
       const newProduct = await new Product(req.body);
       const savedProduct = await newProduct.save();
       res.status(201).json(savedProduct);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -60,7 +59,7 @@ class ProductController {
       );
       console.log(product);
       res.status(200).send(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -69,7 +68,7 @@ class ProductController {
     try {
       const product = await Product.findByIdAndDelete(req.params.id);
       res.status(204).send(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
