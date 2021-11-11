@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ShopCartDB from "./components/ShopCartDB";
 import Home from "./views/Home";
 import Navbar from "./components/Navbar";
 import { SocialProfileWithImage } from "./components/Card";
@@ -10,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
 import ProductsGrid from "./components/Grid";
+import ShopCartDB from "./components/ShopCartDB";
 import ShopCart from "./components/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,8 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />
         <Route path='/myProducts' element={<MyProducts />} />
-        <Route path="/myCart" element={<ShopCart />} />
+        <Route path={`/${user.username}/myCart`} element={<ShopCartDB />} />
+        <Route path={`/cart`} element={<ShopCart />} />
         <Route
           path={`/categories/categoryId`}
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}

@@ -1,27 +1,111 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getUser } from "../store/user";
-import { useDispatch } from "react-redux";
+import { Button, useToast, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
+import { Link } from "react-router-dom";
+import { errorToast } from "../utils/toastMessages";
+import { useSelector } from "react-redux";
+
 
 const ShopCartDB = () => {
-    const [cart, setCart] = useState({})
-    const dispatch = useDispatch();
-    const user = dispatch(getUser());
+    const [cart, setCart] = useState({list: [], total: 0});
+    const [aux, setAux] = useState(true);
+    const user= useSelector((state) => state.user);
+    const toast = useToast();
 
     useEffect(() => {
-        console.log("user:",user);
-        axios.get(`http://localhost:8080/api/user/P6c3Y8FFPxYqwTu_DLrdP`)
+        axios.get(`/api/cart/${user._id}`)
         .then( res => {
-            console.log("here",res.data);
-            setCart(res.data)})
-        .catch( err => console.log(err.message))
+            let carrito = [];
+            if (res.data === null) {
+                carrito = [//pa probar
+                    {product: {title: "monitor", price: 10}, quantity: 1},
+                    {product: {title: "celu", price: 100}, quantity: 2}];
+                axios.post(`/api/cart/`, {carrito})
+                .catch(err => console.log(err));
+            }
+            else {
+                carrito = res.data
+                console.log("im here")
+            }
+            return carrito
+        })
+        .then((carrito) => {
+            console.log("hola?")
+            let total = 0;
+
+            carrito.map((cartItem, i) => {
+                total += cartItem.product.price * cartItem.quantity
+            });
+            
+            console.log("carrito:",carrito);
+            setCart({list: carrito, total})
+            console.log("cart:",cart);
+            aux === true ? setAux(false): setAux(true);
+
+        })
+        .catch(err => console.log(err))
+
     }, [])
-    
-    console.log("hola")
+
+    useEffect(() => {
+        const product = cart.list
+        axios.put(`/api/cart/${user._id}`, {product})
+    }, [aux])
+
+    const changeQuantity = (moreOrLess, index) => {
+        let auxCart = cart;
+        if (moreOrLess === "+") {
+            auxCart.list[index].quantity+=1;
+            auxCart.total += auxCart.list[index].product.price
+        } else {
+            if (auxCart.list[index].quantity>1) {
+                auxCart.list[index].quantity-=1;
+                auxCart.total -= auxCart.list[index].product.price
+            } else {
+                errorToast(toast, "use the delete button");
+            }
+        }
+        setCart(auxCart);
+        aux===true ? setAux(false) : setAux(true);
+    }
+
+    const deleteFromCart = (index) => {
+        let auxCart = cart;
+        auxCart.total -= auxCart.list[index].product.price * auxCart.list[index].quantity
+        auxCart.list.splice(index,1);
+        setCart(auxCart);
+        aux===true ? setAux(false) : setAux(true);
+    }
+
     return (
-        <>
-            <h1>hola</h1>
-        </>
+        <Flex>
+            <Box>
+                <h1>carrito de {user.username}</h1>
+                {cart.list.map((prod, i) => (
+                    <Grid templateColumns="repeat(4, 1fr)" align="center" h="16">
+                        <Center>
+                            {prod.product.title}
+                        </Center>
+                        <Stack direction={"row"} align="center" spacing={3}>
+                            <Button onClick={()=>changeQuantity("-", i)}>-</Button>
+
+                            <p>Quantity: {prod.quantity} </p>
+
+                            <Button onClick={()=>changeQuantity("+", i)}>+</Button>
+                        </Stack>
+                        <Center>
+                            Price: {prod.product.price}
+                        </Center>
+                        <Center>
+                            <Button onClick={()=>deleteFromCart(i)}>delete product</Button>
+                        </Center>
+                    </Grid>
+                ))}
+            </Box>
+            <Box>total: {cart.total}</Box>
+            <Link to="/">proceed with order</Link>
+        </Flex>
     )
 }
 
