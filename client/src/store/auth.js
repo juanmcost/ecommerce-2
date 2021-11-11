@@ -5,20 +5,6 @@ import axios from "axios"; // import axios
 
 const API = "http://localhost:8080/api/auth"
 
-//--Config Login
-export const sendLoginRequest = createAsyncThunk('LOGIN', (login) => {
-  return axios.post(`${API}/signin`, login).then((res) => {
-      if (res.status === 200) {
-          return res.data[0];
-      }
-  });
-});
-
-//--Config isLogin 
-
-export const isLoginRequest = createAsyncThunk("IS_LOGIN_REQUEST", ()=> {
-  return axios.get('').then((res)=>res.data);
-})
 
 //--Config Register
 
@@ -34,11 +20,9 @@ export const sendLogoutRequest = createAsyncThunk("LOGOUT_REQUEST", ()=>{
 
 //--Config Reducer
 
-const authReducer = createReducer([], {
-  [sendLoginRequest.fullfilled]: (state, action) => action.payload,
-  [isLoginRequest.fullfilled]: (state, action) => action.payload,
-  [sendRegisterRequest.fullfilled]: (state, action) => action.payload,
-  [sendLogoutRequest.fullfilled]: (state, action) => action.payload,
+const authReducer = createReducer({}, {
+  [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
+  [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
 })
 
 export default authReducer;

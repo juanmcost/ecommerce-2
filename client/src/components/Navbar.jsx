@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import {
     Box,
     Flex,
@@ -41,6 +42,9 @@ export default function Navbar() {
         computer_accessories: ["connectivity", "webcam", "speakers", "stabilizers", "backpacks and notebook bags"]
     }
 
+    const user= useSelector((state) => state.user)
+    console.log('user', user)
+
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -65,21 +69,21 @@ export default function Navbar() {
                             </Link>
 
                             <Menu>
-                                <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
+                                {user.email ? <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
                                     <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
-                                </MenuButton>
+                                </MenuButton> : <Link as={ReactLink} to='/login'><Button>Sign In</Button></Link>}
                                 <MenuList alignItems={'center'}>
                                     <br />
                                     <Center>
                                         <Avatar size={'2xl'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
                                     </Center>
                                     <br />
-                                    <Center>
-                                        <p>Username</p>
-                                    </Center>
+                                    {user.username ? <Center>
+                                        <p>{user.username}</p>
+                                    </Center>: null }
                                     <br />
                                     <MenuDivider />
-                                    <MenuItem>Your Servers</MenuItem>
+                                    <MenuItem>Your Profile</MenuItem>
                                     <MenuItem>Account Settings</MenuItem>
                                     <MenuItem>Logout</MenuItem>
                                 </MenuList>
