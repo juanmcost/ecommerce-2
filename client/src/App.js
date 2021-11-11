@@ -8,7 +8,6 @@ import Register from "./views/Register";
 import { Route, Routes } from "react-router-dom";
 import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
-import ProductsGrid from "./components/Grid";
 import ShopCartDB from "./components/ShopCartDB";
 import ShopCart from "./components/ShopCart";
 import axios from "axios";
@@ -33,8 +32,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/articles/:id" element={<Article/>} />
-        <Route path="/home" element={<Carousel slides={images}/>} />
         <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Carousel slides={images}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />

@@ -14,14 +14,14 @@ const ShopCartDB = () => {
     const toast = useToast();
 
     useEffect(() => {
-        axios.get(`/api/cart/${user._id}`)
+        axios.get(`http://localhost:8080/api/cart/${user._id}`)
         .then( res => {
             let carrito = [];
             if (res.data === null) {
                 carrito = [//pa probar
                     {product: {title: "monitor", price: 10}, quantity: 1},
                     {product: {title: "celu", price: 100}, quantity: 2}];
-                axios.post(`/api/cart/`, {carrito})
+                axios.post(`http://localhost:8080/api/cart/`, {products: carrito})
                 .catch(err => console.log(err));
             }
             else {
@@ -50,7 +50,7 @@ const ShopCartDB = () => {
 
     useEffect(() => {
         const product = cart.list
-        axios.put(`/api/cart/${user._id}`, {product})
+        axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
     }, [aux])
 
     const changeQuantity = (moreOrLess, index) => {
