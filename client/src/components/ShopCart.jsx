@@ -11,19 +11,28 @@ const ShopCart = () => {
 
 
     useEffect(() => {
-        //esto si hiría:
         const jsonCart = localStorage.getItem('carrito');
         let carrito = JSON.parse(jsonCart);
-        console.log("carrito:",carrito);
-
         let total = 0;
-        carrito.list.map((cartItem, i) => {
-            total += cartItem.product.price * cartItem.quantity
-        })
-        carrito.total = total;
+        console.log("lista:",carrito);
 
-        if (jsonCart) setCart(carrito);
-        console.log("")
+        if (carrito === null) {
+            carrito = {
+                list: [//should be empty array
+                    {product: {title:"celu", price: 100}, quantity: 2},
+                    {product: {title:"monitor", price: 10}, quantity: 1}
+                ],
+                total: 0
+            }
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }
+        else {
+            carrito.list.map((cartItem) => {
+                total += cartItem.product.price * cartItem.quantity
+            })
+        }
+
+        setCart({list: carrito.list, total});
     }, [])
     
     const changeQuantity = (moreOrLess, index) => {
