@@ -83,6 +83,7 @@ export default function Navbar() {
                                     </Center>: null }
                                     <br />
                                     <MenuDivider />
+                                    {user.isAdmin ? <MenuItem>Admin</MenuItem> : null}
                                     <MenuItem>Your Profile</MenuItem>
                                     <MenuItem>Account Settings</MenuItem>
                                     <MenuItem>Logout</MenuItem>
