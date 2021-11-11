@@ -1,6 +1,7 @@
 import React, { useState } from "react"; // import react
 import { useDispatch } from "react-redux"; // import dispatch
-import { useNavigate} from "react-router-dom"; // import history
+import { useNavigate } from "react-router-dom"; // import history
+import { useForm } from "react-hook-form";
 import { sendLoginRequest } from "../store/auth"; // import login
 import { FaFacebook, FaGoogle } from "react-icons/fa"; //import react-icons
 import { GoMarkGithub } from "react-icons/go"; // import react-icons
@@ -11,6 +12,7 @@ import {
   useToast,
   Box,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Stack,
@@ -30,17 +32,16 @@ export default function Register() {
   const toast = useToast();
   const history = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const reUser = /^[a-zA-Z0-9_.-]*$/;
   const reSp = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~*]/;
-  
+
   const [form, setValues] = useState({
     email: "",
     username: "",
     password: "",
   });
-  const [register, setRegister] = useState();
-
   const handleInput = (event) => {
     setValues({
       ...form,
@@ -48,28 +49,48 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { email, password, username } = form;
-    const res = await axios.post("/api/auth/signup", {
-      email,
-      password,
-      username,
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const { email, password, username } = form;
+  //   const res = await axios.post("/api/auth/signup", {
+  //     email,
+  //     password,
+  //     username,
+  //   });
+  //   console.log(res)
+  //   if (res.status === 200) {
+  //     dispatch(sendLoginRequest({ email, password })).then((res) => {
+  //       successToast(
+  //         toast,
+  //         "Account created",
+  //         `Yor account has been created. Enjoy!`
+  //       );
+  //       history.push("/");
+  //     });
+  //   }
+  // };
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+} = useForm();
+
+function onSubmit(form) {
+  const {email, username, password} = form
+    axios.post('http://localhost:8080/api/auth/signup', { email, password, username }).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+            dispatch(sendLoginRequest({ email, password })).then((res) => {
+                successToast(toast, 'Account created', `Yor account has been created. Enjoy!`);
+                navigate('/')
+            });
+        }
     });
-    if (res.status === 200) {
-      dispatch(sendLoginRequest({ email, password })).then((res) => {
-        successToast(
-          toast,
-          "Account created",
-          `Yor account has been created. Enjoy!`
-        );
-        history.push("/");
-      });
-    }
-  };
+}
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Flex
         minH={"100vh"}
         align={"center"}
@@ -88,32 +109,75 @@ export default function Register() {
             p={8}
           >
             <Stack spacing={4}>
-              <FormControl isInvalid={reSp.test(form.username)} id="username" isRequired>
+              <FormControl
+                isInvalid={reSp.test(form.username) && errors.username}
+                id="username"
+                isRequired
+              >
                 <FormLabel>Username</FormLabel>
                 <Input
                   name="username"
                   placeholder="Your name"
+                  {...register("username", {
+                    required: "Allow only numbers and characters",
+                    pattern: {
+                      value: reUser,
+                      message: "Allow Only numbers and characters",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Minimum length should be 3",
+                    },
+                  })}
                   type="text"
                   onChange={handleInput}
                 />
+                <FormErrorMessage>
+                  {errors.username && errors.username.message}
+                </FormErrorMessage>
               </FormControl>
-              <FormControl id="email" isRequired>
+              <FormControl isInvalid={errors.email} id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
                 <Input
                   name="email"
                   placeholder="example@example.com"
+                  {...register("email", {
+                    required: "Email is Required",
+                    pattern: {
+                      value:
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message: "Invalid email address",
+                    },
+                  })}
                   type="email"
                   onChange={handleInput}
                 />
+                <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={form.password.length < 8}id="password" isRequired>
+              <FormControl
+                isInvalid={form.password.length < 8 && errors.password}
+                id="password"
+                isRequired
+              >
                 <FormLabel>Password</FormLabel>
                 <Input
                   name="password"
                   placeholder="*******"
+                  {...register("password", {
+                    required: "Password is Required",
+                    minLength: {
+                      value: 8,
+                      message: "Password minimun length should be 8",
+                    },
+                  })}
                   type="password"
                   onChange={handleInput}
                 />
+                <FormErrorMessage>
+                  {errors.password && errors.password.message}
+                </FormErrorMessage>
               </FormControl>
               <Stack spacing={10}>
                 <Button
@@ -165,7 +229,6 @@ export default function Register() {
             </Stack>
           </Box>
         </Stack>
-        {register ? <Redirect to="/login" /> : null}
       </Flex>
     </form>
   );

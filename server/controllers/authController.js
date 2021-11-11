@@ -12,7 +12,7 @@ class AuthController {
                 const user = await newUser.save();
                 return user ? res.json(user) : res.status(500).send('Error on .save()');
             }
-            return res.stauts(404).json('Bad Request');
+            return res.status(404).json('Bad Request');
         } catch (error) {
             return res.json(error);
         }

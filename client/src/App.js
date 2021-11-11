@@ -1,3 +1,5 @@
+import ShopCartDB from "./components/ShopCartDB";
+import Home from "./views/Home";
 import React from "react";
 import Navbar from "./components/Navbar";
 import { SocialProfileWithImage } from "./components/Card";
@@ -19,10 +21,10 @@ const App = () => {
       <Routes>
         <Route path="/articles/:id" element={<Article/>} />
         <Route path="/home" element={<Carousel slides={images}/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />
-        <Route path="/myCart" element={<></>} />
         <Route path='/myProducts' element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
         <Route
