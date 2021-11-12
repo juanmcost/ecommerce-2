@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Logo from "../assets/logo.svg";
 import { Link as ReactLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +27,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   Icon,
+  Image,
   InputGroup,
   Input,
   InputLeftElement,
@@ -81,7 +83,9 @@ export default function Navbar() {
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"}>
           <Link as={ReactLink} to="/home">
-            logo
+            <Box boxSize={10}>
+              <Image src={Logo} alt="Segun Adebayo" />
+            </Box>
           </Link>
           <InputGroup ml="10" w="35%">
             <InputLeftElement

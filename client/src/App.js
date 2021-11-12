@@ -9,6 +9,7 @@ import Carousel from "./components/Carousel";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Profile from "./views/Profile"
+import Admin from "./views/Admin.jsx"
 import { Route, Routes } from "react-router-dom";
 import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
@@ -35,6 +36,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/articles/:id" element={<Article/>} />
+        <Route exact path="/admin" element={<Admin/>} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

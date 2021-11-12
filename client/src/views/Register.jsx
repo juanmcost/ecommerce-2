@@ -30,7 +30,6 @@ export default function Register() {
 
   //-----SEND Register----------------
   const toast = useToast();
-  const history = useNavigate();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,28 +47,6 @@ export default function Register() {
       [event.target.name]: event.target.value,
     });
   };
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const { email, password, username } = form;
-  //   const res = await axios.post("/api/auth/signup", {
-  //     email,
-  //     password,
-  //     username,
-  //   });
-  //   console.log(res)
-  //   if (res.status === 200) {
-  //     dispatch(sendLoginRequest({ email, password })).then((res) => {
-  //       successToast(
-  //         toast,
-  //         "Account created",
-  //         `Yor account has been created. Enjoy!`
-  //       );
-  //       history.push("/");
-  //     });
-  //   }
-  // };
-
   const {
     handleSubmit,
     register,
