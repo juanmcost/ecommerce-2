@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { dummieData as data } from "../utils/dummieData";
 import { Flex, IconButton, useColorModeValue, Stack } from "@chakra-ui/react";
 import { MyProductCard } from "../components/MyProductCard";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +10,7 @@ const themer = useColorModeValue;
 export default function MyProducts() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product);
+  console.log(products)
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
@@ -23,7 +23,7 @@ export default function MyProducts() {
           colorScheme="blue"
           icon={<BiAddToQueue />}
         />
-        {data.map((token, tid) => {
+        {products.map((token, tid) => {
           return <MyProductCard product={token} key={tid} />;
         })}
       </Stack>

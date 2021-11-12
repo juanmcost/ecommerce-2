@@ -14,14 +14,11 @@ const ShopCart = () => {
         const jsonCart = localStorage.getItem('carrito');
         let carrito = JSON.parse(jsonCart);
         let total = 0;
-        console.log("lista:",carrito);
+        console.log("storedCart:",carrito);
 
         if (carrito === null) {
             carrito = {
-                list: [//should be empty array
-                    {product: {title:"celu", price: 100}, quantity: 2},
-                    {product: {title:"monitor", price: 10}, quantity: 1}
-                ],
+                list: [],
                 total: 0
             }
             localStorage.setItem('carrito', JSON.stringify(carrito));
