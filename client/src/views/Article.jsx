@@ -23,17 +23,16 @@ export default function Article() {
   const {id} = useParams();
   const product = data[4]
   const [article, setArticle] = useState({})
-  //const id = useLocation().pathname.split('/')[2]; //toDo Usar para gestionar estado de producto con redux.
-  
-  console.log("id:",id)
-  useEffect(() => {
-    axios
+  useEffect(async () => {
+    await axios
     .get(`/api/product/${id}`)
-    .then((res) => setArticle(res.data) )
+    .then((res) => {
+      console.log(res);
+      setArticle(res.data)} )
     .catch((err) => (console.log(err)));
-    
+    console.log(article)
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
   
   console.log("this is article",article)
 

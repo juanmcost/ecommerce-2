@@ -19,7 +19,7 @@ class CartController {
     // Get User Cart
     static async userCart(req, res) {
         try {
-            const cart = await Cart.findOne({ userId: req.params.userId });
+            const cart = await Cart.findOne({ userId: req.params.id });
             res.status(200).json(cart);
         } catch (err) {
             res.status(500).json(err);
@@ -38,12 +38,12 @@ class CartController {
 
     // Update Cart
     static async updateCart(req, res) {
-        const { item } = req.body;
+        const { products } = req.body;
         try {
             const cart = await Cart.findByIdAndUpdate(
                 req.params.id,
                 {
-                    $set: { products: item },
+                    $set: { products: products },
                 },
                 { new: true }
             );

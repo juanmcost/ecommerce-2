@@ -22,7 +22,6 @@ export const sendLogoutRequest = createAsyncThunk("LOGOUT_REQUEST", ()=>{
 
 const authReducer = createReducer({}, {
   [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
-  [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
 })
 
 export default authReducer;

@@ -1,7 +1,5 @@
 const Product = require("../models/Products");
 
-//preguntar a joacoo sobre las categorias
-
 class Category {
   static async addCategory(req, res) {
     try {
@@ -17,7 +15,7 @@ class Category {
         { new: true }
       );
       res.status(201).json(newCategory);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -31,21 +29,23 @@ class Category {
         { multi: true }
       );
       res.status(204).send(products);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
 
   static async editCategory(req, res) {
     const { category } = req.body;
-    const product = await Product.updateMany(
-      { category: { $in: [req.params.category] } },
-      {
-        $set: { category },
-      },
-      { new: true }
-    );
-    res.status(200).send(product);
+    try {
+      const product = await Product.updateMany(
+        { category: { $in: [req.params.tag] } },
+        { $set: { "category.$": category } },
+        { new: true }
+      );
+      res.status(200).send(product);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   }
 }
 

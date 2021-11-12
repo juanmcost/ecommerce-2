@@ -8,7 +8,7 @@ router.get('/:id', checkAuthAndAuthorization, OrderController.returnOrders);
 
 router.get('/confirm/:id/:token', checkAuth, OrderController.confirmCart);
 
-router.post('/confirm', checkAuth, OrderController.confirm);
+router.post('/confirm', checkAuth, OrderController.confirm); //para confirmar el carrito
 
 router.post('/add', checkStatusOrder, OrderController.createOrder);
 

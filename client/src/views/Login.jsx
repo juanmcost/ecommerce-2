@@ -1,5 +1,6 @@
 import react, { useState } from "react";
 import {useNavigate} from "react-router-dom"
+import { Link as ReactLink } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { sendLoginRequest } from "../store/user";
 import { successToast, errorToast } from "../utils/toastMessages";
@@ -51,7 +52,7 @@ export default function Login() {
         .then((res) => {
           if (res.payload) {
             successToast(toast, `Welcome ${res.payload.username}`);
-            navigate('/')
+            navigate('/home')
           } else {
             errorToast(toast, `Wrong email or password`);
           }
@@ -134,6 +135,7 @@ export default function Login() {
                     bg: "blue.500",
                   }}
                   type="button"
+                  onClick={(e)=> {e.preventDefault(); navigate('/register')} }
                 >
                   Sign Up
                 </Button>

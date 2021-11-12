@@ -16,6 +16,10 @@ export const sendLoginRequest = createAsyncThunk("LOGIN", (login) => {
     }
   });
 });
+//--Config Logout
+
+export const sendLogoutRequest = createAction('LOGOUT_USER');
+
 
 //--GET all users
 
@@ -51,6 +55,7 @@ const userReducer = createReducer(
   {},
   {
     [sendLoginRequest.fulfilled]: (state, action) => action.payload,
+    [sendLogoutRequest]:(state, action)=> action.payload,
     [getAllUser.fulfilled]: (state, action) => action.payload,
     [getUser]: (state, action) => action.payload,
     [editUser.fulfilled]: (state, action) => action.payload,
