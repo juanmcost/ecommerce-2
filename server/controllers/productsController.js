@@ -4,6 +4,7 @@ class ProductController {
   static async getAllProduct(req, res) {
     try {
       const products = await Product.find({ color: "Negro" });
+      console.log(products)
       res.json(products);
     } catch {
       res.status(500).json({ error });
