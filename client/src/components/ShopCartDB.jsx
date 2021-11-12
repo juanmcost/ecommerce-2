@@ -1,37 +1,58 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Button, useToast, useColorModeValue } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { errorToast } from "../utils/toastMessages";
+import { useSelector } from "react-redux";
 
-const ShopCart = () => {
-    const [cart,setCart] = useState({});
+
+const ShopCartDB = () => {
+    const [cart, setCart] = useState({list: [], total: 0});
     const [aux, setAux] = useState(true);
+    const user= useSelector((state) => state.user);
     const toast = useToast();
 
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/cart/${user._id}`)
+        .then( res => {
+            let carrito = [];
+            if (res.data === null) {
+                carrito = [//pa probar
+                    {product: {title: "monitor", price: 10}, quantity: 1},
+                    {product: {title: "celu", price: 100}, quantity: 2}];
+                axios.post(`http://localhost:8080/api/cart/`, {products: carrito})
+                .catch(err => console.log(err));
+            }
+            else {
+                carrito = res.data
+                console.log("im here")
+            }
+            return carrito
+        })
+        .then((carrito) => {
+            console.log("hola?")
+            let total = 0;
+
+            carrito.map((cartItem, i) => {
+                total += cartItem.product.price * cartItem.quantity
+            });
+            
+            console.log("carrito:",carrito);
+            setCart({list: carrito, total})
+            console.log("cart:",cart);
+            aux === true ? setAux(false): setAux(true);
+
+        })
+        .catch(err => console.log(err))
+
+    }, [])
 
     useEffect(() => {
-        const jsonCart = localStorage.getItem('carrito');
-        let carrito = JSON.parse(jsonCart);
-        let total = 0;
-        console.log("storedCart:",carrito);
+        const product = cart.list
+        axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
+    }, [aux])
 
-        if (carrito === null) {
-            carrito = {
-                list: [],
-                total: 0
-            }
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-        }
-        else {
-            carrito.list.map((cartItem) => {
-                total += cartItem.product.price * cartItem.quantity
-            })
-        }
-
-        setCart({list: carrito.list, total});
-    }, [])
-    
     const changeQuantity = (moreOrLess, index) => {
         let auxCart = cart;
         if (moreOrLess === "+") {
@@ -45,7 +66,6 @@ const ShopCart = () => {
                 errorToast(toast, "use the delete button");
             }
         }
-        localStorage.setItem('carrito', JSON.stringify(auxCart));
         setCart(auxCart);
         aux===true ? setAux(false) : setAux(true);
     }
@@ -54,7 +74,6 @@ const ShopCart = () => {
         let auxCart = cart;
         auxCart.total -= auxCart.list[index].product.price * auxCart.list[index].quantity
         auxCart.list.splice(index,1);
-        localStorage.setItem('carrito', JSON.stringify(auxCart));
         setCart(auxCart);
         aux===true ? setAux(false) : setAux(true);
     }
@@ -62,14 +81,17 @@ const ShopCart = () => {
     return (
         <Flex>
             <Box>
-                {cart?.list?.map((prod, i) => (
+                <h1>carrito de {user.username}</h1>
+                {cart.list.map((prod, i) => (
                     <Grid templateColumns="repeat(4, 1fr)" align="center" h="16">
                         <Center>
                             {prod.product.title}
                         </Center>
                         <Stack direction={"row"} align="center" spacing={3}>
                             <Button onClick={()=>changeQuantity("-", i)}>-</Button>
+
                             <p>Quantity: {prod.quantity} </p>
+
                             <Button onClick={()=>changeQuantity("+", i)}>+</Button>
                         </Stack>
                         <Center>
@@ -81,10 +103,10 @@ const ShopCart = () => {
                     </Grid>
                 ))}
             </Box>
-            <Box>total: {cart?.total}</Box>
+            <Box>total: {cart.total}</Box>
             <Link to="/">proceed with order</Link>
         </Flex>
     )
 }
 
-export default ShopCart
+export default ShopCartDB;

@@ -8,9 +8,15 @@ import {
     Icon,
     chakra,
     Tooltip,
+    Button,
+    useToast
   } from '@chakra-ui/react';
+  import { useSelector } from 'react-redux';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
+  import { successToast, errorToast } from "../utils/toastMessages";
+  import axios from "axios";
+  
   
   const data = {
     isNew: true,
@@ -22,12 +28,7 @@ import {
     numReviews: 34,
   };
   
-  interface RatingProps {
-    rating: number;
-    numReviews: number;
-  }
-  
-  function Rating({ rating, numReviews }: RatingProps) {
+  function Rating({ rating, numReviews }) {
     return (
       <Box d="flex" alignItems="center">
         {Array(5)
@@ -55,7 +56,37 @@ import {
     );
   }
   
-  function Item() {
+  function Item( { item } ) {
+
+    const user= useSelector((state) => state.user)
+    const jsonCart = localStorage.getItem('carrito');
+    let carrito = JSON.parse(jsonCart);
+    const toast = useToast();
+
+    const addToCart = () => {
+      if (
+
+        carrito.list.some((el) => { //does the cart have the product?
+          return el.product === item._id;
+        })
+
+      ) errorToast(toast, "you already have that in the cart");
+
+      else {//if it doesn't then add it
+        if (user.username){
+          let products = carrito.list;
+          axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
+        }
+        else {
+          carrito.list.push({product: item, quantity: 1}) 
+          localStorage.setItem('carrito', JSON.stringify(carrito));
+          successToast(toast, "product added to cart!")
+        }
+
+      }
+      
+    }
+
     return (
       <Flex p={50} w="full" alignItems="center" justifyContent="center">
         <Box
@@ -76,8 +107,9 @@ import {
           )}
   
           <Image
-            src={data.imageURL}
-            alt={`Picture of ${data.name}`}
+            src={item.img[0]}
+            alt={`Picture of ${item.title}`}
+            w="full"
             roundedTop="lg"
           />
   
@@ -96,7 +128,7 @@ import {
                 as="h4"
                 lineHeight="tight"
                 isTruncated>
-                {data.name}
+                {item.title}
               </Box>
               <Tooltip
                 label="Add to cart"
@@ -104,9 +136,9 @@ import {
                 placement={'top'}
                 color={'gray.800'}
                 fontSize={'1.2em'}>
-                <chakra.a href={'#'} display={'flex'}>
+                <Button onClick={()=>{addToCart()}} href={'#'} display={'flex'} bg="none">
                   <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
-                </chakra.a>
+                </Button>
               </Tooltip>
             </Flex>
   
@@ -114,9 +146,9 @@ import {
               <Rating rating={data.rating} numReviews={data.numReviews} />
               <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
                 <Box as="span" color={'gray.600'} fontSize="lg">
-                  £
+                  $
                 </Box>
-                {data.price.toFixed(2)}
+                {item.price.toFixed(2)}
               </Box>
             </Flex>
           </Box>
