@@ -31,9 +31,8 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/articles/:id" element={<Article/>} />
+        <Route path="/" element={<Home />}/>
         <Route path="/home" element={<Home />} />
-        <Route path="/home" element={<Carousel slides={images}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<SocialProfileWithImage />} />
@@ -44,6 +43,7 @@ const App = () => {
           path={`/categories/categoryId`}
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
         />{" "}
+        <Route exact path="/articles/:id" element={<Article />} />} />
       </Routes>
     </div>
   );

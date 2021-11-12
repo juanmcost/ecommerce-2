@@ -28,12 +28,7 @@ import {
     numReviews: 34,
   };
   
-  interface RatingProps {
-    rating: number;
-    numReviews: number;
-  }
-  
-  function Rating({ rating, numReviews }: RatingProps) {
+  function Rating({ rating, numReviews }) {
     return (
       <Box d="flex" alignItems="center">
         {Array(5)
@@ -112,8 +107,9 @@ import {
           )}
   
           <Image
-            src={data.imageURL}
-            alt={`Picture of ${data.name}`}
+            src={item.img}
+            alt={`Picture of ${item.title}`}
+            w="full"
             roundedTop="lg"
           />
   
@@ -132,7 +128,7 @@ import {
                 as="h4"
                 lineHeight="tight"
                 isTruncated>
-                {data.name}
+                {item.title}
               </Box>
               <Tooltip
                 label="Add to cart"
@@ -152,7 +148,7 @@ import {
                 <Box as="span" color={'gray.600'} fontSize="lg">
                   £
                 </Box>
-                {data.price.toFixed(2)}
+                {item.price.toFixed(2)}
               </Box>
             </Flex>
           </Box>
