@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Sidebar = (prop) => {
+const Admin = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Sidebar = (prop) => {
     )
 }
 
-export default Sidebar
+export default Admin
