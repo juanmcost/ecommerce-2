@@ -67,18 +67,18 @@ import {
       if (
 
         carrito.list.some((el) => { //does the cart have the product?
-          return el.product.title === "tv"/* el.product === item._id */;
+          return el.product === item._id;
         })
 
       ) errorToast(toast, "you already have that in the cart");
 
       else {//if it doesn't then add it
-        carrito.list.push({product: {title: "tv", price: 50}, quantity: 1}/* item._id */) 
         if (user.username){
           let products = carrito.list;
           axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
         }
         else {
+          carrito.list.push({product: item, quantity: 1}) 
           localStorage.setItem('carrito', JSON.stringify(carrito));
           successToast(toast, "product added to cart!")
         }
@@ -107,7 +107,7 @@ import {
           )}
   
           <Image
-            src={item.img}
+            src={item.img[0]}
             alt={`Picture of ${item.title}`}
             w="full"
             roundedTop="lg"

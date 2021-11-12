@@ -1,4 +1,4 @@
-import { Grid, GridItem, Box } from "@chakra-ui/react";
+import { SimpleGrid, GridItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Item from "./Item";
@@ -17,13 +17,15 @@ const ProductsGrid = () => {
     }, [])
 
     return (
-        <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
             {products.map(elem => (
+            <GridItem>
                 <Link to={`/articles/${elem._id}`}>
                     <Item item={elem}/>
                 </Link>
+            </GridItem>
             ))}
-        </Grid>
+        </SimpleGrid>
     )
 }
 

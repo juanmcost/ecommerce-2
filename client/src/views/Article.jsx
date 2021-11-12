@@ -29,10 +29,8 @@ export default function Article() {
   useEffect(() => {
     axios
     .get(`/api/product/${id}`)
-    .then((res) => {
-      console.log("res:", res)
-      setArticle(res.data)})
-    .catch((err) => ({ err: err.message }));
+    .then((res) => setArticle(res.data) )
+    .catch((err) => (console.log(err)));
     
     window.scrollTo(0, 0);
   }, []);
@@ -43,7 +41,7 @@ export default function Article() {
     <Container maxW={"95vw"} py={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Flex>
-          <Carousel slides={product.images} />
+          <Carousel slides={article.img} />
         </Flex>
         <Stack spacing={4}>
           <Heading>{article.title}</Heading>

@@ -48,7 +48,7 @@ const App = () => {
           path={`/categories/categoryId`}
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
         />{" "}
-        <Route exact path="/articles/:id" element={<Article />} />} />
+        <Route exact path="/articles/:id" element={<Article />} />
       </Routes>
     </div>
   );
