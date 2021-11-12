@@ -1,163 +1,236 @@
 [
-    {
-        "title": "Celular Samsung Galaxy S20FE 128 GB Verde",
-        "description": "El celular Samsung Galaxy S20FE presenta un diseño ergonómico y elegante. Con la pantalla Super Amoled de 6.5 pulgadas con una resolución de 1080x2400 FHD vas a poder sumergirte en tus juegos y videos favoritos. ",
-        "img": "https://images.fravega.com/f300/c965a6d0e2fc723c39b4ccc42641e001.jpg",
-        "price": 76999,
-        "category": ["celular", "samsung"],
-        "color": "Verde"
-    },
-    {
-        "title": "Celular Samsung Galaxy A72 128 GB Negro",
-        "description": "Su procesador Octa-Core y la memoria RAM de 6 GB te permitirán ejecutar aplicaciones y realizar múltiples tareas al mismo tiempo. Además, su sistema operativo Android es eficiente y fácil de usar.",
-        "img": "https://images.fravega.com/f300/e5bd6d9d73deaffdbe7f6a006e58d99c.jpg",
-        "price": 66999,
-        "category": ["celular", "samsung"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular Samsung Galaxy A21s 128 GB Negro",
-        "description": "El Galaxy A21s presenta un diseño ergonómico y elegante. Con la pantalla de 6.5 vas a poder sumergirte en tus juegos y videos favoritos. Con su pantalla HD+, con marco casi inexistente, el Galaxy A21s rediseña tus momentos de entretenimiento. Conexión USB-C.",
-        "img": "https://images.fravega.com/f300/7b6ba44f90c0cc399c1d0d71ab2fac00.jpg",
-        "price": 40999,
-        "category": ["celular", "samsung"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular Samsung Galaxy M12 128 GB Negro",
-        "description": "El Galaxy M12 presenta un diseño ergonómico y elegante. Con la pantalla de 6,5 pulgadas con una resolución de 1600x720 HD vas a poder sumergirte en tus juegos y videos favoritos. La gran pantalla Infinity-V del Galaxy M12 rediseña tus momentos de entretenimiento. Conexión Micro USB.",
-        "img": "https://images.fravega.com/f300/73a83fe2c4a762c9ae974b499cf58406.jpg",
-        "price": 36999,
-        "category": ["celular", "samsung"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular Samsung Galaxy A12 64 GB Azul",
-        "description": "El celular Samsung A12 posee una memoria interna de 64GB y la posibilidad de expandirla con una tarjeta microSD hasta 1TB. Vas a poder descargar aplicaciones, almacenar videos, fotos y música sin problemas.",
-        "img": "https://images.fravega.com/f300/6c5c279402a5100f9a1a20ecb681c9d2.jpg",
-        "price": 31999,
-        "category": ["celular", "samsung"],
-        "color": "Azul"
-    },
-    {
-        "title": "Celular Samsung Galaxy S21 128 GB Blanco",
-        "description": "Con un diseño de vanguardia, el celular Samsung S21 es un teléfono único que ofrece una pantalla Dynamic AMOLED 2x con una resolución Full HD+ sin Notch ni distracciones. Además, tiene 8GB de RAM y 128GB de almacenamiento.",
-        "img": "https://images.fravega.com/f300/f3a4a173fcb49f816523cbb16a06a261.jpg",
-        "price": 114999,
-        "category": ["celular", "samsung"],
-        "color": "Blanco"
-    },
-    {
-        "title": "Celular Samsung Galaxy Z Flip3 128 GB Beige + Cargador Inalámbrico",
-        "description": "El celular Samsung Galaxy Z Flip3 ofrece una gran pantalla Infinity Flex Display de 6,7 pulgadas FHD+. Tiene 8GB de RAM y 128GB de almacenamiento. Además, incluye cargador inalámbrico EP-P4300BBEGAR.",
-        "img": "https://images.fravega.com/f300/13ea949844e7dfc5ef6b38341e794266.jpg",
-        "price": 144999,
-        "category": ["celular", "samsung"],
-        "color": "Beige"
-    },
-    {
-        "title": "Celular Samsung Galaxy A52 128GB Negro",
-        "description": "El celular Samsung Galaxy A52 presenta un diseño ergonómico, elegante y delgado. Con la pantalla de 6.3 vas a poder sumergirte en tus juegos y videos favoritos. Además, con su tecnología Super AMOLED, de extremo a extremo, con un marco casi inexistente, el Galaxy A52 rediseña tus momentos de entretenimiento. Su resolución es de 1080 x 2400p (FHD+).",
-        "img": "https://images.fravega.com/f300/45c6d89d1132121af48c2a3eac156510.jpg",
-        "price": 60999,
-        "category": ["celular", "samsung"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular Xiaomi Redmi Note 8 64 GB Neptune Blue",
-        "description": "Celular Xiaomi Redmi Note 8 64 GB Neptune Blue - Cuenta con 4 cámaras traseras de 48 Mpx, 8 Mpx, 2 Mpx y 2 Mpx con inteligencia artificial. Lente macro, ultra gran angular y sensor de profundidad. Cámara frontal de 13 Mpx con modo retrato. Pantalla Full HD+ para que disfrutes de contenidos en alta calidad. Batería con carga rápida para usarlo en todo momento. Desbloqueo rápido y seguro con reconocimiento facial y lector de huella dactilar.",
-        "img": "https://images.fravega.com/f300/26f1c2e5767937593bcc22eddff06f24.jpg",
-        "price": 66481,
-        "category": ["celular", "xiaomi"],
-        "color": "Neptune Blue"
-    },
-    {
-        "title": "Celular Xiaomi Note 10S 6GB 128GB Ocean Blue",
-        "description": "Marca: Xiaomi Color: Azul Versión Bluetooth: 5.1 Resolución: 2400 x 1176 Especificaciones de la memoria RAM: 6 GB Memoria Interna: 128 GB Especificaciones del Procesador: Mediatek Helio G95 Velocidad del procesador: 2.05 GHz Pantalla: 6.43 Sin trafo Por cuestiones de Homologación y normas Iram, los transformadores son extraídos de las cajas a su ingreso al país, para su comercialización",
-        "img": "https://images.fravega.com/f300/05e3b8de62451e98355a9dc9dcaa92d3.jpg.webp",
-        "price": 78599,
-        "category": ["celular", "xiaomi"],
-        "color": "Ocean Blue"
-    },
-    {
-        "title": "Celular Xiaomi Poco X3 Pro 8GB 256GB Negro",
-        "description": "XIAOMI POCO X3 PRO DIMENSIONES Y PESO:165,3 x 76,8 x 9,4 mm 215 g PANTALLA:IPS 6,67 pulgadas 120 Hz 240 Hz táctil, 450 nits Gorilla Glass 6, HDR10 PROCESADOR: Qualcomm Snapdragon 860 RAM:8 GB LPDDR4X ALMACENAMIENTO:256 GB UFS 3.1 (hasta 1 TB con microSD) CÁMARAS TRASERAS: 48 MP, f/1.79, AF UGA 8 MP, f/2.2, 119° 2 MP macro, f/2.4, FF 2 MP profundidad, f/2.4, FF CÁMARA FRONTAL: 20 MP, f/2.2 BATERÍA: 5.160 mAh SISTEMA OPERATIVO: Android 11 + MIUI 12 CONECTIVIDAD: 4G, Bluetooth 5.0, WiFi 5, NFC OTROS: Jack 3,5 mm Estéreo, Infrarrojos. Lector de huellas lateral Sin trafo Por cuestiones de Homologación y normas Iram, los transformadores son extraídos de las cajas a su ingreso al país, para su comercialización",
-        "img": "https://images.fravega.com/f300/4c50448924195efb627f67d3a729cca3.jpg",
-        "price": 117899,
-        "category": ["celular", "xiaomi"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular Xiaomi Redmi 9A 32 GB Gris Granito",
-        "description": "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53 . Cámara trasera de 13Mpx. Cámara delantera de 5Mpx. Procesador MediaTek Helio G25 Octa-Core de 2GHz con 2GB de RAM. Batería de 5000mAh. Memoria interna de 32GB. Apto para tarjeta SD de 512GB. Con reconocimiento facial.",
-        "img": "https://images.fravega.com/f300/c31c45abbbb3a29d1e0f30263f285296.jpg",
-        "price": 31756,
-        "category": ["celular", "xiaomi"],
-        "color": "Gris"
-    },
-    {
-        "title": "Celular Xiaomi Mi 11 Lite 128GB Negro",
-        "description": "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53 . Cámara trasera de 13Mpx. Cámara delantera de 5Mpx. Procesador MediaTek Helio G25 Octa-Core de 2GHz con 2GB de RAM. Batería de 5000mAh. Memoria interna de 32GB. Apto para tarjeta SD de 512GB. Con reconocimiento facial.",
-        "img": "https://images.fravega.com/f300/9f4bac7d594b642c7a2ab7c01516e157.jpg",
-        "price": 82799,
-        "category": ["celular", "xiaomi"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular Xiaomi Redmi Note 9 64 GB Verde",
-        "description": "Celular Xiaomi Redmi Note 9 64 GB Verde. Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53 . Tiene 4 cámaras traseras de 48Mpx/8Mpx/2Mpx/2Mpx. Cámara delantera de 13Mpx. Procesador MediaTek Helio G85 Octa-Core de 2GHz con 3GB de RAM. Batería de 5020mAh. Memoria interna de 64GB. Apto para tarjeta SD de 512GB. Con reconocimiento facial y sensor de huella dactilar.",
-        "img": "https://images.fravega.com/f300/bd9a7bcfd6c74d7a9e1a6055c659d809.jpg",
-        "price": 57300,
-        "category": ["celular", "xiaomi"],
-        "color": "Verde"
-    },
-    {
-        "title": "Celular LG K42 64 GB Gris",
-        "description": "El Celular LG K42 ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla de 6,6 pulgadas. Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para tu entretenimiento y calza perfectamente en la palma de tu mano.",
-        "img": "https://images.fravega.com/f300/1d8b40a51dc53b55a5d184502a8c165e.jpg",
-        "price": 24999,
-        "category": ["celular", "lg"],
-        "color": "Gris"
-    },
-    {
-        "title": "Celular LG K41S 32GB Titanium",
-        "description": "El celular LG K41S ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla FullVision de 6,55 pulgadas HD con una resolución de 1600x720 . Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para todo tu entretenimiento y calza perfectamente en la palma de tu mano. ",
-        "img": "https://images.fravega.com/f300/9bd05be9602582b53d0ded9c20f1a807.jpg",
-        "price": 21999,
-        "category": ["celular", "lg"],
-        "color": "Titanium"
-    },
-    {
-        "title": "Celular LG K61 128GB Titan + Memoria MicroSD Kingston 32GB",
-        "description": "asdCELULAR SMARTPHONE DE 6,53 LG K61 CON ANDROID 9 4GB / 128GB / 48MPx LM-Q630HA CUATRO CÁMARAS PARA CAPTURAR TUS MOMENTOS FAVORITOS Aporta más versatilidad a la fotografía. Captura tus momentos favoritos en cualquier momento, en cualquier lugar y de la manera que desees, con la excelente resolución de la cámara estándar, gran angular, sensor de profundidad y lente macro. ILUMINA LA NOCHE Revela el brillo de cada escena. La tecnología avanzada Quad-Cell aumenta el brillo y disminuye el ruido para tomar fotos excepcionales incluso en condiciones difíciles o con poca luz.asd",
-        "img": "https://images.fravega.com/f300/c8f99243b5deb7d6eb2bd31b35d0eed3.jpg",
-        "price": 45199,
-        "category": ["celular", "lg"],
-        "color": "Titanium"
-    },
-    {
-        "title": "Celular LG K50 32GB Negro + Memoria MicroSD Kingston 32GB",
-        "description": "CELULAR SMARTPHONE 6,26 LG K50 LIBERADO ANDROID 9 3GB / 32GB / 13 MPx LM-X520HM (Aurora black) CÁMARA DUAL TRASERA Retratos de amigos, comidas, monumentos y hasta incluso tus mascotas pueden tener un aspecto bokeh profesional, con la cámara de 13 MP. CÁMARA FRONTAL DE 13MP Fotografía con verdadera precisión, detalle y claridad en cada toma. ¡Prueba tomándote una selfie donde brillen tú y el escenario! AI CAM, CADA TOMA PENSADA JUSTO PARA TI Reconoce con precisión ocho escenarios diferentes y aplica los filtros ideales para cada uno, así cada toma se convierte en la foto perfecta. PANTALLA DE 6,26 HD+ FULLVISION",
-        "img": "https://images.fravega.com/f300/d402e0f752c85d98a081ce56e7b6bc08.jpg",
-        "price": 26999,
-        "category": ["celular", "lg"],
-        "color": "Negro"
-    },
-    {
-        "title": "Celular LG K22 Plus 64 GB Titanium",
-        "description": "El Celular LG K22 Plus ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla de 6,2 FullVision HD+ y una resolución de 720 x 15820p; para que puedas ver todo con la mejor calidad. Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para todo tu entretenimiento, a la vez que calza perfectamente en la palma de tu mano. ",
-        "img": "https://images.fravega.com/f300/c4c9ee2102ebd4a45e618da763190f5b.jpg",
-        "price": 20999,
-        "category": ["celular", "lg"],
-        "color": "Titanium"
-    },
-    {
-        "title": "Celular LG K51s 64 GB Titanium",
-        "description": "El Celular LG K51s ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla de 6.5 pulgadas inch touch screen. Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para todo tu entretenimiento y calza perfectamente en la palma de tu mano. Conexión Micro USB.",
-        "img": "https://images.fravega.com/f300/d5e23cd99eeed62d7c40470f29c6b6a9.jpg",
-        "price": 25999,
-        "category": ["celular", "lg"],
-        "color": "Titanium"
-    },
-    { "title": "s7", "description": "asdasd", "img": "url", "price": 34, "category": ["computadora"] }
+  {
+    "title": "Celular Samsung Galaxy S20FE 128 GB Verde",
+    "description": "El celular Samsung Galaxy S20FE presenta un diseño ergonómico y elegante. Con la pantalla Super Amoled de 6.5 pulgadas con una resolución de 1080x2400 FHD vas a poder sumergirte en tus juegos y videos favoritos. ",
+    "img": [
+      "https://images.fravega.com/f300/c965a6d0e2fc723c39b4ccc42641e001.jpg",
+      "https://images.fravega.com/f300/023b9678d1bbe1c5908d65cc0c7e2de2.jpg",
+      "https://images.fravega.com/f300/7b1cade04667235a5bd72bd25920f51f.jpg",
+      "https://images.fravega.com/f300/c7dd87949993950bd41d2845a2ac3d4c.jpg"
+    ],
+    "price": 76999,
+    "category": ["celular", "samsung"],
+    "color": "Verde"
+  },
+  {
+    "title": "Celular Samsung Galaxy A72 128 GB Negro",
+    "description": "Su procesador Octa-Core y la memoria RAM de 6 GB te permitirán ejecutar aplicaciones y realizar múltiples tareas al mismo tiempo. Además, su sistema operativo Android es eficiente y fácil de usar.",
+    "img": [
+      "https://images.fravega.com/f300/e5bd6d9d73deaffdbe7f6a006e58d99c.jpg",
+      "https://images.fravega.com/f300/f8944e4b4492f62f9a53c03544fb159b.jpg",
+      "https://images.fravega.com/f300/5df626489b99d3af5a04488e81267ec7.jpg",
+      "https://images.fravega.com/f300/aa68149f1553e9cd5eab9c2a2c674932.jpg"
+    ],
+    "price": 66999,
+    "category": ["celular", "samsung"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular Samsung Galaxy A21s 128 GB Negro",
+    "description": "El Galaxy A21s presenta un diseño ergonómico y elegante. Con la pantalla de 6.5 vas a poder sumergirte en tus juegos y videos favoritos. Con su pantalla HD+, con marco casi inexistente, el Galaxy A21s rediseña tus momentos de entretenimiento. Conexión USB-C.",
+    "img": [
+      "https://images.fravega.com/f300/7b6ba44f90c0cc399c1d0d71ab2fac00.jpg",
+      "https://images.fravega.com/f300/9a60072b1632a7114ff7f250e42f2d5d.jpg",
+      "https://images.fravega.com/f300/95886902cf9a6b752089d8217527c2f8.jpg",
+      "https://images.fravega.com/f300/2a962bdbcf7ff858d6200e6d49c199d7.jpg"
+    ],
+    "price": 40999,
+    "category": ["celular", "samsung"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular Samsung Galaxy M12 128 GB Negro",
+    "description": "El Galaxy M12 presenta un diseño ergonómico y elegante. Con la pantalla de 6,5 pulgadas con una resolución de 1600x720 HD vas a poder sumergirte en tus juegos y videos favoritos. La gran pantalla Infinity-V del Galaxy M12 rediseña tus momentos de entretenimiento. Conexión Micro USB.",
+    "img": [
+      "https://images.fravega.com/f300/73a83fe2c4a762c9ae974b499cf58406.jpg",
+      "https://images.fravega.com/f300/d5679aa8d05321b166f40b4f6fe21d0a.jpg",
+      "https://images.fravega.com/f300/27d6fd6acd60273f8a34d610b5fcab5f.jpg",
+      "https://images.fravega.com/f300/448ac45bc2c11be613f5f04be26af051.jpg"
+    ],
+    "price": 36999,
+    "category": ["celular", "samsung"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular Samsung Galaxy A12 64 GB Azul",
+    "description": "El celular Samsung A12 posee una memoria interna de 64GB y la posibilidad de expandirla con una tarjeta microSD hasta 1TB. Vas a poder descargar aplicaciones, almacenar videos, fotos y música sin problemas.",
+    "img": [
+      "https://images.fravega.com/f300/6c5c279402a5100f9a1a20ecb681c9d2.jpg",
+      "https://images.fravega.com/f300/6c5c279402a5100f9a1a20ecb681c9d2.jpg",
+      "https://images.fravega.com/f300/40fdab6284c28baef799ec783e95e29b.jpg",
+      "https://images.fravega.com/f300/6b66b30c43baa3816831c1ed73594ca1.jpg"
+    ],
+    "price": 31999,
+    "category": ["celular", "samsung"],
+    "color": "Azul"
+  },
+  {
+    "title": "Celular Samsung Galaxy S21 128 GB Blanco",
+    "description": "Con un diseño de vanguardia, el celular Samsung S21 es un teléfono único que ofrece una pantalla Dynamic AMOLED 2x con una resolución Full HD+ sin Notch ni distracciones. Además, tiene 8GB de RAM y 128GB de almacenamiento.",
+    "img": [
+      "https://images.fravega.com/f300/f3a4a173fcb49f816523cbb16a06a261.jpg",
+      "https://images.fravega.com/f300/f3a4a173fcb49f816523cbb16a06a261.jpg",
+      "https://images.fravega.com/f300/e6304dcd4402adc203591ed8f057a1e9.jpg",
+      "https://images.fravega.com/f300/db7d643c057c3c09a1047e39fe94d1d3.jpg"
+    ],
+    "price": 114999,
+    "category": ["celular", "samsung"],
+    "color": "Blanco"
+  },
+  {
+    "title": "Celular Samsung Galaxy Z Flip3 128 GB Beige + Cargador Inalámbrico",
+    "description": "El celular Samsung Galaxy Z Flip3 ofrece una gran pantalla Infinity Flex Display de 6,7 pulgadas FHD+. Tiene 8GB de RAM y 128GB de almacenamiento. Además, incluye cargador inalámbrico EP-P4300BBEGAR.",
+    "img": [
+      "https://images.fravega.com/f300/13ea949844e7dfc5ef6b38341e794266.jpg",
+      "https://images.fravega.com/f300/c029c74ead08c01d7e2fe706c38258e1.jpg",
+      "https://images.fravega.com/f300/3dffc47be80812f2b1290ffc73dc2ed8.jpg",
+      "https://images.fravega.com/f300/aacc4abf5f3b29b9294ee232d5771d0f.jpg"
+    ],
+    "price": 144999,
+    "category": ["celular", "samsung"],
+    "color": "Beige"
+  },
+  {
+    "title": "Celular Samsung Galaxy A52 128GB Negro",
+    "description": "El celular Samsung Galaxy A52 presenta un diseño ergonómico, elegante y delgado. Con la pantalla de 6.3 vas a poder sumergirte en tus juegos y videos favoritos. Además, con su tecnología Super AMOLED, de extremo a extremo, con un marco casi inexistente, el Galaxy A52 rediseña tus momentos de entretenimiento. Su resolución es de 1080 x 2400p (FHD+).",
+    "img": [
+      "https://images.fravega.com/f300/45c6d89d1132121af48c2a3eac156510.jpg",
+      "https://images.fravega.com/f300/537979054b9dba2d6de1ca1668b30a7c.jpg",
+      "https://images.fravega.com/f300/af0a0354c28e856f3777d206658ac7da.jpg",
+      "https://images.fravega.com/f300/a31eb38034b014594e8096ff606950a5.jpg"
+    ],
+    "price": 60999,
+    "category": ["celular", "samsung"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular Xiaomi Redmi Note 8 64 GB Neptune Blue",
+    "description": "Celular Xiaomi Redmi Note 8 64 GB Neptune Blue - Cuenta con 4 cámaras traseras de 48 Mpx, 8 Mpx, 2 Mpx y 2 Mpx con inteligencia artificial. Lente macro, ultra gran angular y sensor de profundidad. Cámara frontal de 13 Mpx con modo retrato. Pantalla Full HD+ para que disfrutes de contenidos en alta calidad. Batería con carga rápida para usarlo en todo momento. Desbloqueo rápido y seguro con reconocimiento facial y lector de huella dactilar.",
+    "img": ["https://images.fravega.com/f300/26f1c2e5767937593bcc22eddff06f24.jpg"],
+    "price": 66481,
+    "category": ["celular", "xiaomi"],
+    "color": "Neptune Blue"
+  },
+  {
+    "title": "Celular Xiaomi Note 10S 6GB 128GB Ocean Blue",
+    "description": "Marca: Xiaomi Color: Azul Versión Bluetooth: 5.1 Resolución: 2400 x 1176 Especificaciones de la memoria RAM: 6 GB Memoria Interna: 128 GB Especificaciones del Procesador: Mediatek Helio G95 Velocidad del procesador: 2.05 GHz Pantalla: 6.43 Sin trafo Por cuestiones de Homologación y normas Iram, los transformadores son extraídos de las cajas a su ingreso al país, para su comercialización",
+    "img": "https://images.fravega.com/f300/05e3b8de62451e98355a9dc9dcaa92d3.jpg.webp",
+    "price": 78599,
+    "category": ["celular", "xiaomi"],
+    "color": "Ocean Blue"
+  },
+  {
+    "title": "Celular Xiaomi Poco X3 Pro 8GB 256GB Negro",
+    "description": "XIAOMI POCO X3 PRO DIMENSIONES Y PESO:165,3 x 76,8 x 9,4 mm 215 g PANTALLA:IPS 6,67 pulgadas 120 Hz 240 Hz táctil, 450 nits Gorilla Glass 6, HDR10 PROCESADOR: Qualcomm Snapdragon 860 RAM:8 GB LPDDR4X ALMACENAMIENTO:256 GB UFS 3.1 (hasta 1 TB con microSD) CÁMARAS TRASERAS: 48 MP, f/1.79, AF UGA 8 MP, f/2.2, 119° 2 MP macro, f/2.4, FF 2 MP profundidad, f/2.4, FF CÁMARA FRONTAL: 20 MP, f/2.2 BATERÍA: 5.160 mAh SISTEMA OPERATIVO: Android 11 + MIUI 12 CONECTIVIDAD: 4G, Bluetooth 5.0, WiFi 5, NFC OTROS: Jack 3,5 mm Estéreo, Infrarrojos. Lector de huellas lateral Sin trafo Por cuestiones de Homologación y normas Iram, los transformadores son extraídos de las cajas a su ingreso al país, para su comercialización",
+    "img": ["https://images.fravega.com/f300/4c50448924195efb627f67d3a729cca3.jpg"],
+    "price": 117899,
+    "category": ["celular", "xiaomi"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular Xiaomi Redmi 9A 32 GB Gris Granito",
+    "description": "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53 . Cámara trasera de 13Mpx. Cámara delantera de 5Mpx. Procesador MediaTek Helio G25 Octa-Core de 2GHz con 2GB de RAM. Batería de 5000mAh. Memoria interna de 32GB. Apto para tarjeta SD de 512GB. Con reconocimiento facial.",
+    "img": ["https://images.fravega.com/f300/c31c45abbbb3a29d1e0f30263f285296.jpg"],
+    "price": 31756,
+    "category": ["celular", "xiaomi"],
+    "color": "Gris"
+  },
+  {
+    "title": "Celular Xiaomi Mi 11 Lite 128GB Negro",
+    "description": "Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53 . Cámara trasera de 13Mpx. Cámara delantera de 5Mpx. Procesador MediaTek Helio G25 Octa-Core de 2GHz con 2GB de RAM. Batería de 5000mAh. Memoria interna de 32GB. Apto para tarjeta SD de 512GB. Con reconocimiento facial.",
+    "img": [
+      "https://images.fravega.com/f300/9f4bac7d594b642c7a2ab7c01516e157.jpg",
+      "https://images.fravega.com/f300/e65022e9259b3d2fc80fed911b9a6122.jpg",
+      "https://images.fravega.com/f300/703af5f25f9d09012c764d38d187b362.jpg"
+    ],
+    "price": 82799,
+    "category": ["celular", "xiaomi"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular Xiaomi Redmi Note 9 64 GB Verde",
+    "description": "Celular Xiaomi Redmi Note 9 64 GB Verde. Dispositivo liberado para que elijas la compañía telefónica que prefieras. Pantalla IPS de 6.53 . Tiene 4 cámaras traseras de 48Mpx/8Mpx/2Mpx/2Mpx. Cámara delantera de 13Mpx. Procesador MediaTek Helio G85 Octa-Core de 2GHz con 3GB de RAM. Batería de 5020mAh. Memoria interna de 64GB. Apto para tarjeta SD de 512GB. Con reconocimiento facial y sensor de huella dactilar.",
+    "img": ["https://images.fravega.com/f300/bd9a7bcfd6c74d7a9e1a6055c659d809.jpg"],
+    "price": 57300,
+    "category": ["celular", "xiaomi"],
+    "color": "Verde"
+  },
+  {
+    "title": "Celular LG K42 64 GB Gris",
+    "description": "El Celular LG K42 ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla de 6,6 pulgadas. Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para tu entretenimiento y calza perfectamente en la palma de tu mano.",
+    "img": [
+      "https://images.fravega.com/f300/1d8b40a51dc53b55a5d184502a8c165e.jpg",
+      "https://images.fravega.com/f300/a0ff7412288d9eac0fb11e65e68f2c1d.jpg",
+      "https://images.fravega.com/f300/3b56d3b30b959e4ce67e076596a6bf76.jpg",
+      "https://images.fravega.com/f300/a6ff988587487826ccec921a430efb97.jpg"
+    ],
+    "price": 24999,
+    "category": ["celular", "lg"],
+    "color": "Gris"
+  },
+  {
+    "title": "Celular LG K41S 32GB Titanium",
+    "description": "El celular LG K41S ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla FullVision de 6,55 pulgadas HD con una resolución de 1600x720 . Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para todo tu entretenimiento y calza perfectamente en la palma de tu mano. ",
+    "img": [
+      "https://images.fravega.com/f300/9bd05be9602582b53d0ded9c20f1a807.jpg",
+      "https://images.fravega.com/f300/ba825e05f99c2c22adbe942597fa67f8.jpg",
+      "https://images.fravega.com/f300/bdd8e9740b20f72c6d8d78f125652c9c.jpg",
+      "https://images.fravega.com/f300/7533b0fd91187cabc901cb9031b4d4b1.jpg"
+    ],
+    "price": 21999,
+    "category": ["celular", "lg"],
+    "color": "Titanium"
+  },
+  {
+    "title": "Celular LG K61 128GB Titan + Memoria MicroSD Kingston 32GB",
+    "description": "asdCELULAR SMARTPHONE DE 6,53 LG K61 CON ANDROID 9 4GB / 128GB / 48MPx LM-Q630HA CUATRO CÁMARAS PARA CAPTURAR TUS MOMENTOS FAVORITOS Aporta más versatilidad a la fotografía. Captura tus momentos favoritos en cualquier momento, en cualquier lugar y de la manera que desees, con la excelente resolución de la cámara estándar, gran angular, sensor de profundidad y lente macro. ILUMINA LA NOCHE Revela el brillo de cada escena. La tecnología avanzada Quad-Cell aumenta el brillo y disminuye el ruido para tomar fotos excepcionales incluso en condiciones difíciles o con poca luz.asd",
+    "img": [
+      "https://images.fravega.com/f300/c8f99243b5deb7d6eb2bd31b35d0eed3.jpg",
+      "https://images.fravega.com/f300/64b609ba8256b825c649c59091fe2bba.jpg",
+      "https://images.fravega.com/f300/32553ee92ed1987addd620054823b738.jpg",
+      "https://images.fravega.com/f300/12fb8f5d4ae67df560f6ec1e4cf8add2.jpg"
+    ],
+    "price": 45199,
+    "category": ["celular", "lg"],
+    "color": "Titanium"
+  },
+  {
+    "title": "Celular LG K50 32GB Negro + Memoria MicroSD Kingston 32GB",
+    "description": "CELULAR SMARTPHONE 6,26 LG K50 LIBERADO ANDROID 9 3GB / 32GB / 13 MPx LM-X520HM (Aurora black) CÁMARA DUAL TRASERA Retratos de amigos, comidas, monumentos y hasta incluso tus mascotas pueden tener un aspecto bokeh profesional, con la cámara de 13 MP. CÁMARA FRONTAL DE 13MP Fotografía con verdadera precisión, detalle y claridad en cada toma. ¡Prueba tomándote una selfie donde brillen tú y el escenario! AI CAM, CADA TOMA PENSADA JUSTO PARA TI Reconoce con precisión ocho escenarios diferentes y aplica los filtros ideales para cada uno, así cada toma se convierte en la foto perfecta. PANTALLA DE 6,26 HD+ FULLVISION",
+    "img": [
+      "https://images.fravega.com/f300/d402e0f752c85d98a081ce56e7b6bc08.jpg",
+      "https://images.fravega.com/f300/51670e532f9e6d448cc8f55c0e672c5d.jpg",
+      "https://images.fravega.com/f300/2f1f9c0e02dc4673bc436555b0905f66.jpg",
+      "https://images.fravega.com/f300/a45737646ee7db34fb7c482a7981cdca.jpg"
+    ],
+    "price": 26999,
+    "category": ["celular", "lg"],
+    "color": "Negro"
+  },
+  {
+    "title": "Celular LG K22 Plus 64 GB Titanium",
+    "description": "El Celular LG K22 Plus ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla de 6,2 FullVision HD+ y una resolución de 720 x 15820p; para que puedas ver todo con la mejor calidad. Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para todo tu entretenimiento, a la vez que calza perfectamente en la palma de tu mano. ",
+    "img": [
+      "https://images.fravega.com/f300/c4c9ee2102ebd4a45e618da763190f5b.jpg",
+      "https://images.fravega.com/f300/6dd6afb126b52bc7e91ead8ff311e7d7.jpg",
+      "https://images.fravega.com/f300/71c99880aa4f5e45a44cc3dfa299e3a3.jpg",
+      "https://images.fravega.com/f300/4e7c87e2aa6751fccedb09d9dd2bf4a8.jpg"
+    ],
+    "price": 20999,
+    "category": ["celular", "lg"],
+    "color": "Titanium"
+  },
+  {
+    "title": "Celular LG K51s 64 GB Titanium",
+    "description": "El Celular LG K51s ofrece un diseño moderno, simple y ergonómico. A su vez, cuenta con una pantalla de 6.5 pulgadas inch touch screen. Sus bordes minimalistas te brindan la emoción de un teléfono lo suficientemente grande para todo tu entretenimiento y calza perfectamente en la palma de tu mano. Conexión Micro USB.",
+    "img": [
+      "https://images.fravega.com/f300/d5e23cd99eeed62d7c40470f29c6b6a9.jpg",
+      "https://images.fravega.com/f300/d5e23cd99eeed62d7c40470f29c6b6a9.jpg",
+      "https://images.fravega.com/f300/aae27ef4e064ada3548f5e88b6b06ae2.jpg",
+      "https://images.fravega.com/f300/6dd00064bf1a9a3d1f8891ff1a27f08c.jpg"
+    ],
+    "price": 25999,
+    "category": ["celular", "lg"],
+    "color": "Titanium"
+  }
 ]
