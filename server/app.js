@@ -9,7 +9,9 @@ const cors = require('cors');
 const router = require('./routes/');
 const client = require('./config/db');
 const setupController = require('./controllers/seedController');
-require('./config/passport');
+
+require('./config/passport-local');
+require('./config/passport-google');
 
 const app = express();
 
@@ -34,10 +36,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api', router);
-
-app.get('/', (req, res, next) => {
-    res.json('HOLA');
-});
 
 client.then(() => {
     //setupController();
