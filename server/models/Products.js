@@ -1,35 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 const Product = new Schema(
-<<<<<<< HEAD
-    {
-        title: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        description: {
-            type: String,
-            required: true,
-        },
-        img: {
-            type: Array,
-            required: true,
-        },
-        category: {
-            type: Array,
-            required: true,
-        },
-        price: {
-            type: Number,
-            required: true,
-        },
-        color: {
-            type: String,
-        },
-    },
-    { timestamps: true } // createAt updateAt
-=======
   {
     title: {
       type: String,
@@ -69,7 +40,6 @@ const Product = new Schema(
     },
   },
   { timestamps: true } // createAt updateAt
->>>>>>> origin
 );
 
 Product.post("init", function (doc) {

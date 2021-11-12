@@ -10,11 +10,9 @@ router.post('/signup', AuthController.register);
 
 router.post('/signin', passport.authenticate('local'), AuthController.login);
 
-<<<<<<< HEAD
 router.get('/me', checkAuth, AuthController.login);
-=======
+
 //router.post("/facebook", passport.authenticate("facebook"), AuthController.login);
->>>>>>> origin
 
 router.get('/logout', checkAuth, AuthController.logOut);
 

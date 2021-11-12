@@ -145,7 +145,7 @@ export default function Navbar() {
                   ) : null}
                   <br />
                   <MenuDivider />
-                  {user.isAdmin ? <MenuItem>Admin</MenuItem> : null}
+                  {user.isAdmin ? <Link as={ReactLink} to="/admin"><MenuItem>Admin</MenuItem></Link> : null}
                   <MenuItem>
                     <Link as={ReactLink} to="/profile">
                       Your Profile
