@@ -24,7 +24,7 @@ const Carousel = ({slides}) => {
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    const slidesCount = slides.length;
+    const slidesCount = slides?.length;
 
     const prevSlide = () => {
         setCurrentSlide((s) => (s === 0 ? slidesCount - 1 : s - 1));
@@ -42,7 +42,7 @@ const Carousel = ({slides}) => {
         <Flex w="full" bg={useColorModeValue('gray.200', 'gray.600')} p={10} alignItems="center" justifyContent="center">
             <Flex w="full" overflow="hidden" pos="relative">
                 <Flex h="400px" w="full" {...carouselStyle}>
-                    {slides.map((slide, sid) => (
+                    {slides?.map((slide, sid) => (
                         <Box key={`slide-${sid}`} boxSize="full" shadow="md" flex="none">
                             <Text color="white" fontSize="xs" p="8px 12px" pos="absolute" top="0">
                                 {sid + 1} / {slidesCount}
