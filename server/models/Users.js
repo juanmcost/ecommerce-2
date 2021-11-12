@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
+const findOrCreate = require('mongoose-findorcreate');
 const User = new Schema(
     {
         email: {
@@ -51,5 +51,7 @@ User.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, 12);
     return next();
 });
+
+User.plugin(findOrCreate);
 
 module.exports = model('User', User);

@@ -1,11 +1,12 @@
 const Product = require("../models/Products");
+const { joiProduct } = require("../utils/joi");
 
 class ProductController {
   static async getAllProduct(req, res) {
     try {
-      const products = await Product.find({ color: "Negro" });
+      const products = await Product.find();
       res.json(products);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -14,17 +15,16 @@ class ProductController {
     try {
       const product = await Product.findById(req.params.id);
       res.json(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
-  //db.people.find({"name": {$regex:".*fis", $options:"i"}},{name:1})
+
   static async getProductTitle(req, res) {
     try {
-      //const { title } = req.body;
       const product = await Product.find({ title: { $regex: ".*" + req.params.title + ".*" } });
       res.json(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -33,7 +33,52 @@ class ProductController {
     try {
       const products = await Product.find({ category: { $in: [req.params.tag] } });
       res.json(products);
-    } catch {
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  // user logueado
+  static async addReview(req, res) {
+    try {
+      const { username, review } = req.body;
+      const newReview = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+          $push: {
+            reviews: {
+              $each: [{ username, review }],
+            },
+          },
+        },
+        { new: true }
+      );
+      res.status(200).send(newReview);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+  //invalid request
+  static async addAppreciation(req, res) {
+    const appreciation = parseInt(req.body.appreciation);
+    try {
+      const { error } = joiProduct.validate({ appreciation });
+      if (!error) {
+        const newAppreciation = await Product.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              appreciation: {
+                $each: [appreciation],
+              },
+            },
+          },
+          { new: true }
+        );
+        return res.status(200).send(newAppreciation);
+      }
+      return res.status(400).json("Bad Request");
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -44,7 +89,7 @@ class ProductController {
       const newProduct = await new Product(req.body);
       const savedProduct = await newProduct.save();
       res.status(201).json(savedProduct);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -60,7 +105,7 @@ class ProductController {
       );
       console.log(product);
       res.status(200).send(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
@@ -69,7 +114,7 @@ class ProductController {
     try {
       const product = await Product.findByIdAndDelete(req.params.id);
       res.status(204).send(product);
-    } catch {
+    } catch (error) {
       res.status(500).json({ error });
     }
   }
