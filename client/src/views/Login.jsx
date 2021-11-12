@@ -1,7 +1,7 @@
 import react, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { sendLoginRequest } from "../store/auth";
+import { sendLoginRequest } from "../store/user";
 import { successToast, errorToast } from "../utils/toastMessages";
 import {
   Flex,

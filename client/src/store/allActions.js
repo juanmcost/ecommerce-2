@@ -4,8 +4,6 @@ import * as shopCart from './shopCart'
 import * as user from './user'
 
 //auth Reducer
-export const sendLoginRequest = auth.sendLoginRequest;
-export const isLoginRequest = auth.isLoginRequest;
 export const sendRegisterRequest = auth.sendRegisterRequest;
 export const sendLogoutRequest = auth.sendLogoutRequest;
 
@@ -13,12 +11,12 @@ export const sendLogoutRequest = auth.sendLogoutRequest;
 export const createProduct = product.createProduct;
 export const getAllProducts = product.getAllProducts;
 export const getProduct = product.getProduct;
-export const updateProduct = product.updateProduct;
-export const deleteProduct = product.deleteProduct;
+export const modifyProduct = product.modifyProduct;
+export const removeProduct = product.removeProduct;
 
 //shopCart Reducer
 export const addProduct = shopCart.addProduct;
-export const removeProduct = shopCart.removeProduct;
+export const removeFromCart = shopCart.removeProduct;
 
 //user Recducer
 export const getAllUser = user.getAllUser;

@@ -2,7 +2,7 @@ import React, { useState } from "react"; // import react
 import { useDispatch } from "react-redux"; // import dispatch
 import { useNavigate } from "react-router-dom"; // import history
 import { useForm } from "react-hook-form";
-import { sendLoginRequest } from "../store/auth"; // import login
+import { sendLoginRequest } from "../store/user"; // import login
 import { FaFacebook, FaGoogle } from "react-icons/fa"; //import react-icons
 import { GoMarkGithub } from "react-icons/go"; // import react-icons
 import { successToast } from "../utils/toastMessages";
