@@ -1,4 +1,5 @@
 const Product = require("../models/Products");
+const { joiProduct } = require("../utils/joi");
 
 class ProductController {
   static async getAllProduct(req, res) {
@@ -32,6 +33,51 @@ class ProductController {
     try {
       const products = await Product.find({ category: { $in: [req.params.tag] } });
       res.json(products);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  // user logueado
+  static async addReview(req, res) {
+    try {
+      const { username, review } = req.body;
+      const newReview = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+          $push: {
+            reviews: {
+              $each: [{ username, review }],
+            },
+          },
+        },
+        { new: true }
+      );
+      res.status(200).send(newReview);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+  //invalid request
+  static async addAppreciation(req, res) {
+    const appreciation = parseInt(req.body.appreciation);
+    try {
+      const { error } = joiProduct.validate({ appreciation });
+      if (!error) {
+        const newAppreciation = await Product.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              appreciation: {
+                $each: [appreciation],
+              },
+            },
+          },
+          { new: true }
+        );
+        return res.status(200).send(newAppreciation);
+      }
+      return res.status(400).json("Bad Request");
     } catch (error) {
       res.status(500).json({ error });
     }

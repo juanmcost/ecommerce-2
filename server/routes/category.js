@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const auth = require("../middlewares/auth");
-const categoryControllers = require("../controllers/categoryController");
+const categoryController = require("../controllers/categoryController");
 
-router.put("/add/:id", checkAuthAndAdmin, categoryController.addCategory);
+router.put("/add/:id", auth.checkAuthAndAdmin, categoryController.addCategory);
 
-router.delete("/remove", checkAuthAndAdmin, categoryController.removeCategory);
+router.delete("/remove", auth.checkAuthAndAdmin, categoryController.removeCategory);
 
-router.put("/edit/:tag", auth.checkAuthAndAdmin, categoryControllers.editCategory);
+router.put("/edit/:tag", auth.checkAuthAndAdmin, categoryController.editCategory);
 
 module.exports = router;

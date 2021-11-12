@@ -10,6 +10,14 @@ router.get("/:id", productsController.getProduct);
 
 router.get("/search/:title", productsController.getProductTitle);
 
+// user logueado
+
+router.put("/review/:id", auth.checkAuth, productsController.addReview);
+
+router.put("/appreciation/:id", auth.checkAuth, productsController.addAppreciation);
+
+//router.put("/")
+
 //admin
 router.post("/add", auth.checkAuth, productsController.addProduct);
 
