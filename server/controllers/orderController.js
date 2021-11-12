@@ -27,11 +27,11 @@ class OrderController {
         try {
             const { user } = jwt.verify(req.params.token, process.env.JWT_SECRET);
 
-            if (user !== req.user[0]._id) return res.status(401).json('Unauthorized');
+            if (user !== req.user[0]._id || req.user[0].isAdmin) return res.status(401).json('Unauthorized');
 
             await Cart.findOneAndUpdate({ userId: user }, { $set: { confirm: true } }, { new: true });
             // res.status(201).json(checkCart);
-            return res.redirect('http:localhost:3000/');
+            return res.redirect('http:localhost:3000/cart/payment');
         } catch (error) {
             return res.status(500).json({ error });
         }
