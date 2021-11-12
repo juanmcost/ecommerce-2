@@ -8,24 +8,24 @@ import { handleSee, handleModify } from '../utils/redirect'
 
 export const MyProductListButtons = ({ product }) => {
   const handleDelete = () => {
-    console.log('delete', product.id)
+    console.log('delete', product._id)
   };
 
   return (
     <VStack>
-      <ResponsiveButton onClick={() => {handleSee(product.id)}}>
+      <ResponsiveButton onClick={() => {handleSee(product._id)}}>
         Rating: {product.avgRating}
       </ResponsiveButton>
       <Spacer />
       <Spacer />
       <RespButtonGroup>
         <IconButton
-          onClick={() => {handleSee(product.id)}}
+          onClick={() => {handleSee(product._id)}}
           colorScheme="blue"
           icon={<BsBoxArrowUpRight />}
         />
         <IconButton
-          onClick={() => handleModify(product.id)}
+          onClick={() => handleModify(product._id)}
           colorScheme="green"
           icon={<AiFillEdit />}
         />

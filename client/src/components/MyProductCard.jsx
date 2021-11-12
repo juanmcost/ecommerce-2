@@ -2,10 +2,11 @@ import React from "react";
 import ProductMiniature from "./ProductMiniature";
 import { ResponsiveText } from "../common/ResponsiveText";
 import { MyProductListButtons } from "../components/MyProductListButtons";
+import { timeConverter } from "../utils/timeConverter";
 import {
   Flex,
   GridItem,
-  HStack,
+  Stack,
   SimpleGrid,
   Text,
   useColorModeValue,
@@ -13,6 +14,8 @@ import {
 const themer = useColorModeValue;
 
 export const MyProductCard = ({ product }) => {
+  const productTime = timeConverter(product.createdAt);
+
   return (
     <Flex
       rounded={13}
@@ -29,17 +32,17 @@ export const MyProductCard = ({ product }) => {
           fontWeight="hairline"
         >
           <GridItem rowSpan={2} colSpan={1}>
-            <ProductMiniature image={product.images[0]} />
+            <ProductMiniature image={product.img} />
           </GridItem>
           <GridItem rowSpan={1} colSpan={2}>
             <Flex justify="center" align="center" h="100%">
-              <HStack>
-                <ResponsiveText>
-                  <strong>{product.name}</strong>
-                </ResponsiveText>
-                <span> · </span>
-                <ResponsiveText>{product.created}</ResponsiveText>
-              </HStack>
+                  <Stack direction={["column", "row"]}>
+                    <ResponsiveText>
+                      <strong>{product.title}</strong>
+                    </ResponsiveText>
+                    <Text align="center"> · </Text>
+                    <ResponsiveText>{productTime}</ResponsiveText>
+                  </Stack>
             </Flex>
           </GridItem>
           <GridItem rowSpan={1} colSpan={2}>
