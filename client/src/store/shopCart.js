@@ -5,21 +5,21 @@ import axios from "axios"; // import axios
 
 //--Add products
 
-export const addProduct = createAsyncThenk("ADD_PRODUCT", () => {
+export const addProduct = createAsyncThunk("ADD_PRODUCT", () => {
   return axios.put("").then((res) => res.data);
 });
 
 //--remove Product
 
-export const removeProduct = createAsyncThenk("REMOVE_PRODUCT", () => {
+export const removeProduct = createAsyncThunk("REMOVE_PRODUCT", () => {
   return axios.delete("").then((res) => res.data);
 });
 
 //--Config Reducer
 
 const shopCartReducer = createReducer([], {
-  [addProduct.fullfilled]: (state, action) => action.payload,
-  [removeProduct.fullfilled]: (state, action) => action.payload,
+  [addProduct.fulfilled]: (state, action) => action.payload,
+  [removeProduct.fulfilled]: (state, action) => action.payload,
 });
 
 export default shopCartReducer;

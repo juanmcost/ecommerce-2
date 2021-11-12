@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit"; // import redux tool-kit
 import logger from 'redux-logger' // import redux logger
 import authReducer from './auth'
 import userReducer from './user'
+import productReducer from './product'
 
 
 // config reducer
@@ -11,6 +12,7 @@ const store = configureStore({
     reducer: {
       auth: authReducer,
       user: userReducer,
+      product: productReducer,
     },
   });
   

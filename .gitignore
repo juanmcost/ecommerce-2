@@ -59,5 +59,7 @@ typings/
 # dist bundles 
 backend/public/bundle.js
 backend/public/bundle.js.map
-;
 
+# personal utils
+personaUtils/
+;

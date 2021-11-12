@@ -38,11 +38,11 @@ export const deleteUser = createAsyncThunk("GET_USER", (prop) => {
 //--Config Reducer
 
 const userReducer = createReducer([], {
-  [getAllUser.fullfilled]: (state, action) => action.payload,
-  [getUser.fullfilled]: (state, action) => action.payload,
-  [editUser.fullfilled]: (state, action) => action.payload,
-  [adminUser.fullfilled]: (state, action) => action.payload,
-  [deleteUser.fullfilled]: (state, action) => action.payload,
+  [getAllUser.fulfilled]: (state, action) => action.payload,
+  [getUser.fulfilled]: (state, action) => action.payload,
+  [editUser.fulfilled]: (state, action) => action.payload,
+  [adminUser.fulfilled]: (state, action) => action.payload,
+  [deleteUser.fulfilled]: (state, action) => action.payload,
 });
 
 export default userReducer;

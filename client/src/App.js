@@ -1,4 +1,6 @@
 import ShopCartDB from "./components/ShopCartDB";
+import { NewProduct } from "./containers/NewProduct";
+import { ModifyProduct } from "./containers/ModifyProduct";
 import Home from "./views/Home";
 import React from "react";
 import Navbar from "./components/Navbar";
@@ -27,6 +29,8 @@ const App = () => {
         <Route path="/profile" element={<SocialProfileWithImage />} />
         <Route path='/myProducts' element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
+        <Route path="/myProducts/newProduct" element={<NewProduct />} />
+        <Route path="/myProducts/ModifyProduct/:id" element={<ModifyProduct />} />
         <Route
           path={`/categories/categoryId`}
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
