@@ -23,15 +23,16 @@ export default function Article() {
   const {id} = useParams();
   const product = data[4]
   const [article, setArticle] = useState({})
-  
-  useEffect(() => {
-    axios
+  useEffect(async () => {
+    await axios
     .get(`/api/product/${id}`)
-    .then((res) => setArticle(res.data) )
+    .then((res) => {
+      console.log(res);
+      setArticle(res.data)} )
     .catch((err) => (console.log(err)));
-    
+    console.log(article)
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
   
   console.log("this is article",article)
 

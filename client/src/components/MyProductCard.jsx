@@ -32,7 +32,7 @@ export const MyProductCard = ({ product }) => {
           fontWeight="hairline"
         >
           <GridItem rowSpan={2} colSpan={1}>
-            <ProductMiniature image={product.img} />
+            <ProductMiniature image={product.img[0]} />
           </GridItem>
           <GridItem rowSpan={1} colSpan={2}>
             <Flex justify="center" align="center" h="100%">
