@@ -2,7 +2,12 @@
     {
         "title": "Celular Samsung Galaxy S20FE 128 GB Verde",
         "description": "El celular Samsung Galaxy S20FE presenta un diseño ergonómico y elegante. Con la pantalla Super Amoled de 6.5 pulgadas con una resolución de 1080x2400 FHD vas a poder sumergirte en tus juegos y videos favoritos. ",
-        "img": "https://images.fravega.com/f300/c965a6d0e2fc723c39b4ccc42641e001.jpg",
+        "img": [
+            "https://images.fravega.com/f300/c965a6d0e2fc723c39b4ccc42641e001.jpg",
+            "https://images.fravega.com/f300/023b9678d1bbe1c5908d65cc0c7e2de2.jpg",
+            "https://images.fravega.com/f300/7b1cade04667235a5bd72bd25920f51f.jpg",
+            "https://images.fravega.com/f300/c7dd87949993950bd41d2845a2ac3d4c.jpg"
+        ],
         "price": 76999,
         "category": ["celular", "samsung"],
         "color": "Verde"
@@ -10,7 +15,12 @@
     {
         "title": "Celular Samsung Galaxy A72 128 GB Negro",
         "description": "Su procesador Octa-Core y la memoria RAM de 6 GB te permitirán ejecutar aplicaciones y realizar múltiples tareas al mismo tiempo. Además, su sistema operativo Android es eficiente y fácil de usar.",
-        "img": "https://images.fravega.com/f300/e5bd6d9d73deaffdbe7f6a006e58d99c.jpg",
+        "img": [
+            "https://images.fravega.com/f300/e5bd6d9d73deaffdbe7f6a006e58d99c.jpg",
+            "https://images.fravega.com/f300/f8944e4b4492f62f9a53c03544fb159b.jpg",
+            "https://images.fravega.com/f300/5df626489b99d3af5a04488e81267ec7.jpg",
+            "https://images.fravega.com/f300/aa68149f1553e9cd5eab9c2a2c674932.jpg"
+        ],
         "price": 66999,
         "category": ["celular", "samsung"],
         "color": "Negro"
@@ -18,7 +28,12 @@
     {
         "title": "Celular Samsung Galaxy A21s 128 GB Negro",
         "description": "El Galaxy A21s presenta un diseño ergonómico y elegante. Con la pantalla de 6.5 vas a poder sumergirte en tus juegos y videos favoritos. Con su pantalla HD+, con marco casi inexistente, el Galaxy A21s rediseña tus momentos de entretenimiento. Conexión USB-C.",
-        "img": "https://images.fravega.com/f300/7b6ba44f90c0cc399c1d0d71ab2fac00.jpg",
+        "img": [
+            "https://images.fravega.com/f300/7b6ba44f90c0cc399c1d0d71ab2fac00.jpg",
+            "https://images.fravega.com/f300/9a60072b1632a7114ff7f250e42f2d5d.jpg",
+            "https://images.fravega.com/f300/95886902cf9a6b752089d8217527c2f8.jpg",
+            "https://images.fravega.com/f300/2a962bdbcf7ff858d6200e6d49c199d7.jpg"
+        ],
         "price": 40999,
         "category": ["celular", "samsung"],
         "color": "Negro"
@@ -26,7 +41,12 @@
     {
         "title": "Celular Samsung Galaxy M12 128 GB Negro",
         "description": "El Galaxy M12 presenta un diseño ergonómico y elegante. Con la pantalla de 6,5 pulgadas con una resolución de 1600x720 HD vas a poder sumergirte en tus juegos y videos favoritos. La gran pantalla Infinity-V del Galaxy M12 rediseña tus momentos de entretenimiento. Conexión Micro USB.",
-        "img": "https://images.fravega.com/f300/73a83fe2c4a762c9ae974b499cf58406.jpg",
+        "img": [
+            "https://images.fravega.com/f300/73a83fe2c4a762c9ae974b499cf58406.jpg",
+            "https://images.fravega.com/f300/d5679aa8d05321b166f40b4f6fe21d0a.jpg",
+            "https://images.fravega.com/f300/27d6fd6acd60273f8a34d610b5fcab5f.jpg",
+            "https://images.fravega.com/f300/448ac45bc2c11be613f5f04be26af051.jpg"
+        ],
         "price": 36999,
         "category": ["celular", "samsung"],
         "color": "Negro"
@@ -34,7 +54,12 @@
     {
         "title": "Celular Samsung Galaxy A12 64 GB Azul",
         "description": "El celular Samsung A12 posee una memoria interna de 64GB y la posibilidad de expandirla con una tarjeta microSD hasta 1TB. Vas a poder descargar aplicaciones, almacenar videos, fotos y música sin problemas.",
-        "img": "https://images.fravega.com/f300/6c5c279402a5100f9a1a20ecb681c9d2.jpg",
+        "img": [
+            "https://images.fravega.com/f300/6c5c279402a5100f9a1a20ecb681c9d2.jpg",
+            "https://images.fravega.com/f300/6c5c279402a5100f9a1a20ecb681c9d2.jpg",
+            "https://images.fravega.com/f300/40fdab6284c28baef799ec783e95e29b.jpg",
+            "https://images.fravega.com/f300/6b66b30c43baa3816831c1ed73594ca1.jpg"
+        ],
         "price": 31999,
         "category": ["celular", "samsung"],
         "color": "Azul"
@@ -42,7 +67,12 @@
     {
         "title": "Celular Samsung Galaxy S21 128 GB Blanco",
         "description": "Con un diseño de vanguardia, el celular Samsung S21 es un teléfono único que ofrece una pantalla Dynamic AMOLED 2x con una resolución Full HD+ sin Notch ni distracciones. Además, tiene 8GB de RAM y 128GB de almacenamiento.",
-        "img": "https://images.fravega.com/f300/f3a4a173fcb49f816523cbb16a06a261.jpg",
+        "img": [
+            "https://images.fravega.com/f300/f3a4a173fcb49f816523cbb16a06a261.jpg",
+            "https://images.fravega.com/f300/f3a4a173fcb49f816523cbb16a06a261.jpg",
+            "https://images.fravega.com/f300/e6304dcd4402adc203591ed8f057a1e9.jpg",
+            "https://images.fravega.com/f300/db7d643c057c3c09a1047e39fe94d1d3.jpg"
+        ],
         "price": 114999,
         "category": ["celular", "samsung"],
         "color": "Blanco"
@@ -50,7 +80,12 @@
     {
         "title": "Celular Samsung Galaxy Z Flip3 128 GB Beige + Cargador Inalámbrico",
         "description": "El celular Samsung Galaxy Z Flip3 ofrece una gran pantalla Infinity Flex Display de 6,7 pulgadas FHD+. Tiene 8GB de RAM y 128GB de almacenamiento. Además, incluye cargador inalámbrico EP-P4300BBEGAR.",
-        "img": "https://images.fravega.com/f300/13ea949844e7dfc5ef6b38341e794266.jpg",
+        "img": [
+            "https://images.fravega.com/f300/13ea949844e7dfc5ef6b38341e794266.jpg",
+            "https://images.fravega.com/f300/c029c74ead08c01d7e2fe706c38258e1.jpg",
+            "https://images.fravega.com/f300/3dffc47be80812f2b1290ffc73dc2ed8.jpg",
+            "https://images.fravega.com/f300/aacc4abf5f3b29b9294ee232d5771d0f.jpg"
+        ],
         "price": 144999,
         "category": ["celular", "samsung"],
         "color": "Beige"
@@ -58,7 +93,12 @@
     {
         "title": "Celular Samsung Galaxy A52 128GB Negro",
         "description": "El celular Samsung Galaxy A52 presenta un diseño ergonómico, elegante y delgado. Con la pantalla de 6.3 vas a poder sumergirte en tus juegos y videos favoritos. Además, con su tecnología Super AMOLED, de extremo a extremo, con un marco casi inexistente, el Galaxy A52 rediseña tus momentos de entretenimiento. Su resolución es de 1080 x 2400p (FHD+).",
-        "img": "https://images.fravega.com/f300/45c6d89d1132121af48c2a3eac156510.jpg",
+        "img": [
+            "https://images.fravega.com/f300/45c6d89d1132121af48c2a3eac156510.jpg",
+            "https://images.fravega.com/f300/537979054b9dba2d6de1ca1668b30a7c.jpg",
+            "https://images.fravega.com/f300/af0a0354c28e856f3777d206658ac7da.jpg",
+            "https://images.fravega.com/f300/a31eb38034b014594e8096ff606950a5.jpg"
+        ],
         "price": 60999,
         "category": ["celular", "samsung"],
         "color": "Negro"
