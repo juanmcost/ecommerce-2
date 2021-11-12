@@ -52,7 +52,7 @@ export default function Login() {
         .then((res) => {
           if (res.payload) {
             successToast(toast, `Welcome ${res.payload.username}`);
-            navigate('/')
+            navigate('/home')
           } else {
             errorToast(toast, `Wrong email or password`);
           }
@@ -135,10 +135,9 @@ export default function Login() {
                     bg: "blue.500",
                   }}
                   type="button"
+                  onClick={(e)=> {e.preventDefault(); navigate('/register')} }
                 >
-                  <Link as={ReactLink} to='/register'>
                   Sign Up
-                  </Link>
                 </Button>
               </Stack>
             </Stack>

@@ -33,12 +33,12 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/articles/:id" element={<Article />} />
-        <Route exact path="/admin" element={<Admin />} />
+      <Route path="/" element={<Home />}/>
+      <Route path="/admin" element={<Admin />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<SocialProfileWithImage />} />
         <Route path="/myProducts" element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
         <Route path="/myProducts/newProduct" element={<NewProduct />} />

@@ -60,7 +60,7 @@ function onSubmit(form) {
         if (res.status === 200) {
             dispatch(sendLoginRequest({ email, password })).then((res) => {
                 successToast(toast, 'Account created', `Yor account has been created. Enjoy!`);
-                navigate('/')
+                navigate('/home')
             });
         }
     });

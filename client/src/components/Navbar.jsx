@@ -45,7 +45,7 @@ export default function Navbar() {
       .get("/api/auth/logout")
       .then(({ data }) => {
         dispatch(sendLogoutRequest(data));
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => ({ err: err.message }));
   };
