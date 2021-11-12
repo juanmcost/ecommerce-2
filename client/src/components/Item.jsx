@@ -64,27 +64,34 @@ import {
     const toast = useToast();
 
     const addToCart = () => {
-      if (
-
-        carrito.list.some((el) => { //does the cart have the product?
-          return el.product === item._id;
-        })
-
-      ) errorToast(toast, "you already have that in the cart");
-
-      else {//if it doesn't then add it
         if (user.username){
-          let products = carrito.list;
-          axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
+          axios.get(`http://localhost:8080/api/cart/${user._id}`)
+          .then(dbCart => {
+            if (dbCart.data === null) {
+              axios.post(`http://localhost:8080/api/cart/`, {products: [{productId: item._id}]})
+              .then(() => successToast(toast, "product added to cart!"))
+              .catch(err => console.log(err));
+            }
+            else {  
+              dbCart = dbCart.data
+              if (dbCart.products.some(el => el.productId === item._id)) errorToast(toast, "you already have that in the cart");
+              else{
+                dbCart.products.push({productId: item._id})
+                axios.put(`http://localhost:8080/api/cart/${user._id}`, {dbCart})
+                .then(successToast(toast, "product added to cart!"));
+              }
+            }
+          })
+          .catch(err => console.log(err))
         }
         else {
-          carrito.list.push({product: item, quantity: 1}) 
-          localStorage.setItem('carrito', JSON.stringify(carrito));
-          successToast(toast, "product added to cart!")
+          if (carrito.list.some(el => el.product._id === item._id)) errorToast(toast, "you already have that in the cart");
+          else{
+            carrito.list.push({product: item, quantity: 1}); 
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            successToast(toast, "product added to cart!");
+          }  
         }
-
-      }
-      
     }
 
     return (
