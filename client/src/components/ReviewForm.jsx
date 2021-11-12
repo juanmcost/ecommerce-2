@@ -15,6 +15,7 @@ import {
 import { useForm } from '../hooks/useForm'
 
 export default function ReviewForm() {
+  const options = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
   const { form, handleForm } = useForm();
 	// const handleSubmit = () => {
 	  //console.log(form);																//toDo handleSubmit
@@ -51,16 +52,7 @@ export default function ReviewForm() {
 											onChange={handleForm}
                       isRequired
                     >
-                      <option>10</option>
-                      <option>9</option>
-                      <option>8</option>
-                      <option>7</option>
-                      <option>6</option>
-                      <option>5</option>
-                      <option>4</option>
-                      <option>3</option>
-                      <option>2</option>
-                      <option>1</option>
+                      {options.map(e => <option key={e}>{e}</option>)}
                     </Select>
                   </FormControl>
                   <FormControl id="title" align="left">

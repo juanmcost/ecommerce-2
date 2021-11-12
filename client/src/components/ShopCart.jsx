@@ -5,33 +5,34 @@ import { Link } from "react-router-dom";
 import { errorToast } from "../utils/toastMessages";
 
 const ShopCart = () => {
-    const [user,setUser] = useState({});
     const [cart,setCart] = useState({});
     const [aux, setAux] = useState(true);
     const toast = useToast();
 
 
     useEffect(() => {
-        //pa probar:
-        const testObject = {username: "ale"}
-        const testCarrito = {
-            list: [{product: {title: "celu", price: 100}, quantity: 2},{product: {title: "monitor", price: 10}, quantity: 1}],
-            total: 0
-        }
-        localStorage.setItem('loggedUser', JSON.stringify(testObject));
-        localStorage.setItem('carrito', JSON.stringify(testCarrito));
-        //esto si hiría:
-        const jsonUser = localStorage.getItem('loggedUser');
         const jsonCart = localStorage.getItem('carrito');
         let carrito = JSON.parse(jsonCart);
-        console.log("carrito:",carrito);
-        carrito.list.map((cartItem, i) => {
-            carrito.total += cartItem.product.price * cartItem.quantity
-        })
-        console.log("total de carrito:", carrito.total)
-        if (jsonUser) setUser(JSON.parse(jsonUser));
-        if (jsonCart) setCart(carrito);
-        console.log("")
+        let total = 0;
+        console.log("lista:",carrito);
+
+        if (carrito === null) {
+            carrito = {
+                list: [//should be empty array
+                    {product: {title:"celu", price: 100}, quantity: 2},
+                    {product: {title:"monitor", price: 10}, quantity: 1}
+                ],
+                total: 0
+            }
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+        }
+        else {
+            carrito.list.map((cartItem) => {
+                total += cartItem.product.price * cartItem.quantity
+            })
+        }
+
+        setCart({list: carrito.list, total});
     }, [])
     
     const changeQuantity = (moreOrLess, index) => {
@@ -64,7 +65,6 @@ const ShopCart = () => {
     return (
         <Flex>
             <Box>
-                <h1>carrito de {user.username}</h1>
                 {cart?.list?.map((prod, i) => (
                     <Grid templateColumns="repeat(4, 1fr)" align="center" h="16">
                         <Center>

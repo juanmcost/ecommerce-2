@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
 import ShopCartDB from "./components/ShopCartDB";
+import { NewProduct } from "./containers/NewProduct";
+import { ModifyProduct } from "./containers/ModifyProduct";
+import React, { useEffect } from "react";
 import Home from "./views/Home";
 import Navbar from "./components/Navbar";
 import { SocialProfileWithImage } from "./components/Card";
@@ -10,7 +12,6 @@ import Profile from "./views/Profile"
 import { Route, Routes } from "react-router-dom";
 import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
-import ProductsGrid from "./components/Grid";
 import ShopCart from "./components/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,12 +35,16 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/articles/:id" element={<Article/>} />
-        <Route path="/home" element={<Carousel slides={images}/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path='/myProducts' element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
+        <Route path="/myProducts/newProduct" element={<NewProduct />} />
+        <Route path="/myProducts/ModifyProduct/:id" element={<ModifyProduct />} />
+        <Route path={`/${user.username}/myCart`} element={<ShopCartDB />} />
+        <Route path={`/cart`} element={<ShopCart />} />
         <Route
           path={`/categories/categoryId`}
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}

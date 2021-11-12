@@ -100,11 +100,12 @@ export default function Navbar() {
               <Button onClick={toggleColorMode} bg="none" rounded="full">
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
-
-              <Link as={ReactLink} to="/myCart">
+              <Link
+                as={ReactLink}
+                to={user.username ? `/${user.username}/myCart` : `cart`}
+              >
                 <Icon as={FaShoppingCart} />
               </Link>
-
               <Menu>
                 {user.email ? (
                   <MenuButton
