@@ -52,6 +52,7 @@ const testimonials = [
       'https://www.memesargentinos.com.ar/wp-content/uploads/2019/07/Portada-ulala-senor-frances.jpg',
   },
 ];
+
 export default function Reviews() {
   return (
 		<Container maxW="100%">

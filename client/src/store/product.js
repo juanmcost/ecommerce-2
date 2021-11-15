@@ -4,6 +4,9 @@ import axios from "axios"; // import axios
 //---------------CONFIG PRODUCT --------------\\
 
 const API = '"http://localhost:8080/api/product"'
+const fileOptions = {
+  headers: {'Content-Type': 'multipart/form-data; boundary=${form._boundary}'}
+};
 
 //--GET ALL Product
 
@@ -29,8 +32,8 @@ export const getAllProducts = createAsyncThunk("GET_ALL_PRODUCTS", async () => {
 
 //--GET Product
 
-export const getProduct = createAsyncThunk("GET_PRODUCT", () => {
-  return axios.get(`${API}/:id`).then((res) => res.data);
+export const getProduct = createAsyncThunk("GET_PRODUCT", (id) => {
+  return axios.get(`http://localhost:8080/api/product/${id}`).then(res => res.data);
 });
 
 //--GET Product Title
@@ -43,12 +46,21 @@ export const getProductTitle = createAsyncThunk("GET_PRODUCT", () => {
 
 //------ADMIN------\\
 
-//--create Product
+//--create Product                                                                  //toDo WIP
 
-export const addProduct = createAsyncThunk("CREATE_PRODUCT", () => {
-  return axios.post(`${API}/add`).then((res) => res.data);
+export const addProduct = createAsyncThunk("CREATE_PRODUCT", (images) => {
+  console.log('IMG', images)
+  return axios.post(`http://localhost:8080/api/product/add`, images, fileOptions).then((res) => res.data);
 });
 
+// export const addProduct = createAsyncThunk("CREATE_PRODUCT", (images) => {
+//   console.log('IMG', images)
+//   return axios({
+// 		method: 'post',
+// 		url: `http://localhost:8080/api/product/add`,
+// 		data: {data: images},
+// 	}).then((res) => res.data);
+// });
 
 //--update Product
 

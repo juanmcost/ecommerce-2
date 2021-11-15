@@ -13,6 +13,7 @@ class ProductController {
 
   static async getProduct(req, res) {
     try {
+      console.log(req.params)
       const product = await Product.findById(req.params.id);
       res.json(product);
     } catch (error) {

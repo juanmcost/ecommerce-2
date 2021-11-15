@@ -10,31 +10,23 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { IoAnalyticsSharp, IoLogoBitcoin } from "react-icons/io5";
-import { React, useEffect } from "react";
+import { useEffect } from "react";
 import Reviews from "../containers/Reviews";
 import Carousel from "../components/Carousel";
 import Feature from "../components/Feature";
-import { dummieData as data } from "../utils/dummieData"
-import { useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../store/product";
 
 export default function Article() {
-  const {id} = useParams();
-  const product = data[4]
-  const [article, setArticle] = useState({})
-  useEffect(async () => {
-    await axios
-    .get(`/api/product/${id}`)
-    .then((res) => {
-      console.log(res);
-      setArticle(res.data)} )
-    .catch((err) => (console.log(err)));
-    console.log(article)
-    window.scrollTo(0, 0);
+  const { id } = useParams();
+  const article = useSelector(({ product }) => product);
+  console.log("ProductO", article);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct(id));
   }, [id]);
-  
-  console.log("this is article",article)
 
   return (
     <Container maxW={"95vw"} py={12}>
@@ -65,14 +57,18 @@ export default function Article() {
                 <Icon as={IoAnalyticsSharp} color={"yellow.500"} w={5} h={5} />
               }
               iconBg={useColorModeValue("yellow.100", "yellow.900")}
-              text={`In stock: ${product.quantity}`} //toDo cambiar icono
+              text={`Main category: ${article.category && article.category[0]}`} //toDo cambiar icono
             />
             <Feature
               icon={
                 <Icon as={IoAnalyticsSharp} color={"yellow.500"} w={5} h={5} />
               }
               iconBg={useColorModeValue("yellow.100", "yellow.900")}
-              text={`Average rating: ${product.avgRating}`}
+              text={`Average rating: ${
+                article?.appreciation?.length > 0
+                  ? article.appreciation
+                  : "Not rated yet"
+              }`}
             />
           </Stack>
         </Stack>
