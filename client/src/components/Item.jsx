@@ -77,9 +77,9 @@ import {
           }
           else {
             let aux = false
+            console.log("i'm in")
             dbCart.products.forEach(el => {
               if (el.productId === item._id) {
-                console.log("i'm in")
                 aux = true
                 el.quantity++;
                 return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products]})
@@ -88,9 +88,10 @@ import {
             })
             if (!aux) {  
               axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products, {productId: item._id}]})
-              .then((res) => 
-              {console.log("carrito guardado", res.data.products);
-              successToast(toast, "product added to cart!");})
+              .then((res) => {
+                console.log("carrito guardado", res.data);
+                successToast(toast, "product added to cart!");
+              })
             }
           }
         })
