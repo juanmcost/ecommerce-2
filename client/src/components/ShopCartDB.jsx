@@ -16,41 +16,28 @@ const ShopCartDB = () => {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/cart/${user._id}`)
         .then( res => {
-            let carrito = [];
-            if (res.data === null) {
-                carrito = [//pa probar
-                    {product: {title: "monitor", price: 10}, quantity: 1},
-                    {product: {title: "celu", price: 100}, quantity: 2}];
-                axios.post(`http://localhost:8080/api/cart/`, {products: carrito})
-                .catch(err => console.log(err));
-            }
-            else {
-                carrito = res.data
-                console.log("im here")
-            }
+            let carrito = []
+            if (res.data !== null) carrito = res.data.products;
             return carrito
         })
-        .then((carrito) => {
-            console.log("hola?")
+        .then(carrito => {
             let total = 0;
 
             carrito.map((cartItem, i) => {
                 total += cartItem.product.price * cartItem.quantity
             });
             
-            console.log("carrito:",carrito);
             setCart({list: carrito, total})
-            console.log("cart:",cart);
-            aux === true ? setAux(false): setAux(true);
-
         })
         .catch(err => console.log(err))
 
     }, [])
 
     useEffect(() => {
-        const product = cart.list
-        axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
+        if (cart.list == []){
+            const product = cart.list
+            axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
+        }
     }, [aux])
 
     const changeQuantity = (moreOrLess, index) => {
