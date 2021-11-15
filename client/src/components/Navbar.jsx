@@ -99,7 +99,7 @@ export default function Navbar() {
             />
           </InputGroup>
 
-          <Flex alignItems={"center"} ml="50%">
+          <Flex alignItems={"center"} ml="auto">
             <Stack direction={"row"} spacing={7} alignItems={"center"}>
               <Button onClick={toggleColorMode} bg="none" rounded="full">
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

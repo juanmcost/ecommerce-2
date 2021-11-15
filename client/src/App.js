@@ -13,6 +13,7 @@ import Admin from "./views/Admin.jsx";
 import { Route, Routes } from "react-router-dom";
 import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
+import OrderAddress from "./views/OrderAddress";
 import ShopCart from "./components/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,6 +54,7 @@ const App = () => {
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
         />{" "}
         <Route exact path="/articles/:id" element={<Article />} />
+        <Route path="/new_order/address" element={<OrderAddress />} />
       </Routes>
     </div>
   );
