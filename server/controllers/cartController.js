@@ -3,10 +3,10 @@ const Cart = require('../models/Cart');
 class CartController {
     // Create Cart
     static async createCart(req, res) {
-        const { products } = req.body; // products must be an array
+        const { products, userId } = req.body; // products must be an array
         try {
             const cart = new Cart({
-                userId: req.user[0]._id,
+                userId,
                 products,
             });
             const savedCart = await cart.save();
@@ -40,8 +40,8 @@ class CartController {
     static async updateCart(req, res) {
         const { products } = req.body;
         try {
-            const cart = await Cart.findByIdAndUpdate(
-                req.params.id,
+            const cart = await Cart.findOneAndUpdate(
+                { userId: req.params.id },
                 {
                     $set: { products: products },
                 },
@@ -56,7 +56,7 @@ class CartController {
     // Delete Cart
     static async deleteCart(req, res) {
         try {
-            const deleted = await Cart.findByIdAndDelete(req.params.id);
+            const deleted = await Cart.findOneAndDelete({ userId: req.params.id });
             return res.status(204).json(deleted);
         } catch (error) {
             return res.status(500).json({ error });
