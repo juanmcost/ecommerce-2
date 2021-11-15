@@ -16,12 +16,8 @@ const ShopCartDB = () => {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/cart/${user._id}`)
         .then( res => {
-            /* let carrito = [];
-            if (res.data === null) {
-                axios.post(`http://localhost:8080/api/cart/`, {userId: user._id, products: carrito})
-                .catch(err => console.log(err));
-            }
-            else */ let carrito = res.data.products;
+            let carrito = []
+            if (res.data !== null) carrito = res.data.products;
             return carrito
         })
         .then(carrito => {
@@ -32,15 +28,16 @@ const ShopCartDB = () => {
             });
             
             setCart({list: carrito, total})
-            aux === true ? setAux(false): setAux(true);
         })
         .catch(err => console.log(err))
 
     }, [])
 
     useEffect(() => {
-        const product = cart.list
-        axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
+        if (cart.list == []){
+            const product = cart.list
+            axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
+        }
     }, [aux])
 
     const changeQuantity = (moreOrLess, index) => {
