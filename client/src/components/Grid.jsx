@@ -12,7 +12,6 @@ const ProductsGrid = () => {
     useEffect(() => {
         axios.get("http://localhost:8080/api/product/")
         .then(res => {
-            console.log("here it is",res.data)
             setProducts(res.data)});
     }, [])
 
@@ -20,9 +19,7 @@ const ProductsGrid = () => {
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
             {products.map(elem => (
             <GridItem>
-                <Link to={`/articles/${elem._id}`}>
-                    <Item item={elem}/>
-                </Link>
+                <Item item={elem}/>
             </GridItem>
             ))}
         </SimpleGrid>

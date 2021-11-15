@@ -5,11 +5,11 @@ const { checkAuth, checkAuthAndAdmin, checkAuthAndAuthorization } = require('../
 
 router.get('/', checkAuthAndAdmin, CartController.allCarts);
 
-router.get('/:id', checkAuthAndAuthorization, CartController.userCart);
+router.get('/:id', CartController.userCart);
 
-router.post('/', checkAuth, CartController.createCart);
+router.post('/' , CartController.createCart);
 
-router.put('/:id', checkAuthAndAuthorization, CartController.updateCart);
+router.put('/:id', CartController.updateCart);
 
 router.delete('/:id', checkAuthAndAuthorization, CartController.deleteCart);
 
