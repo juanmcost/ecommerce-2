@@ -16,6 +16,7 @@ import {
   import { FiShoppingCart } from 'react-icons/fi';
   import { successToast, errorToast } from "../utils/toastMessages";
   import axios from "axios";
+  import {Link} from 'react-router-dom'
   
   
   const data = {
@@ -67,7 +68,7 @@ import {
       if (
 
         carrito.list.some((el) => { //does the cart have the product?
-          return el.product === item._id;
+          return el.product._id === item._id;
         })
 
       ) errorToast(toast, "you already have that in the cart");
@@ -105,14 +106,14 @@ import {
               bg="red.200"
             />
           )}
-  
+  <Link to={`/articles/${item._id}`}>
           <Image
             src={item.img[0]}
             alt={`Picture of ${item.title}`}
             w="full"
             roundedTop="lg"
           />
-  
+  </Link>
           <Box p="6">
             <Box d="flex" alignItems="baseline">
               {data.isNew && (

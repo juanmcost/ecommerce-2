@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { sendLogoutRequest } from "../store/user";
+import Search from './Search'
 import {
   Box,
   Flex,
@@ -48,8 +49,10 @@ export default function Navbar() {
         navigate("/home");
       })
       .catch((err) => ({ err: err.message }));
-  };
-
+    };
+    
+    const user = useSelector((state) => state.user);
+    
   const subCategories = {
     cellphones_by_brand: ["Samsung", "LG", "Motorola", "Apple"],
     consoles_and_videogames: [
@@ -76,7 +79,6 @@ export default function Navbar() {
     ],
   };
 
-  const user = useSelector((state) => state.user);
 
   return (
     <>
@@ -84,10 +86,10 @@ export default function Navbar() {
         <Flex h={16} alignItems={"center"}>
           <Link as={ReactLink} to="/home">
             <Box boxSize={10}>
-              <Image src={Logo} alt="Segun Adebayo" />
+              <Image src={Logo} alt="Logo" />
             </Box>
           </Link>
-          <InputGroup ml="10" w="35%">
+          {/* <InputGroup ml="10" w="35%">
             <InputLeftElement
               pointerEvents="none"
               children={<FaSearch color="gray.300" />}
@@ -97,8 +99,8 @@ export default function Navbar() {
               type="tel"
               placeholder="Search some products!"
             />
-          </InputGroup>
-
+          </InputGroup> */}
+          <Search />
           <Flex alignItems={"center"} ml="50%">
             <Stack direction={"row"} spacing={7} alignItems={"center"}>
               <Button onClick={toggleColorMode} bg="none" rounded="full">

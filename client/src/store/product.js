@@ -3,16 +3,12 @@ import axios from "axios"; // import axios
 
 //---------------CONFIG PRODUCT --------------\\
 
-const API = '"http://localhost:8080/api/product"'
+const API = '/api/product'
 
 //--GET ALL Product
 
 export const getAllProduct = createAsyncThunk("GET_ALL_PRODUCT", () => {
   return axios.get(`${API}/`).then((res) => res.data);
-});
-
-export const createProduct = createAsyncThunk("CREATE_PRODUCT", () => {
-  return axios.post("").then((res) => res.data);
 });
 
 //--GET TAGS
@@ -35,8 +31,8 @@ export const getProduct = createAsyncThunk("GET_PRODUCT", () => {
 
 //--GET Product Title
 
-export const getProductTitle = createAsyncThunk("GET_PRODUCT", () => {
-  return axios.get(`${API}/search:title`).then((res) => res.data);
+export const getProductTitle = createAsyncThunk("GET_PRODUCT", async (title) => {
+  return axios.get(`${API}/search/${title}`).then((res) => res.data);
 });
 
 
@@ -45,7 +41,7 @@ export const getProductTitle = createAsyncThunk("GET_PRODUCT", () => {
 
 //--create Product
 
-export const addProduct = createAsyncThunk("CREATE_PRODUCT", () => {
+export const createProduct = createAsyncThunk("CREATE_PRODUCT", () => {
   return axios.post(`${API}/add`).then((res) => res.data);
 });
 
@@ -65,12 +61,11 @@ export const removeProduct = createAsyncThunk("DELETE_PRODUCT", () => {
 
 //--Config Reducer
 
-const productReducer = createReducer([], {
-  [createProduct.fulfilled]: (state, action) => action.payload,
+const productReducer = createReducer({}, {
   [getProduct.fulfilled]: (state, action) => action.payload,
   [getAllProducts.fulfilled]: (state, action) => action.payload,
   [getTags.fulfilled]: (state, action) => action.payload,
-  [addProduct.fulfilled]: (state, action) => action.payload,
+  [createProduct.fulfilled]: (state, action) => action.payload,
   [modifyProduct.fulfilled]: (state, action) => action.payload,
   [removeProduct.fulfilled]: (state, action) => action.payload,
   [getProductTitle.fulfilled]: (state, action) => action.payload,
