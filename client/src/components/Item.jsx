@@ -77,7 +77,6 @@ import {
           }
           else {
             let aux = false
-            console.log("i'm in")
             dbCart.products.forEach(el => {
               if (el.productId === item._id) {
                 aux = true
@@ -89,7 +88,6 @@ import {
             if (!aux) {  
               axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products, {productId: item._id}]})
               .then((res) => {
-                console.log("carrito guardado", res.data);
                 successToast(toast, "product added to cart!");
               })
             }
@@ -99,12 +97,27 @@ import {
       else {
         const jsonCart = localStorage.getItem('carrito');
         let carrito = JSON.parse(jsonCart);
-        if (carrito.list.some(el => el.product._id === item._id)) errorToast(toast, "you already have that in the cart");
+        /* if (carrito.list.some(el => el.product._id === item._id)) errorToast(toast, "you already have that in the cart");
           else{
             carrito.list.push({product: item, quantity: 1}); 
             localStorage.setItem('carrito', JSON.stringify(carrito));
             successToast(toast, "product added to cart!");
-          }  
+          } */ 
+        let aux = false
+          carrito.list.forEach(el => {
+            if (el.product._id === item._id) {
+              aux = true
+              el.quantity++;
+              localStorage.setItem('carrito', JSON.stringify(carrito));
+              successToast(toast, "summed to cart!")
+              return;
+            }
+          })
+          if (!aux) {  
+            carrito.list.push({product: item, quantity: 1}); 
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            successToast(toast, "product added to cart!");
+          }
         }
     }
 
