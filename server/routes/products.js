@@ -19,7 +19,7 @@ router.put("/appreciation/:id", auth.checkAuth, productsController.addAppreciati
 //router.put("/")
 
 //admin
-router.post("/add", auth.checkAuth, productsController.addProduct);
+router.post("/add", auth.checkAuthAndAdmin, productsController.addProduct);
 
 router.put("/:id", auth.checkAuthAndAdmin, productsController.modifyProduct);
 

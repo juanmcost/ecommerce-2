@@ -58,7 +58,7 @@ class ProductController {
       res.status(500).json({ error });
     }
   }
-  //invalid request
+
   static async addAppreciation(req, res) {
     const appreciation = parseInt(req.body.appreciation);
     try {
