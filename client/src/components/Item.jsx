@@ -6,18 +6,23 @@ import {
     Badge,
     useColorModeValue,
     Icon,
-    chakra,
     Tooltip,
     Button,
-    useToast
+    useToast,
+    AspectRatio
   } from '@chakra-ui/react';
   import { useSelector } from 'react-redux';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
   import { successToast, errorToast } from "../utils/toastMessages";
   import axios from "axios";
+<<<<<<< HEAD
   import {Link} from 'react-router-dom'
   
+=======
+  import { Link } from 'react-router-dom';
+
+>>>>>>> ff4e2a264c95ed522663d488ce46068ea28d88f8
   
   const data = {
     isNew: true,
@@ -60,36 +65,64 @@ import {
   function Item( { item } ) {
 
     const user= useSelector((state) => state.user)
-    const jsonCart = localStorage.getItem('carrito');
-    let carrito = JSON.parse(jsonCart);
     const toast = useToast();
-
+    
     const addToCart = () => {
-      if (
+      if (user.username){
+        let newList = [];
 
-        carrito.list.some((el) => { //does the cart have the product?
-          return el.product._id === item._id;
+        axios.get(`http://localhost:8080/api/cart/${user._id}`)
+        .then(response => response.data)
+        .then(dbCart => {
+          if (dbCart === null) {
+            newList.push({productId: item._id});
+            axios.post(`http://localhost:8080/api/cart/`, {products: newList, userId: user._id})
+            .then(() => successToast(toast, "product added to cart!"))
+            .catch(err => console.log(err));
+          }
+          else {
+            let aux = false
+            dbCart.products.forEach(el => {
+              if (el.productId === item._id) {
+                aux = true
+                el.quantity++;
+                return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products]})
+                .then(() => successToast(toast, "summed to cart!"))
+              }
+            })
+            if (!aux) {  
+              axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products, {productId: item._id}]})
+              .then((res) => {
+                successToast(toast, "product added to cart!");
+              })
+            }
+          }
         })
-
-      ) errorToast(toast, "you already have that in the cart");
-
-      else {//if it doesn't then add it
-        if (user.username){
-          let products = carrito.list;
-          axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
-        }
-        else {
-          carrito.list.push({product: item, quantity: 1}) 
-          localStorage.setItem('carrito', JSON.stringify(carrito));
-          successToast(toast, "product added to cart!")
-        }
-
       }
-      
+      else {
+        const jsonCart = localStorage.getItem('carrito');
+        let carrito = JSON.parse(jsonCart);
+        if (carrito === null) carrito = {list: [], total: 0};
+        let aux = false
+          carrito.list.forEach(el => {
+            if (el.product._id === item._id) {
+              aux = true
+              el.quantity++;
+              localStorage.setItem('carrito', JSON.stringify(carrito));
+              successToast(toast, "summed to cart!")
+              return;
+            }
+          })
+          if (!aux) {  
+            carrito.list.push({product: item, quantity: 1}); 
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            successToast(toast, "product added to cart!");
+          }
+        }
     }
 
     return (
-      <Flex p={50} w="full" alignItems="center" justifyContent="center">
+      <Flex alignItems="center" justifyContent="center">
         <Box
           bg={useColorModeValue('white', 'gray.800')}
           maxW="sm"
@@ -106,6 +139,7 @@ import {
               bg="red.200"
             />
           )}
+<<<<<<< HEAD
   <Link to={`/articles/${item._id}`}>
           <Image
             src={item.img[0]}
@@ -114,6 +148,20 @@ import {
             roundedTop="lg"
           />
   </Link>
+=======
+          
+          <Link to={`/articles/${item._id}`}>
+            <AspectRatio minH="400px" ratio={1}>
+              <Image
+                src={item.img[0]}
+                alt={`Picture of ${item.title}`}
+                roundedTop="lg"
+                objectFit="contain"
+              />
+            </AspectRatio>
+          </Link>
+  
+>>>>>>> ff4e2a264c95ed522663d488ce46068ea28d88f8
           <Box p="6">
             <Box d="flex" alignItems="baseline">
               {data.isNew && (

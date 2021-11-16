@@ -8,20 +8,19 @@ import {
   VStack,
   FormControl,
   FormLabel,
-  Input,
   Select,
   Textarea,
 } from "@chakra-ui/react";
-import { useForm } from '../hooks/useForm'
+import { useForm } from "../hooks/useForm";
 
 export default function ReviewForm() {
-  const options = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  const options = [5, 4, 3, 2, 1];
   const { form, handleForm } = useForm();
-	// const handleSubmit = () => {
-	  //console.log(form);																//toDo handleSubmit
-	// }
+  // const handleSubmit = () => {
+  //console.log(form);																//toDo handleSubmit (incluir user)
+  // }
 
-	return (
+  return (
     <Container w="100%" mt={20} centerContent p="0px">
       <Flex w="95vw">
         <Box
@@ -44,40 +43,29 @@ export default function ReviewForm() {
                   <FormControl id="rating" maxW="20rem">
                     <FormLabel>Personal rating</FormLabel>
                     <Select
-											name='rating'
-                      w="7vw"
+                      name="rating"
+                      w="7rem"
                       borderColor="gray.300"
                       _hover={{ borderRadius: "gray.300" }}
                       placeholder="Rating"
-											onChange={handleForm}
+                      onChange={handleForm}
                       isRequired
                     >
-                      {options.map(e => <option key={e}>{e}</option>)}
+                      {options.map((e) => (
+                        <option key={e}>{e}</option>
+                      ))}
                     </Select>
-                  </FormControl>
-                  <FormControl id="title" align="left">
-                    <FormLabel>Title</FormLabel>
-                    <Input
-											name='title'
-                      w="40vw"
-                      borderColor="gray.300"
-                      _hover={{ borderRadius: "gray.300" }}
-                      placeholder="Title"
-                      errorBorderColor="red.500"
-											onChange={handleForm}
-                      isRequired
-                    />
                   </FormControl>
                   <FormControl id="review">
                     <FormLabel>Review</FormLabel>
                     <Textarea
-											name='review'
+                      name="review"
                       borderColor="gray.300"
                       _hover={{ borderRadius: "gray.300" }}
                       placeholder="Review"
                       errorBorderColor="red.500"
                       isRequired
-											onChange={handleForm}
+                      onChange={handleForm}
                     />
                   </FormControl>
                   <FormControl id="submit" float="right">

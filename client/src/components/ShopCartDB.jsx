@@ -1,111 +1,109 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Button, useToast, useColorModeValue } from "@chakra-ui/react";
+import { Button, useToast, Image, Heading, Divider, useColorModeValue } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
-import { Link } from "react-router-dom";
-import { errorToast } from "../utils/toastMessages";
 import { useSelector } from "react-redux";
-
+import {useNavigate} from "react-router-dom";
+import { moreQuantity, lessQuantity, deleteFromCart, deleteCart } from "../utils/shopCartDb";
 
 const ShopCartDB = () => {
     const [cart, setCart] = useState({list: [], total: 0});
     const [aux, setAux] = useState(true);
-    const user= useSelector((state) => state.user);
+    const user= useSelector(state => state.user);
     const toast = useToast();
-
+    const navigate = useNavigate();
+    const itemsBg = useColorModeValue("gray.100", "gray.900");
+    const isMounted = useRef(false);
+    
     useEffect(() => {
         axios.get(`http://localhost:8080/api/cart/${user._id}`)
         .then( res => {
-            let carrito = [];
-            if (res.data === null) {
-                carrito = [//pa probar
-                    {product: {title: "monitor", price: 10}, quantity: 1},
-                    {product: {title: "celu", price: 100}, quantity: 2}];
-                axios.post(`http://localhost:8080/api/cart/`, {products: carrito})
-                .catch(err => console.log(err));
-            }
-            else {
-                carrito = res.data
-                console.log("im here")
-            }
-            return carrito
-        })
-        .then((carrito) => {
-            console.log("hola?")
-            let total = 0;
 
-            carrito.map((cartItem, i) => {
-                total += cartItem.product.price * cartItem.quantity
-            });
-            
-            console.log("carrito:",carrito);
-            setCart({list: carrito, total})
-            console.log("cart:",cart);
-            aux === true ? setAux(false): setAux(true);
+            if (res.data !== null) {//get array with products id
+                let carrito = {list: [], total: 0}
 
+                res.data.products.map((cartItem, i) => {//change id to real product and sum total price
+                    axios.get(`http://localhost:8080/api/product/${res.data.products[i].productId}`)
+                    .then(res => res.data)
+                    .then(item => {
+                        carrito.list.push({product: item, quantity: cartItem.quantity});
+                        carrito.total += item.price * cartItem.quantity;
+                        return carrito
+                    })
+                    .then(carrito => {
+                        setCart({...carrito})
+                    })
+                });
+            }
         })
         .catch(err => console.log(err))
 
     }, [])
 
     useEffect(() => {
-        const product = cart.list
-        axios.put(`http://localhost:8080/api/cart/${user._id}`, {product})
+        if (isMounted.current) {
+            const products = []
+            cart.list.map((cartItem) =>{
+                products.push({productId: cartItem.product._id, quantity: cartItem.quantity})
+            })
+            return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
+        }
+        else {isMounted.current = true};
     }, [aux])
 
-    const changeQuantity = (moreOrLess, index) => {
-        let auxCart = cart;
-        if (moreOrLess === "+") {
-            auxCart.list[index].quantity+=1;
-            auxCart.total += auxCart.list[index].product.price
-        } else {
-            if (auxCart.list[index].quantity>1) {
-                auxCart.list[index].quantity-=1;
-                auxCart.total -= auxCart.list[index].product.price
-            } else {
-                errorToast(toast, "use the delete button");
-            }
-        }
-        setCart(auxCart);
-        aux===true ? setAux(false) : setAux(true);
-    }
-
-    const deleteFromCart = (index) => {
-        let auxCart = cart;
-        auxCart.total -= auxCart.list[index].product.price * auxCart.list[index].quantity
-        auxCart.list.splice(index,1);
-        setCart(auxCart);
-        aux===true ? setAux(false) : setAux(true);
-    }
-
     return (
+        <>
+        <Flex align="center" justify="center">
+            <Heading fontSize={"4xl"} m="5">My Cart</Heading>
+            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {cart.total}</Heading>   
+        </Flex>
+            <Divider orientation="horizontal" mb="5" />
         <Flex>
             <Box>
-                <h1>carrito de {user.username}</h1>
                 {cart.list.map((prod, i) => (
-                    <Grid templateColumns="repeat(4, 1fr)" align="center" h="16">
-                        <Center>
-                            {prod.product.title}
-                        </Center>
-                        <Stack direction={"row"} align="center" spacing={3}>
-                            <Button onClick={()=>changeQuantity("-", i)}>-</Button>
-
-                            <p>Quantity: {prod.quantity} </p>
-
-                            <Button onClick={()=>changeQuantity("+", i)}>+</Button>
+                    <Grid templateColumns="repeat(3, 1fr)" align="center" key={i} bg={itemsBg} rounded={"lg"} m="5">
+                        <Stack direction="row" align="center" mr="5">
+                            <Center m="3">
+                                <Image
+                                boxSize="80%"
+                                rounded={"lg"}
+                                src={prod.product.img[0]}
+                                alt={prod.product.title}
+                                />
+                            </Center>
+                            <Center>{prod.product.title}</Center>
                         </Stack>
-                        <Center>
-                            Price: {prod.product.price}
-                        </Center>
-                        <Center>
-                            <Button onClick={()=>deleteFromCart(i)}>delete product</Button>
-                        </Center>
+                        <Stack direction={"row"} align="center" spacing={3}>
+                            <Button onClick={()=>lessQuantity(i, cart, aux, setCart, setAux, toast)}>-</Button>
+                            <p>Quantity: {prod.quantity} </p>
+                            <Button onClick={()=>moreQuantity(i, cart, aux, setCart, setAux)}>+</Button>
+                        </Stack>
+                        <Stack align={"center"} justify="center">
+                            <Box>$ {prod.product.price}</Box>
+                            <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>delete product</Button>
+                        </Stack>
                     </Grid>
                 ))}
             </Box>
-            <Box>total: {cart.total}</Box>
-            <Link to="/">proceed with order</Link>
+            {cart.list[0] !== undefined ? 
+                <Stack spacing={5} mt="5" mr="5">
+                    <Button
+                    bg={"green.400"}
+                    color={"white"}
+                    _hover={{
+                        bg: "green.500",
+                    }}
+                    onClick={(e)=> {e.preventDefault(); navigate('/new_order/address')} }
+                    >
+                    proceed with order
+                    </Button>
+                    <Button onClick={()=>deleteCart(aux, setCart, setAux, user._id, toast)}>delete cart</Button>
+                </Stack>
+                :
+                <></>
+            }
         </Flex>
+        </>
     )
 }
 

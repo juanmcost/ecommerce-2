@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { sendLogoutRequest } from "../store/user";
-import Search from './Search'
+import Search from "./Search";
 import {
   Box,
   Flex,
@@ -41,6 +41,10 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  console.log(location);
+
   const handleLogout = () => {
     axios
       .get("/api/auth/logout")
@@ -49,10 +53,8 @@ export default function Navbar() {
         navigate("/home");
       })
       .catch((err) => ({ err: err.message }));
-    };
-    
-    const user = useSelector((state) => state.user);
-    
+  };
+
   const subCategories = {
     cellphones_by_brand: ["Samsung", "LG", "Motorola", "Apple"],
     consoles_and_videogames: [
@@ -79,6 +81,7 @@ export default function Navbar() {
     ],
   };
 
+  const user = useSelector((state) => state.user);
 
   return (
     <>
@@ -86,21 +89,12 @@ export default function Navbar() {
         <Flex h={16} alignItems={"center"}>
           <Link as={ReactLink} to="/home">
             <Box boxSize={10}>
-              <Image src={Logo} alt="Logo" />
+              <Image src={Logo} alt="Segun Adebayo" />
             </Box>
           </Link>
-          {/* <InputGroup ml="10" w="35%">
-            <InputLeftElement
-              pointerEvents="none"
-              children={<FaSearch color="gray.300" />}
-            />
-            <Input
-              bg={useColorModeValue("gray.50", "gray.700")}
-              type="tel"
-              placeholder="Search some products!"
-            />
-          </InputGroup> */}
+
           <Search />
+
           <Flex alignItems={"center"} ml="50%">
             <Stack direction={"row"} spacing={7} alignItems={"center"}>
               <Button onClick={toggleColorMode} bg="none" rounded="full">
@@ -147,7 +141,11 @@ export default function Navbar() {
                   ) : null}
                   <br />
                   <MenuDivider />
-                  {user.isAdmin ? <Link as={ReactLink} to="/admin"><MenuItem>Admin</MenuItem></Link> : null}
+                  {user.isAdmin ? (
+                    <Link as={ReactLink} to="/admin">
+                      <MenuItem>Admin</MenuItem>
+                    </Link>
+                  ) : null}
                   <MenuItem>
                     <Link as={ReactLink} to="/profile">
                       Your Profile
@@ -161,29 +159,47 @@ export default function Navbar() {
           </Flex>
         </Flex>
         <Divider orientation="horizontal" />
-        <Center>
-          {Object.keys(subCategories).map((category, i) => (
-            <Popover trigger={"hover"} key={i}>
-              <PopoverTrigger bg="none" on>
-                <Button bg="none">{category.split("_").join(" ")}</Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <Stack align={"center"}>
-                  {subCategories[category].map((sub, i) => (
-                    <Link
-                      as={ReactLink}
-                      to={`/categories/${category}/${sub.split(" ").join("_")}`}
-                      style={{ textDecoration: "none" }}
-                      key={i}
-                    >
-                      {sub}
-                    </Link>
-                  ))}
-                </Stack>
-              </PopoverContent>
-            </Popover>
-          ))}
-        </Center>
+        <Flex display="flex" align="center">
+          <Center flex={user.isAdmin ? "1" : "3"}>
+            {Object.keys(subCategories).map((category, i) => (
+              <Popover trigger={"hover"} key={i}>
+                <PopoverTrigger bg="none" on>
+                  <Button bg="none">{category.split("_").join(" ")}</Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <Stack align={"center"}>
+                    {subCategories[category].map((sub, i) => (
+                      <Link
+                        as={ReactLink}
+                        to={`/categories/${category}/${sub
+                          .split(" ")
+                          .join("_")}`}
+                        style={{ textDecoration: "none" }}
+                        key={i}
+                      >
+                        {sub}
+                      </Link>
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              </Popover>
+            ))}
+          </Center>
+          {user.isAdmin && location.pathname !== "/admin/v2" ? (
+            <ReactLink to="/admin/v2">
+              <Button
+                border="2px"
+                borderColor="red.700"
+                padding="0 1.7em"
+                variant="outline"
+                //bg="red.700"
+                _hover={{ bg: "red.700" }}
+              >
+                ADMIN PANEL
+              </Button>
+            </ReactLink>
+          ) : null}
+        </Flex>
       </Box>
     </>
   );

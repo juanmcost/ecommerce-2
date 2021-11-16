@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Text, Box, Flex, useColorModeValue, Image } from '@chakra-ui/react';
 
-
-const Carousel = ({slides}) => {
+const Carousel = ({ slides }) => {
     const arrowStyles = {
         cursor: 'pointer',
         pos: 'absolute',
@@ -39,7 +38,13 @@ const Carousel = ({slides}) => {
     };
 
     return (
-        <Flex w="full" bg={useColorModeValue('gray.200', 'gray.600')} p={10} alignItems="center" justifyContent="center">
+        <Flex
+            w="full"
+            bg={useColorModeValue('gray.200', 'gray.600')}
+            p={10}
+            alignItems="center"
+            justifyContent="center"
+        >
             <Flex w="full" overflow="hidden" pos="relative">
                 <Flex h="400px" w="full" {...carouselStyle}>
                     {slides?.map((slide, sid) => (

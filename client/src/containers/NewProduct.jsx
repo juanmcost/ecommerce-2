@@ -1,23 +1,33 @@
-import { Box, Center, HStack, CloseButton } from "@chakra-ui/react";
+import { Container, Flex, Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { ProductForm } from "../components/ProductForm";
+import { ResponsiveText } from "../common/ResponsiveText";
 
 export const NewProduct = () => {
-
   return (
-    <>
-      <Center h="100%">
+    <Container w="100%" mt={20} centerContent p="0px" mt="0">
+      <Flex w="95vw">
         <Box
-          p="5%"
-          w="90vw"
-          h="90vh"
+          bg="#1A202C"
           color="white"
-          mt="4"
-          bg="teal.500"
-          rounded="15px"
-          shadow="md"
+          borderRadius="lg"
+          p={{ sm: 2, md: 2, lg: 7 }}
+          w="100%"
         >
-          Fade
+          <Box p={4}>
+            <VStack pl={0} spacing={2}>
+              <Box py={{ base: 5, sm: 5, md: 8, lg: 5 }}>
+                <ResponsiveText>
+                  <Heading>New Article</Heading>
+                  <Text mt={{ sm: 3, md: 3, lg: 5 }} color="blue.300">
+                    Add the new product down here.
+                  </Text>
+                </ResponsiveText>
+              </Box>
+              <ProductForm />
+            </VStack>
+          </Box>
         </Box>
-      </Center>
-    </>
+      </Flex>
+    </Container>
   );
 };
