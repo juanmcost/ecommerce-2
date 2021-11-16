@@ -12,18 +12,41 @@ import {
     Heading,
     Text,
     useColorModeValue,
-    InputGroup,
-    InputRightElement,
-    Select
+    Select,
+    Textarea
   } from "@chakra-ui/react"; // import chackra
-  import {useNavigate} from "react-router-dom"
-  import {countryList} from "../utils/dummieData";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {useNavigate} from "react-router-dom"
+import {countryList} from "../utils/dummieData";
+import { setAddress } from "../store/order";
 
 
 const OrderAddress = function () {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const order = useSelector((state) => state.order)
+    const user = useSelector((state) => state.user)
+    const [form, setForm] = useState({});
+    
+    const handleInput = (event) => {
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value,
+        });
+    };
+ 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(setAddress(form));
+        navigate('/new_order/paymethod')
+    }
+
+
+
     return (
-        <form>
+        <>
+        <form onSubmit={handleSubmit} >
             <Flex
                 minH={"100vh"}
                 align={"center"}
@@ -42,71 +65,87 @@ const OrderAddress = function () {
                         p={8}
                     >
                         <Stack spacing={4}>
-                        <FormControl id="country" isRequired>
-                            <FormLabel>Country</FormLabel>
-                            <Select placeholder="Select country">
-                                {countryList.map(country => (<option>{country}</option>))}
-                            </Select>
-                        </FormControl>
-                        <FormControl id="region" isRequired>
-                            <FormLabel>Region</FormLabel>
-                            <Input
-                                name="region"
-                                placeholder="Insert State / Province"
-                            />
-                        </FormControl>
-                        <Stack
-                        direction={{ base: "column", sm: "row" }}
-                        align={"start"}
-                        justify={"space-between"}
-                        >
-                            <FormControl id="city" isRequired>
-                                <FormLabel>city</FormLabel>
+                            <FormControl id="country" isRequired>
+                                <FormLabel>Country</FormLabel>
+                                <Select 
+                                name="country"
+                                placeholder="Select country"
+                                onChange={handleInput}
+                                >
+                                    {countryList.map(country => (<option>{country}</option>))}
+                                </Select>
+                            </FormControl>
+                            <FormControl id="region" isRequired>
+                                <FormLabel>Region</FormLabel>
                                 <Input
-                                    name="city"
-                                    placeholder="Insert City"
+                                    name="region"
+                                    placeholder="Insert State / Province"
+                                    onChange={handleInput}
                                 />
                             </FormControl>
-                            <FormControl id="postal" isRequired>
-                                <FormLabel>Postal code</FormLabel>
-                                <Input
-                                    name="postal"
-                                    placeholder="Insert Postal code"
-                                />
-                            </FormControl>
-                        </Stack>
-                        <FormControl id="address1" isRequired>
-                            <FormLabel>Address line 1</FormLabel>
-                            <Input
-                                name="city"
-                                placeholder="Insert an address"
-                            />
-                        </FormControl>
-                        <FormControl id="address2">
-                            <FormLabel>Address line 2</FormLabel>
-                            <Input
-                                name="city"
-                                placeholder="Insert City"
-                            />
-                        </FormControl>
-                        <Stack spacing={5}>
-                            <Button
-                            bg={"green.400"}
-                            color={"white"}
-                            _hover={{
-                                bg: "green.500",
-                            }}
-                            type="submit"
-                            onClick={(e)=> {e.preventDefault(); navigate('/new_order/contact')} }
+                            <Stack
+                            direction={{ base: "column", sm: "row" }}
+                            align={"start"}
+                            justify={"space-between"}
                             >
-                            next
-                            </Button>
-                        </Stack>
+                                <FormControl id="city" isRequired>
+                                    <FormLabel>city</FormLabel>
+                                    <Input
+                                        name="city"
+                                        placeholder="Insert City"
+                                    />
+                                </FormControl>
+                                <FormControl id="postal" isRequired>
+                                    <FormLabel>Postal code</FormLabel>
+                                    <Input
+                                        name="postal"
+                                        placeholder="Insert Postal code"
+                                    />
+                                </FormControl>
+                            </Stack>
+                            <FormControl id="address1" isRequired>
+                                <FormLabel>Address line 1</FormLabel>
+                                <Textarea
+                                    name="address1"
+                                    placeholder="Insert an address"
+                                />
+                            </FormControl>
+                            <FormControl id="address2">
+                                <FormLabel>Address line 2</FormLabel>
+                                <Textarea
+                                    name="address2"
+                                    placeholder="Insert another optional address"
+                                />
+                            </FormControl>
+                            <Stack spacing={5}>
+                                <Button
+                                bg={"green.400"}
+                                color={"white"}
+                                _hover={{
+                                    bg: "green.500",
+                                }}
+                                type="submit"
+                                >
+                                next
+                                </Button>
+                                <Button
+                                bg={"blue.400"}
+                                color={"white"}
+                                _hover={{
+                                    bg: "blue.500",
+                                }}
+                                type="button"
+                                onClick={(e)=> {e.preventDefault(); navigate(`/${user.username}/myCart`)} }
+                                >
+                                Go Back
+                                </Button>
+                            </Stack>
                         </Stack>
                     </Box>
                 </Stack>
             </Flex>
         </form>
+        </>
     )
 }
 
