@@ -97,12 +97,7 @@ import {
       else {
         const jsonCart = localStorage.getItem('carrito');
         let carrito = JSON.parse(jsonCart);
-        /* if (carrito.list.some(el => el.product._id === item._id)) errorToast(toast, "you already have that in the cart");
-          else{
-            carrito.list.push({product: item, quantity: 1}); 
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            successToast(toast, "product added to cart!");
-          } */ 
+        if (carrito === null) carrito = {list: [], total: 0};
         let aux = false
           carrito.list.forEach(el => {
             if (el.product._id === item._id) {

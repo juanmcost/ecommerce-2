@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Button, useToast, Image, Heading, Divider, useColorModeValue } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
-import { Link } from "react-router-dom";
-import { errorToast } from "../utils/toastMessages";
 import { useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
+import { moreQuantity, lessQuantity, deleteFromCart, deleteCart } from "../utils/shopCartDb";
 
 const ShopCartDB = () => {
     const [cart, setCart] = useState({list: [], total: 0});
@@ -14,6 +13,7 @@ const ShopCartDB = () => {
     const toast = useToast();
     const navigate = useNavigate();
     const itemsBg = useColorModeValue("gray.100", "gray.900");
+    const isMounted = useRef(false);
     
     useEffect(() => {
         axios.get(`http://localhost:8080/api/cart/${user._id}`)
@@ -35,54 +35,21 @@ const ShopCartDB = () => {
                     })
                 });
             }
-
         })
         .catch(err => console.log(err))
 
     }, [])
 
     useEffect(() => {
-        if (cart.list[0] !== undefined) {
+        if (isMounted.current) {
             const products = []
             cart.list.map((cartItem) =>{
                 products.push({productId: cartItem.product._id, quantity: cartItem.quantity})
             })
             return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
         }
+        else {isMounted.current = true};
     }, [aux])
-
-    const moreQuantity = (index) => {
-        let auxCart = cart;
-        auxCart.list[index].quantity+=1;
-        auxCart.total += auxCart.list[index].product.price
-        setCart(auxCart);
-        aux===true ? setAux(false) : setAux(true);
-    }
-
-    const lessQuantity = (index) => {
-        let auxCart = cart;
-        if (auxCart.list[index].quantity>1) {
-            auxCart.list[index].quantity--;
-            auxCart.total -= auxCart.list[index].product.price
-            setCart(auxCart);
-            aux===true ? setAux(false) : setAux(true);
-        } else {
-            errorToast(toast, "use the delete button");
-        }
-    }
-
-    const deleteFromCart = (index) => {
-        let auxCart = cart;
-        auxCart.total -= auxCart.list[index].product.price * auxCart.list[index].quantity
-        auxCart.list.splice(index,1);
-        setCart(auxCart);
-        aux===true ? setAux(false) : setAux(true);
-    }
-
-    const deleteCart = () => {
-        axios.delete(`http://localhost:8080/api/cart/${user._id}`)
-        .then(() => errorToast(toast, "user cart deleted"))
-    }
 
     return (
         <>
@@ -107,30 +74,34 @@ const ShopCartDB = () => {
                             <Center>{prod.product.title}</Center>
                         </Stack>
                         <Stack direction={"row"} align="center" spacing={3}>
-                            <Button onClick={()=>lessQuantity(i)}>-</Button>
+                            <Button onClick={()=>lessQuantity(i, cart, aux, setCart, setAux, toast)}>-</Button>
                             <p>Quantity: {prod.quantity} </p>
-                            <Button onClick={()=>moreQuantity(i)}>+</Button>
+                            <Button onClick={()=>moreQuantity(i, cart, aux, setCart, setAux)}>+</Button>
                         </Stack>
                         <Stack align={"center"} justify="center">
                             <Box>$ {prod.product.price}</Box>
-                            <Button onClick={()=>deleteFromCart(i)}>delete product</Button>
+                            <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>delete product</Button>
                         </Stack>
                     </Grid>
                 ))}
             </Box>
-            <Stack spacing={5} mt="5" mr="5">
-                <Button
-                bg={"green.400"}
-                color={"white"}
-                _hover={{
-                    bg: "green.500",
-                }}
-                onClick={(e)=> {e.preventDefault(); navigate('/new_order/address')} }
-                >
-                proceed with order
-                </Button>
-                <Button onClick={()=>deleteCart()}>delete cart</Button>
-            </Stack>
+            {cart.list[0] !== undefined ? 
+                <Stack spacing={5} mt="5" mr="5">
+                    <Button
+                    bg={"green.400"}
+                    color={"white"}
+                    _hover={{
+                        bg: "green.500",
+                    }}
+                    onClick={(e)=> {e.preventDefault(); navigate('/new_order/address')} }
+                    >
+                    proceed with order
+                    </Button>
+                    <Button onClick={()=>deleteCart(aux, setCart, setAux, user._id, toast)}>delete cart</Button>
+                </Stack>
+                :
+                <></>
+            }
         </Flex>
         </>
     )
