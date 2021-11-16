@@ -6,10 +6,10 @@ import {
     Badge,
     useColorModeValue,
     Icon,
-    chakra,
     Tooltip,
     Button,
-    useToast
+    useToast,
+    AspectRatio
   } from '@chakra-ui/react';
   import { useSelector } from 'react-redux';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
@@ -122,7 +122,7 @@ import {
     }
 
     return (
-      <Flex p={50} w="full" alignItems="center" justifyContent="center">
+      <Flex alignItems="center" justifyContent="center">
         <Box
           bg={useColorModeValue('white', 'gray.800')}
           maxW="sm"
@@ -141,12 +141,14 @@ import {
           )}
           
           <Link to={`/articles/${item._id}`}>
-            <Image
-              src={item.img[0]}
-              alt={`Picture of ${item.title}`}
-              w="full"
-              roundedTop="lg"
-            />
+            <AspectRatio minH="400px" ratio={1}>
+              <Image
+                src={item.img[0]}
+                alt={`Picture of ${item.title}`}
+                roundedTop="lg"
+                objectFit="contain"
+              />
+            </AspectRatio>
           </Link>
   
           <Box p="6">

@@ -16,11 +16,9 @@ const ProductsGrid = () => {
     }, [])
 
     return (
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
+        <SimpleGrid minChildWidth="30%"  spacing={6} mt="50" mb="50">
             {products.map(elem => (
-            <GridItem>
                 <Item item={elem}/>
-            </GridItem>
             ))}
         </SimpleGrid>
     )

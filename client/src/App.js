@@ -54,7 +54,9 @@ const App = () => {
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
         />{" "}
         <Route exact path="/articles/:id" element={<Article />} />
-        <Route path="/new_order/address" element={<OrderAddress />} />
+        <Route path="/new_order/address" element={
+          user.username? <OrderAddress /> : <Login />
+        } />
       </Routes>
     </div>
   );

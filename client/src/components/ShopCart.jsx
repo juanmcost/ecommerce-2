@@ -132,7 +132,7 @@ const ShopCart = () => {
                     _hover={{
                         bg: "green.500",
                     }}
-                    onClick={(e)=> {e.preventDefault(); navigate('/new_order/address')} }
+                    onClick={(e)=> {e.preventDefault(); navigate('/login')} }
                     >
                     proceed with order
                     </Button>
