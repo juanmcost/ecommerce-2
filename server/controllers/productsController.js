@@ -49,6 +49,8 @@ class ProductController {
 
     // user logueado
     static async addReview(req, res) {
+
+        console.log('%cMyProject%cline:52%c1', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px', 1)
         try {
             const { username, review } = req.body;
             const newReview = await Product.findByIdAndUpdate(

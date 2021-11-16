@@ -7,9 +7,9 @@ import { useEffect } from "react";
 const Home = () => {
   const dispatch = useDispatch();
   const { product } = useSelector((product) => product);
+  console.log('Products:', product)
   let slides = [];
   product.forEach(i => slides.push(i.img[0]))
-  console.log('SLIDES', slides)
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);

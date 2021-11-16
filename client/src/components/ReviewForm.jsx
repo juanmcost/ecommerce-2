@@ -12,13 +12,30 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "../hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
+import { addReview } from "../store/review";
 
 export default function ReviewForm() {
+  const username = useSelector(s => s.user?.username || 'Anonymous');
+  const { product } = useSelector(product => product);
+  const dispatch = useDispatch();
   const options = [5, 4, 3, 2, 1];
   const { form, handleForm } = useForm();
-  // const handleSubmit = () => {
-  //console.log(form);																//toDo handleSubmit (incluir user)
-  // }
+  const handleSubmit = () => {
+    if (form.review && form.appreciation) {
+      const info = {
+        review: {
+          review: form.review,
+          username: username,
+        },
+        appreciation: form.appreciation,
+        id: product._id,
+      };
+      dispatch(addReview(info));
+    } else {
+      alert('Make sure to fill all fields.')
+    };
+  };
 
   return (
     <Container w="100%" mt={20} centerContent p="0px">
@@ -40,14 +57,14 @@ export default function ReviewForm() {
               </Box>
               <Box bg="#F5F5F5" borderRadius="lg" w="95%">
                 <VStack m={8} color="#0B0E3F" spacing={5} align="left">
-                  <FormControl id="rating" maxW="20rem">
+                  <FormControl id="appreciation" maxW="20rem">
                     <FormLabel>Personal rating</FormLabel>
                     <Select
-                      name="rating"
+                      name="appreciation"
                       w="7rem"
                       borderColor="gray.300"
                       _hover={{ borderRadius: "gray.300" }}
-                      placeholder="Rating"
+                      placeholder="Appreciation"
                       onChange={handleForm}
                       isRequired
                     >
@@ -70,6 +87,7 @@ export default function ReviewForm() {
                   </FormControl>
                   <FormControl id="submit" float="right">
                     <Button
+                      onClick={handleSubmit}
                       variant="solid"
                       bg="#1A202C"
                       color="white"
@@ -78,6 +96,7 @@ export default function ReviewForm() {
                       Submit Review
                     </Button>
                   </FormControl>
+                  
                 </VStack>
               </Box>
             </VStack>
