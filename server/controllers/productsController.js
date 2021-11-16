@@ -1,11 +1,21 @@
 const Product = require("../models/Products");
+<<<<<<< HEAD
+=======
+const { joiProduct } = require("../utils/joi");
+>>>>>>> back
 
 class ProductController {
   static async getAllProduct(req, res) {
     try {
+<<<<<<< HEAD
       const products = await Product.find({ color: "Negro" });
       res.json(products);
     } catch {
+=======
+      const products = await Product.find();
+      res.json(products);
+    } catch (error) {
+>>>>>>> back
       res.status(500).json({ error });
     }
   }
@@ -14,6 +24,7 @@ class ProductController {
     try {
       const product = await Product.findById(req.params.id);
       res.json(product);
+<<<<<<< HEAD
     } catch {
       res.status(500).json({ error });
     }
@@ -25,6 +36,18 @@ class ProductController {
       const product = await Product.find({ title: { $regex: ".*" + req.params.title + ".*" } });
       res.json(product);
     } catch {
+=======
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  static async getProductTitle(req, res) {
+    try {
+      const product = await Product.find({ title: { $regex: ".*" + req.params.title + ".*" } });
+      res.json(product);
+    } catch (error) {
+>>>>>>> back
       res.status(500).json({ error });
     }
   }
@@ -33,7 +56,56 @@ class ProductController {
     try {
       const products = await Product.find({ category: { $in: [req.params.tag] } });
       res.json(products);
+<<<<<<< HEAD
     } catch {
+=======
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  // user logueado
+  static async addReview(req, res) {
+    try {
+      const { username, review } = req.body;
+      const newReview = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+          $push: {
+            reviews: {
+              $each: [{ username, review }],
+            },
+          },
+        },
+        { new: true }
+      );
+      res.status(200).send(newReview);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
+  static async addAppreciation(req, res) {
+    const appreciation = parseInt(req.body.appreciation);
+    try {
+      const { error } = joiProduct.validate({ appreciation });
+      if (!error) {
+        const newAppreciation = await Product.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              appreciation: {
+                $each: [appreciation],
+              },
+            },
+          },
+          { new: true }
+        );
+        return res.status(200).send(newAppreciation);
+      }
+      return res.status(400).json("Bad Request");
+    } catch (error) {
+>>>>>>> back
       res.status(500).json({ error });
     }
   }
@@ -44,7 +116,11 @@ class ProductController {
       const newProduct = await new Product(req.body);
       const savedProduct = await newProduct.save();
       res.status(201).json(savedProduct);
+<<<<<<< HEAD
     } catch {
+=======
+    } catch (error) {
+>>>>>>> back
       res.status(500).json({ error });
     }
   }
@@ -60,7 +136,11 @@ class ProductController {
       );
       console.log(product);
       res.status(200).send(product);
+<<<<<<< HEAD
     } catch {
+=======
+    } catch (error) {
+>>>>>>> back
       res.status(500).json({ error });
     }
   }
@@ -69,7 +149,11 @@ class ProductController {
     try {
       const product = await Product.findByIdAndDelete(req.params.id);
       res.status(204).send(product);
+<<<<<<< HEAD
     } catch {
+=======
+    } catch (error) {
+>>>>>>> back
       res.status(500).json({ error });
     }
   }
