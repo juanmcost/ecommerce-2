@@ -1,16 +1,17 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const UserController = require('../controllers/usersController');
-const { checkAuthAndAdmin, checkAuthAndAuthorization } = require('../middlewares/auth');
+const UserController = require("../controllers/usersController");
+const { checkAuthAndAdmin, checkAuthAndAuthorization, checkAuth } = require("../middlewares/auth");
 
-router.get('/', checkAuthAndAdmin, UserController.getAllUsers);
+router.get("/", checkAuth, UserController.getAllUsers);
 
-router.get('/:id', checkAuthAndAdmin, UserController.getUser);
+router.get("/:id", checkAuthAndAdmin, UserController.getUser);
 
-router.put('/:id', checkAuthAndAuthorization, UserController.editUser);
+router.put("/:id", checkAuthAndAuthorization, UserController.editUser);
 
-router.put('/admin/:id', checkAuthAndAdmin, UserController.setAdmin);
+router.put("/admin/:id", checkAuthAndAdmin, UserController.setAdmin);
 
-router.delete('/:id', checkAuthAndAuthorization, UserController.deleteUser);
+//router.delete("/:id", checkAuth, UserController.deleteUser);
+router.delete("/:id", checkAuth, UserController.deleteUser1);
 
 module.exports = router;
