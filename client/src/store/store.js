@@ -3,6 +3,7 @@ import logger from 'redux-logger' // import redux logger
 import authReducer from './auth'
 import userReducer from './user'
 import productReducer from './product'
+import reviewReducer from './review'
 import orderReducer from './order';
 import totalReducer from './total';
 import addressReducer from './address'
@@ -18,7 +19,8 @@ const store = configureStore({
       product: productReducer,
       order: orderReducer,
       total: totalReducer,
-      address: addressReducer
+      address: addressReducer,
+      review: reviewReducer,
     },
   });
   

@@ -4,9 +4,6 @@ import axios from "axios"; // import axios
 //---------------CONFIG PRODUCT --------------\\
 
 const API = '"http://localhost:8080/api/product"'
-const fileOptions = {
-  headers: {'Content-Type': 'multipart/form-data; boundary=${form._boundary}'}
-};
 
 //--GET ALL Product
 
@@ -42,27 +39,14 @@ export const getProductTitle = createAsyncThunk("GET_PRODUCT", () => {
   return axios.get(`${API}/search:title`).then((res) => res.data);
 });
 
-
-
 //------ADMIN------\\
 
-//--create Product                                                                  //toDo WIP
+//--create Product
 
-export const addProduct = createAsyncThunk("CREATE_PRODUCT", (images) => {
-  console.log('IMG', images)
-  return axios.post(`http://localhost:8080/api/product/add`, images, fileOptions).then((res) => res.data);
+export const addProduct = createAsyncThunk("CREATE_PRODUCT", () => {
+  return axios.post(`http://localhost:8080/api/product/add`).then((res) => res.data);
 });
 
-// export const addProduct = createAsyncThunk("CREATE_PRODUCT", (images) => {
-//   console.log('IMG', images)
-//   return axios({
-// 		method: 'post',
-// 		url: `http://localhost:8080/api/product/add`,
-// 		data: {data: images},
-// 	}).then((res) => res.data);
-// });
-
-//--update Product
 
 export const modifyProduct = createAsyncThunk("UPDATE_PRODUCT", () => {
     return axios.put(`${API}/:id`).then((res) => res.data);

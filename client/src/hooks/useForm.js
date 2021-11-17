@@ -6,6 +6,5 @@ export const useForm = (initialState = {}) => {
 	const handleForm = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
-	
 	return { form, handleForm };
 }
