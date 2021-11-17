@@ -16,12 +16,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../store/review";
 
 export default function ReviewForm() {
-  const username = useSelector((s) => s.user?.username || "Anonymous");
+  const username = useSelector((s) => s.user.username);
   const { product } = useSelector(state => state);
   const dispatch = useDispatch();
   const options = [5, 4, 3, 2, 1];
   const { form, handleForm } = useForm();
   const handleSubmit = () => {
+    if (!username) return alert("You must be logged in to leave a review.");
     if (form.review && form.appreciation) {
       const info = {
         id: product._id,
@@ -49,7 +50,7 @@ export default function ReviewForm() {
               <Box py={{ base: 5, sm: 5, md: 8, lg: 5 }}>
                 <Heading>Review this article</Heading>
                 <Text mt={{ sm: 3, md: 3, lg: 5 }} color="blue.300">
-                  Leave your product opinion down here to help others!
+                  Leave your thoughts on this product down here to help others!
                 </Text>
               </Box>
               <Box bg="#F5F5F5" borderRadius="lg" w="95%">
@@ -58,7 +59,7 @@ export default function ReviewForm() {
                     <FormLabel>Personal rating</FormLabel>
                     <Select
                       name="appreciation"
-                      w="7rem"
+                      w="10rem"
                       borderColor="gray.300"
                       _hover={{ borderRadius: "gray.300" }}
                       placeholder="Appreciation"

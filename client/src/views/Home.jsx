@@ -8,11 +8,10 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
   let slides = [];
-  const { product } = useSelector((product) => product);
-  console.log('Products:', product)
-  product.forEach(i => slides.push(i?.img[0]))
+  const product = useSelector(s => s.product);
+  product.forEach(i => slides.push(i?.img[0]))            //Colocar img de diferentes artículos en un mismo array
 
   return (
     <>
