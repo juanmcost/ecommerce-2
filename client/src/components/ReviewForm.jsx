@@ -8,18 +8,17 @@ import {
   VStack,
   FormControl,
   FormLabel,
-  Select,
   Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../store/review";
+import Rating from '@material-ui/lab/Rating';
 
 export default function ReviewForm() {
   const username = useSelector((s) => s.user.username);
-  const { product } = useSelector(state => state);
+  const { product } = useSelector(s => s);
   const dispatch = useDispatch();
-  const options = [5, 4, 3, 2, 1];
   const { form, handleForm } = useForm();
   const handleSubmit = () => {
     if (!username) return alert("You must be logged in to leave a review.");
@@ -55,24 +54,17 @@ export default function ReviewForm() {
               </Box>
               <Box bg="#F5F5F5" borderRadius="lg" w="95%">
                 <VStack m={8} color="#0B0E3F" spacing={5} align="left">
-                  <FormControl id="appreciation" maxW="20rem">
-                    <FormLabel>Personal rating</FormLabel>
-                    <Select
-                      name="appreciation"
-                      w="10rem"
-                      borderColor="gray.300"
-                      _hover={{ borderRadius: "gray.300" }}
-                      placeholder="Appreciation"
-                      onChange={handleForm}
-                      isRequired
-                    >
-                      {options.map((e) => (
-                        <option key={e}>{e}</option>
-                      ))}
-                    </Select>
-                  </FormControl>
+                  <Box align="center">
+                  </Box>
                   <FormControl id="review">
                     <FormLabel>Review</FormLabel>
+                    <Rating
+                    precision={0.05}
+                    name="appreciation" 
+                    defaultValue={2.5}
+                    size="large" 
+                    onChange={handleForm}
+                    />
                     <Textarea
                       name="review"
                       borderColor="gray.300"
