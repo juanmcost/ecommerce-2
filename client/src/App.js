@@ -11,6 +11,8 @@ import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
 import OrderAddress from "./views/OrderAddress";
 import OrderPayMethod from "./views/OrderPayMethod";
+import EmailSent from "./views/EmailSent";
+import ConfirmCart from "./views/ConfirmCart";
 import ShopCart from "./components/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,6 +56,16 @@ const App = () => {
           path="/new_order/paymethod"
           element={user.username ? <OrderPayMethod /> : <Login />}
         />
+        <Route
+          path="/new_order/address"
+          element={user.username ? <OrderAddress /> : <Login />}
+        />
+        <Route
+          path="/new_order/paymethod"
+          element={user.username ? <OrderPayMethod /> : <Login />}
+        />
+        <Route path="/emailSent" element={<EmailSent />} />
+        <Route path={`/:id/myCart/confirm/:token`} element={<ConfirmCart />} />
       </Routes>
     </div>
   );

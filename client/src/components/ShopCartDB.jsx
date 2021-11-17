@@ -2,28 +2,32 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Button, useToast, Image, Heading, Divider, useColorModeValue, Skeleton } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { moreQuantity, lessQuantity, deleteFromCart, deleteCart } from "../utils/shopCartDb";
+import { setTotal } from "../store/total";
 
 const ShopCartDB = () => {
     const [cart, setCart] = useState({list: [], total: 0});
     const [aux, setAux] = useState(true);
-    const user= useSelector(state => state.user);
+    const user = useSelector(state => state.user);
+    const total = useSelector(state => state.total);
     const toast = useToast();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const itemsBg = useColorModeValue("gray.100", "gray.900");
     const isMounted = useRef(false);
+    const order = useSelector(({ order }) => order);
     
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/cart/${user._id}`)
+        axios.get(`/api/cart/${user._id}`)
         .then( res => {
 
             if (res.data !== null) {//get array with products id
                 let carrito = {list: [], total: 0}
 
                 res.data.products.map((cartItem, i) => {//change id to real product and sum total price
-                    axios.get(`http://localhost:8080/api/product/${res.data.products[i].productId}`)
+                    axios.get(`/api/product/${res.data.products[i].productId}`)
                     .then(res => res.data)
                     .then(item => {
                         carrito.list.push({product: item, quantity: cartItem.quantity});
@@ -32,6 +36,7 @@ const ShopCartDB = () => {
                     })
                     .then(carrito => {
                         setCart({...carrito})
+                        dispatch(setTotal(carrito.total || 0));
                     })
                 });
             }
@@ -43,10 +48,11 @@ const ShopCartDB = () => {
     useEffect(() => {
         if (isMounted.current) {
             const products = []
+            dispatch(setTotal(cart.total || 0));
             cart.list.map((cartItem) =>{
                 products.push({productId: cartItem.product._id, quantity: cartItem.quantity})
             })
-            return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
+            return axios.put(`/api/cart/${user._id}`, {products})
         }
         else {isMounted.current = true};
     }, [aux])
@@ -55,7 +61,7 @@ const ShopCartDB = () => {
         <>
         <Flex align="center" justify="center">
             <Heading fontSize={"4xl"} m="5">My Cart</Heading>
-            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {cart.total}</Heading>
+            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {total}</Heading>
         </Flex>
             <Divider orientation="horizontal" mb="5" />
         <Flex>
@@ -80,7 +86,7 @@ const ShopCartDB = () => {
                         </Stack>
                         <Stack align={"center"} justify="center">
                             <Box>$ {prod.product.price}</Box>
-                            <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>delete product</Button>
+                            <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>Delete product</Button>
                         </Stack>
                     </Grid>
                 ))}
@@ -93,11 +99,11 @@ const ShopCartDB = () => {
                     _hover={{
                         bg: "green.500",
                     }}
-                    onClick={(e)=> {e.preventDefault(); navigate('/new_order/address')} }
+                    onClick={() => navigate("/new_order/address")}
                     >
                     proceed with order
                     </Button>
-                    <Button onClick={()=>deleteCart(aux, setCart, setAux, user._id, toast)}>delete cart</Button>
+                    <Button onClick={()=>deleteCart(aux, setCart, setAux, user._id, toast)}>Delete cart</Button>
                 </Stack>
                 :
                 <></>

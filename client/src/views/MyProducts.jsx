@@ -9,7 +9,7 @@ const themer = useColorModeValue;
 
 export default function MyProducts() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product);
+  const products = useSelector(({product}) => product.products);
   console.log(products)
   useEffect(() => {
     dispatch(getAllProducts());

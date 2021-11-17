@@ -5,6 +5,9 @@ import userReducer from "./user";
 import productReducer from "./product";
 import reviewReducer from "./review";
 import orderReducer from "./order";
+import totalReducer from './total';
+import addressReducer from './address'
+
 
 // config reducer
 
@@ -19,9 +22,11 @@ const store = configureStore({
     auth: authReducer,
     user: userReducer,
     product: productReducer,
-    review: reviewReducer,
     order: orderReducer,
+    total: totalReducer,
+    address: addressReducer,
+    review: reviewReducer,
   },
 });
-
-export default store;
+  
+  export default store; 
