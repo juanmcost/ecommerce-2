@@ -10,15 +10,15 @@ const EmailSent = () => {
     return (
         <Stack align={"center"} mt="50">
             <Heading fontSize={"4xl"}>We've sent you an Email!</Heading>
-            <Text fontSize={"lg"} color={"gray.600"}>Please check your inbox to confirm your cart and proceed with the order</Text>
+            <Text fontSize={"lg"} color={"gray.600"}>Please check your inbox to confirm your purchase</Text>
             <EmailIcon boxSize="60"/>
-            <Button
+            {/* <Button
                 variant="outline"
                 colorScheme="teal"
                 onClick={()=>navigate(`/${user.username}/myCart`)}
             >
                 Done it already?
-            </Button>
+            </Button> */}
         </Stack>
     )
 }

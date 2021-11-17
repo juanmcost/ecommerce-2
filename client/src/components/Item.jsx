@@ -11,12 +11,13 @@ import {
     useToast,
     AspectRatio
   } from '@chakra-ui/react';
-  import { useSelector } from 'react-redux';
+  import { useDispatch, useSelector } from 'react-redux';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
   import { successToast, errorToast } from "../utils/toastMessages";
   import axios from "axios";
   import { Link } from 'react-router-dom';
+  //import { sumTotal } from "../store/total";
 
   
   const data = {
@@ -61,6 +62,7 @@ import {
 
     const user= useSelector((state) => state.user)
     const toast = useToast();
+    //const dispatch = useDispatch();
     
     const addToCart = () => {
       if (user.username){
@@ -85,7 +87,7 @@ import {
                 .then(() => successToast(toast, "summed to cart!"))
               }
             })
-            if (!aux) {  
+            if (!aux) { 
               axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products, {productId: item._id}]})
               .then((res) => {
                 successToast(toast, "product added to cart!");

@@ -1,30 +1,30 @@
 import {
     createAction,
   } from "@reduxjs/toolkit";
-  const SET_ADDRESS = "SET_ADDRESS"
+  //const SET_ADDRESS = "SET_ADDRESS"
   const SET_PRODUCTS = "SET_PRODUCTS"
   const SET_PAYMETHOD = "SET_PAYMETHOD"
   const SET_STATUS = "SET_STATUS"
+  const RESET = "RESET"
   
 //---------------CONFIG ORDER -------------- \\
 
-//--Config Logout
-
-export const setAddress = createAction(SET_ADDRESS);
+//export const setAddress = createAction(SET_ADDRESS);
 export const setProducts = createAction(SET_PRODUCTS);
 export const setPayMethod = createAction(SET_PAYMETHOD);
 export const setStatus = createAction(SET_STATUS);
+export const resetOrder = createAction(RESET);
   
 const orderReducer = function(state = {status: ""}, action){
   switch(action.type){
-      case SET_ADDRESS:
+      /* case SET_ADDRESS:
         {
           const {payload} = action
           return {
             ...state,
             address: payload
           };
-        }
+        } */
       case SET_PRODUCTS:
         {
           const {payload} = action
@@ -49,6 +49,10 @@ const orderReducer = function(state = {status: ""}, action){
             ...state,
             status: payload
           };
+        }
+      case RESET:
+        {
+          return {status: ""};
         }
       default:
           return state;

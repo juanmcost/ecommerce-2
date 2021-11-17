@@ -19,7 +19,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom"
 import {countryList} from "../utils/dummieData";
-import { setAddress } from "../store/order";
+import { setAddress } from "../store/address";
 
 
 const OrderAddress = function () {
