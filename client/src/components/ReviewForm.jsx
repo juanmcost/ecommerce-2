@@ -59,7 +59,7 @@ export default function ReviewForm() {
                   <FormControl id="review">
                     <FormLabel>Review</FormLabel>
                     <Rating
-                    precision={0.05}
+                    precision={0.1}
                     name="appreciation" 
                     defaultValue={2.5}
                     size="large" 

@@ -42,8 +42,6 @@ export default function Navbar() {
     const dispatch = useDispatch();
     const location = useLocation();
 
-    console.log(location);
-
     const handleLogout = () => {
         axios
             .get('/api/auth/logout')

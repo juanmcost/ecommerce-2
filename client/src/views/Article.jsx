@@ -26,12 +26,12 @@ export default function Article() {
   useEffect(() => {
     dispatch(getProduct(id));
     dispatch(getAllReviews(id));                          //Esta informacón sirve al componente Reviews
-  }, [id]);
+  }, [dispatch, id]);
   const average = (arr) => {
     if (!article?.appreciation?.length) return 0;
     let [len, i, sum] = [arr?.length, 0, 0];               //Calcular promedio de apprecations
     while (i < len) { sum += arr[i]; i++;}
-    return (sum / len).toFixed(1);
+    return parseFloat((sum / len).toFixed(1));
   };
 
   return (
@@ -80,7 +80,7 @@ export default function Article() {
                 text={`Rating: `}
               />
               <Rating
-                  precision={0.05}
+                  precision={0.1}
                   name="read-only"
                   value={average(article.appreciation)}
                   readOnly
