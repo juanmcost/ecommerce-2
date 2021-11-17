@@ -15,16 +15,13 @@ const ProductsGrid = () => {
       setProducts(res.data);
     });
   }, []);
-
-  return (
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
-      {products.map((elem) => (
-        <GridItem>
-          <Item item={elem} />
-        </GridItem>
-      ))}
-    </SimpleGrid>
-  );
-};
+    return (
+        <SimpleGrid minChildWidth="30%"  spacing={6} mt="50" mb="50">
+            {products.map((elem, i) => (
+                <Item key={i} item={elem}/>
+            ))}
+        </SimpleGrid>
+    )
+}
 
 export default ProductsGrid;

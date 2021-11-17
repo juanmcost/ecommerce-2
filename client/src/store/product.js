@@ -38,27 +38,15 @@ export const getProductTitle = createAsyncThunk("GET_PRODUCT", async (title) => 
   return axios.get(`${API}/search/${title}`).then((res) => res.data);
 });
 
-
-
 //------ADMIN------\\
 
-//--create Product                                                                  //toDo WIP
+//--create Product
 
 export const createProduct = createAsyncThunk("CREATE_PRODUCT", (images) => {
   console.log('IMG', images)
   return axios.post(`http://localhost:8080/api/product/add`, images, fileOptions).then((res) => res.data);
 });
 
-// export const addProduct = createAsyncThunk("CREATE_PRODUCT", (images) => {
-//   console.log('IMG', images)
-//   return axios({
-// 		method: 'post',
-// 		url: `http://localhost:8080/api/product/add`,
-// 		data: {data: images},
-// 	}).then((res) => res.data);
-// });
-
-//--update Product
 
 export const modifyProduct = createAsyncThunk("UPDATE_PRODUCT", () => {
     return axios.put(`${API}/:id`).then((res) => res.data);

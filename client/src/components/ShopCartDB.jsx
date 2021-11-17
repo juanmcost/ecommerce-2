@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Button, useToast, Image, Heading, Divider, useColorModeValue } from "@chakra-ui/react";
+import { Button, useToast, Image, Heading, Divider, useColorModeValue, Skeleton } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
 import { useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -55,7 +55,7 @@ const ShopCartDB = () => {
         <>
         <Flex align="center" justify="center">
             <Heading fontSize={"4xl"} m="5">My Cart</Heading>
-            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {cart.total}</Heading>   
+            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {cart.total}</Heading>
         </Flex>
             <Divider orientation="horizontal" mb="5" />
         <Flex>

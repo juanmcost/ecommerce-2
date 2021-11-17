@@ -8,7 +8,7 @@ const backgrounds = [
 ];
 
 export default function ReviewCard(testimonials) {
-  const { name, rating, content, avatar, index } = testimonials;
+  const { username, review, img, index } = testimonials;
   return (
     <Flex
       boxShadow={"lg"}
@@ -57,22 +57,22 @@ export default function ReviewCard(testimonials) {
           fontSize={"15px"}
           pb={4}
         >
-          {content}
+          {review}
         </chakra.p>
         <chakra.p fontFamily={"Work Sans"} fontWeight={"bold"} fontSize={14}>
-          {name}
+          {username}
           <chakra.span
             fontFamily={"Inter"}
             fontWeight={"medium"}
             color={"gray.500"}
           >
             {" "}
-            - {rating}
+            {}
           </chakra.span>
         </chakra.p>
       </Flex>
       <Avatar
-        src={avatar}
+        src={img}
         height={"80px"}
         width={"80px"}
         alignSelf={"center"}

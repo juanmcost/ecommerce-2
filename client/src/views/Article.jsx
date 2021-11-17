@@ -21,9 +21,7 @@ import { getProduct } from "../store/product";
 export default function Article() {
   const { id } = useParams();
   const article = useSelector(({ product }) => product);
-  console.log("ProductO", article);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id]);

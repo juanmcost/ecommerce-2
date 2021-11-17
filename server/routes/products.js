@@ -12,6 +12,8 @@ router.get('/admin/:title', productsController.getProductByTitle);
 
 router.get('/search/:title', productsController.getProductLike);
 
+router.get('/reviews/:id', productsController.getAllReviews);
+
 // user logueado
 
 router.put('/review/:id', auth.checkAuth, productsController.addReview);
