@@ -1,33 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {   useColorModeValue, InputGroup, Input, InputLeftElement } from "@chakra-ui/react";
-import { FaSearch } from "react-icons/fa";
-import {getProductTitle} from '../store/product'
-
+import { useNavigate } from "react-router-dom";
+import { Avatar, Text, Flex, Box  } from "@chakra-ui/react";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '@choc-ui/chakra-autocomplete';
+import axios from "axios"
 
 const Search = () => {
 
-    const dispatch = useDispatch();
-    const handleSearch = (e) => {
-        console.log('event', e.target.value)
-      dispatch(getProductTitle(e.target.value))
-        .then(( {payload} ) => console.log('payload', payload))
-        .catch("err");
-    };
+    const navigate = useNavigate();
+    const [prod, setProd] = useState([]);
+    const [current, setCurrent] = useState({});
 
+    useEffect(() => {
+        fetchProducts();
+        async function fetchProducts() {
+            const { data } = await axios.get('/api/product');
+            if (data.length) setProd(data);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchProduct();
+        async function fetchProduct() {
+            const { data } = await axios.get(`/api/product/search/${current}`);
+        }
+    }, [current]);
     return (
-    <InputGroup ml="10" w="35%">
-      <InputLeftElement
-        pointerEvents="none"
-        children={<FaSearch color="gray.300" />}
-      />
-      <Input
-        bg={useColorModeValue("gray.50", "gray.700")}
-        type="tel"
-        placeholder="Search some products!"
-        onChange={handleSearch}
-      />
-    </InputGroup>
+    <>
+            <Flex ml='10' w='35%'>
+                <AutoComplete rollNavigation>
+                    <AutoCompleteInput
+                        variant="filled"
+                        placeholder="Search a product"
+                        autoFocus
+                        onChange={(e) => setCurrent(e.target.value)}
+                    />
+                    <AutoCompleteList>
+                        {prod ? prod.map((element, oid) => (
+                            <AutoCompleteItem
+                                key={`option-${oid}`}
+                                value={element.title}
+                                align="center"
+                                onClick={(e)=> navigate(`/articles/${element._id}`)}
+                            >
+                                <Avatar size="sm" name={element.img[0]} src={element.img[0]} />
+                                <Text ml="4">{element.title}</Text>
+                            </AutoCompleteItem>
+                        )) : null}
+                    </AutoCompleteList>
+                </AutoComplete>
+            </Flex>
+        </>
   );
 };
 

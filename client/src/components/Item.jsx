@@ -16,13 +16,8 @@ import {
   import { FiShoppingCart } from 'react-icons/fi';
   import { successToast, errorToast } from "../utils/toastMessages";
   import axios from "axios";
-<<<<<<< HEAD
-  import {Link} from 'react-router-dom'
-  
-=======
   import { Link } from 'react-router-dom';
 
->>>>>>> ff4e2a264c95ed522663d488ce46068ea28d88f8
   
   const data = {
     isNew: true,
@@ -139,16 +134,6 @@ import {
               bg="red.200"
             />
           )}
-<<<<<<< HEAD
-  <Link to={`/articles/${item._id}`}>
-          <Image
-            src={item.img[0]}
-            alt={`Picture of ${item.title}`}
-            w="full"
-            roundedTop="lg"
-          />
-  </Link>
-=======
           
           <Link to={`/articles/${item._id}`}>
             <AspectRatio minH="400px" ratio={1}>
@@ -161,7 +146,6 @@ import {
             </AspectRatio>
           </Link>
   
->>>>>>> ff4e2a264c95ed522663d488ce46068ea28d88f8
           <Box p="6">
             <Box d="flex" alignItems="baseline">
               {data.isNew && (

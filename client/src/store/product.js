@@ -8,6 +8,12 @@ const fileOptions = {
   headers: {'Content-Type': 'multipart/form-data; boundary=${form._boundary}'}
 };
 
+//--GET ALL Product
+
+export const getAllProduct = createAsyncThunk("GET_ALL_PRODUCT", () => {
+  return axios.get(`${API}/`).then((res) => res.data);
+});
+
 //--GET TAGS
 
 export const getTags = createAsyncThunk("GET_TAGS", () => {
