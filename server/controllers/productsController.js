@@ -1,5 +1,6 @@
 const Product = require('../models/Products');
 const { joiProduct } = require('../utils/joi');
+const defaultProfilePicture = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
 
 class ProductController {
     static async getAllProduct(req, res) {
@@ -47,10 +48,24 @@ class ProductController {
         }
     }
 
+    static async getAllReviews(req, res) {
+        // const reviews = [];
+        try {
+            const product = await Product.findById( req.params.id );
+            const reviews = product.reviews.map(e => { return {   
+                    username: e.username,
+                    review: e.review,
+                    img: 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg',
+                };
+            });
+            res.status(200).send( reviews );
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+    }
+
     // user logueado
     static async addReview(req, res) {
-
-        console.log('%cMyProject%cline:52%c1', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px', 1)
         try {
             const { username, review } = req.body;
             const newReview = await Product.findByIdAndUpdate(
@@ -69,8 +84,10 @@ class ProductController {
             res.status(500).json({ error });
         }
     }
+    
     //invalid request
     static async addAppreciation(req, res) {
+        console.log(req.body)
         const appreciation = parseInt(req.body.appreciation);
         try {
             const { error } = joiProduct.validate({ appreciation });

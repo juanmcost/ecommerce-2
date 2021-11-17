@@ -16,25 +16,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../store/review";
 
 export default function ReviewForm() {
-  const username = useSelector(s => s.user?.username || 'Anonymous');
-  const { product } = useSelector(product => product);
+  const username = useSelector((s) => s.user?.username || "Anonymous");
+  const { product } = useSelector(state => state);
   const dispatch = useDispatch();
   const options = [5, 4, 3, 2, 1];
   const { form, handleForm } = useForm();
   const handleSubmit = () => {
     if (form.review && form.appreciation) {
       const info = {
-        review: {
-          review: form.review,
-          username: username,
-        },
-        appreciation: form.appreciation,
         id: product._id,
+        appreciation: { appreciation: form.appreciation },
+        review: { review: form.review, username: username },
       };
       dispatch(addReview(info));
     } else {
-      alert('Make sure to fill all fields.')
-    };
+      alert("Make sure to fill all fields.");
+    }
   };
 
   return (
@@ -96,7 +93,6 @@ export default function ReviewForm() {
                       Submit Review
                     </Button>
                   </FormControl>
-                  
                 </VStack>
               </Box>
             </VStack>

@@ -6,13 +6,13 @@ import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { product } = useSelector((product) => product);
-  console.log('Products:', product)
-  let slides = [];
-  product.forEach(i => slides.push(i.img[0]))
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
+  let slides = [];
+  const { product } = useSelector((product) => product);
+  console.log('Products:', product)
+  product.forEach(i => slides.push(i?.img[0]))
 
   return (
     <>
