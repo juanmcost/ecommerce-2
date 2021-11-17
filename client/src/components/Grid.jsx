@@ -12,7 +12,7 @@ const ProductsGrid = () => {
     useEffect(() => {
         axios.get("http://localhost:8080/api/product/")
         .then(res => {
-            setProducts(res.data)});
+            setProducts(res.data.products)});
     }, [])
 
     return (

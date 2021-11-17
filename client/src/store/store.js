@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"; // import redux tool-kit
+<<<<<<< HEAD
 import {
       persistReducer,
       FLUSH,
@@ -15,6 +16,14 @@ import userReducer from './user'
 import productReducer from './product'
 import reviewReducer from './review'
 import orderReducer from './order';
+=======
+import logger from "redux-logger"; // import redux logger
+import authReducer from "./auth";
+import userReducer from "./user";
+import productReducer from "./product";
+import reviewReducer from "./review";
+import orderReducer from "./order";
+>>>>>>> 03759888fd0247ac4831aae260f2d8dd94d9db24
 import totalReducer from './total';
 /* import addressReducer from './address' */
 
@@ -45,6 +54,7 @@ const persistConfig = {
 const persistedOrderReducer = persistReducer(persistConfig, orderReducer)
 
 const store = configureStore({
+<<<<<<< HEAD
       reducer: {
             auth: authReducer,
             user: userReducer,
@@ -62,3 +72,23 @@ const store = configureStore({
 })
 
 export default store; 
+=======
+  middleware: (getDefaultMiddleware) => {
+    const customizedMiddleware = getDefaultMiddleware({
+      serializableCheck: false,
+    });
+    return customizedMiddleware.concat(logger);
+  },
+  reducer: {
+    auth: authReducer,
+    user: userReducer,
+    product: productReducer,
+    order: orderReducer,
+    total: totalReducer,
+    address: addressReducer,
+    review: reviewReducer,
+  },
+});
+  
+  export default store; 
+>>>>>>> 03759888fd0247ac4831aae260f2d8dd94d9db24

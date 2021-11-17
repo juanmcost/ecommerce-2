@@ -5,17 +5,14 @@ import { getAllProducts } from "../store/product";
 import { useEffect } from "react";
 
 const Home = () => {
+  const product = useSelector(s => s.product);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-  let slides = [];
-  const product = useSelector(s => s.product);
-  product.forEach(i => slides.push(i?.img[0]))            //Colocar img de diferentes artículos en un mismo array
-
   return (
     <>
-      <Carousel slides={slides} />
+      <Carousel slides={product.discover} />
       <ProductsGrid />
     </>
   );

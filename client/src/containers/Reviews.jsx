@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 export default function Reviews() {
   const reviews = useSelector((s) => {
-    return s.review.data?.length > 0 ? s.review.data : null;                //Esto dentifica si tiene o no tiene reviews.
+    return s.review.data?.reviews?.length > 0 ? s.review.data.reviews : null;                //Esto dentifica si tiene o no tiene reviews.
   });
 
   return (

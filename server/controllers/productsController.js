@@ -6,7 +6,8 @@ class ProductController {
     static async getAllProduct(req, res) {
         try {
             const products = await Product.find();
-            res.json(products);
+            const discover = products.map(i => i?.img[0])
+            res.json({products, discover});
         } catch (error) {
             res.status(500).json({ error });
         }
@@ -52,13 +53,20 @@ class ProductController {
         // const reviews = [];
         try {
             const product = await Product.findById( req.params.id );
+            const appreciation = (() => {
+                const arr = product.appreciation;
+                if (!arr.length) return 0;
+                let [len, i, sum] = [arr?.length, 0, 0];               //Calcular promedio de apprecations
+                while (i < len) { sum += arr[i]; i++;}
+                return (sum / len).toFixed(1);
+            })();
             const reviews = product.reviews.map(e => { return {   
                     username: e.username,
                     review: e.review,
                     img: 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg',
                 };
             });
-            res.status(200).send( reviews );
+            res.status(200).send( {appreciation, reviews} );
         } catch (error) {
             res.status(500).json({ error });
         }
