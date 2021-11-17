@@ -15,6 +15,8 @@ import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
 import OrderAddress from "./views/OrderAddress";
 import OrderPayMethod from "./views/OrderPayMethod";
+import EmailSent from "./views/EmailSent";
+import ConfirmCart from "./views/ConfirmCart";
 import ShopCart from "./components/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +26,7 @@ import AdminPanel from './components/Admin/AdminPanel';
 const App = () => {
     const dispatch = useDispatch();
     const user = useSelector(({ user }) => user);
+
     console.log('useSelector', user);
     useEffect(() => {
         axios.get('/api/auth/me').then((user) => {
@@ -63,6 +66,8 @@ const App = () => {
         <Route path="/new_order/paymethod" element={
           user.username? <OrderPayMethod /> : <Login />
         } />
+        <Route path="/emailSent" element={<EmailSent />} />
+        <Route path={`/:id/myCart/confirm/:token`} element={<ConfirmCart />}/>
       </Routes>
     </div>
   );

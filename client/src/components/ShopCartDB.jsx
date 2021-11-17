@@ -14,16 +14,17 @@ const ShopCartDB = () => {
     const navigate = useNavigate();
     const itemsBg = useColorModeValue("gray.100", "gray.900");
     const isMounted = useRef(false);
+    const order = useSelector(({ order }) => order);
     
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/cart/${user._id}`)
+        axios.get(`/api/cart/${user._id}`)
         .then( res => {
 
             if (res.data !== null) {//get array with products id
                 let carrito = {list: [], total: 0}
 
                 res.data.products.map((cartItem, i) => {//change id to real product and sum total price
-                    axios.get(`http://localhost:8080/api/product/${res.data.products[i].productId}`)
+                    axios.get(`/api/product/${res.data.products[i].productId}`)
                     .then(res => res.data)
                     .then(item => {
                         carrito.list.push({product: item, quantity: cartItem.quantity});
@@ -46,10 +47,15 @@ const ShopCartDB = () => {
             cart.list.map((cartItem) =>{
                 products.push({productId: cartItem.product._id, quantity: cartItem.quantity})
             })
-            return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products})
+            return axios.put(`/api/cart/${user._id}`, {products})
         }
         else {isMounted.current = true};
     }, [aux])
+
+    const confirmCart = () => {
+        axios.post(`/api/order/confirm`)
+        navigate(`/emailsent`)
+    }
 
     return (
         <>
@@ -80,24 +86,39 @@ const ShopCartDB = () => {
                         </Stack>
                         <Stack align={"center"} justify="center">
                             <Box>$ {prod.product.price}</Box>
-                            <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>delete product</Button>
+                            <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>Delete product</Button>
                         </Stack>
                     </Grid>
                 ))}
             </Box>
             {cart.list[0] !== undefined ? 
                 <Stack spacing={5} mt="5" mr="5">
-                    <Button
-                    bg={"green.400"}
-                    color={"white"}
-                    _hover={{
-                        bg: "green.500",
-                    }}
-                    onClick={(e)=> {e.preventDefault(); navigate('/new_order/address')} }
-                    >
-                    proceed with order
-                    </Button>
-                    <Button onClick={()=>deleteCart(aux, setCart, setAux, user._id, toast)}>delete cart</Button>
+                    {
+                        order.status !== "confirmed" ? 
+                        (<Button
+                        bg={"green.400"}
+                        color={"white"}
+                        _hover={{
+                            bg: "green.500",
+                        }}
+                        onClick={(e) => confirmCart(e)}
+                        >
+                        Confirm cart to proceed
+                        </Button>)
+                        :
+                        (<Button
+                        bg={"green.400"}
+                        color={"white"}
+                        _hover={{
+                            bg: "green.500",
+                        }}
+                        onClick={(e) => confirmCart(e)}
+                        >
+                        proceed with order
+                        </Button>)
+
+                    }
+                    <Button onClick={()=>deleteCart(aux, setCart, setAux, user._id, toast)}>Delete cart</Button>
                 </Stack>
                 :
                 <></>
