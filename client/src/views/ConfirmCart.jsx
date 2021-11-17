@@ -3,10 +3,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { setStatus } from "../store/order";
 import { useNavigate } from "react-router-dom";
-import { setProducts } from "../store/order";
 import { useState } from "react";
+import { setStatus } from "../store/order";
+import { setProducts } from "../store/order";
 import { setTotal } from "../store/total";
 import { resetOrder } from "../store/order";
 
@@ -21,12 +21,19 @@ const ConfirmCart = function () {
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/order/confirm/${id}/${token}`)
-        .then((res) => res.data )
-        .then( () => {
-            setState(true)
-            dispatch(setTotal(0));
-            dispatch(resetOrder());
-            axios.delete(`http://localhost:8080/api/cart/${id}`);
+        .then(res => res.data )
+        .then(cart => {
+            dispatch(setProducts({list: cart.products, total}));
+            dispatch(setStatus("confirmed"));
+        })
+        .then(() => {
+            axios.post("/api/order/add", {...order})
+            .then(() => {
+                dispatch(setTotal(0))
+                dispatch(resetOrder());
+                axios.delete(`http://localhost:8080/api/cart/${id}`)
+                setState(true);
+            })
         });
     }, [])
 

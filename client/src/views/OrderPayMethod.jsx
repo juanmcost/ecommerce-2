@@ -37,7 +37,6 @@ const OrderPayMethod = function () {
     const total = useSelector(({ total }) => total);
     const user = useSelector(({ user }) => user);
     const order = useSelector(({ order }) => order);
-    const address = useSelector(({ address }) => address);
     
     const handleCardInput = (event) => {
         setCardForm({
@@ -49,19 +48,23 @@ const OrderPayMethod = function () {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(setPayMethod(method));
         if (true/* validateCard(e.target.cardNumber.value, toast )*/) {
-            axios.get(`/api/cart/${user._id}`)
+            axios.post(`/api/order/confirm`)
+            .then(() => navigate(`/emailsent`))
+            .catch(() => alert("sorry ther was an error"));
+            /* axios.get(`/api/cart/${user._id}`)
             .then(res => {
                 dispatch(setPayMethod(method));
-                console.log("order", order,"address",address)
                 dispatch(setProducts({list: res.data.products, total}));
                 dispatch(setStatus("confirmed"));
             })
             .then(() => {
-                axios.post("/api/order/add", {...order, address})
+                axios.post("/api/order/add", {...order})
                 .then(() => axios.post(`/api/order/confirm`))
-                .then(() => navigate(`/emailsent`));
-            });
+                .then(() => navigate(`/emailsent`))
+                .catch(() => alert("sorry ther was an error"));
+            }); */
         }
     }
         

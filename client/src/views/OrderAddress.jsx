@@ -19,13 +19,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom"
 import {countryList} from "../utils/dummieData";
-import { setAddress } from "../store/address";
+import { setAddress } from "../store/order";
 
 
 const OrderAddress = function () {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const order = useSelector((state) => state.order)
     const user = useSelector((state) => state.user)
     const [form, setForm] = useState({});
     
@@ -41,8 +40,6 @@ const OrderAddress = function () {
         dispatch(setAddress(form));
         navigate('/new_order/paymethod')
     }
-
-
 
     return (
         <>
