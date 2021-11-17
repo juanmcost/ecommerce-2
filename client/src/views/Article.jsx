@@ -22,17 +22,13 @@ const currency = Intl.NumberFormat("en-US", {             //Formatear como núme
 export default function Article() {
   const { id } = useParams();
   const article = useSelector(({ product }) => product);
+  const reviews = useSelector(({ review }) => review.data);
+  const appreciation = parseFloat(reviews?.appreciation) || 0
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProduct(id));
-    dispatch(getAllReviews(id));                          //Esta informacón sirve al componente Reviews
+    dispatch(getAllReviews(id));
   }, [dispatch, id]);
-  const average = (arr) => {
-    if (!article?.appreciation?.length) return 0;
-    let [len, i, sum] = [arr?.length, 0, 0];               //Calcular promedio de apprecations
-    while (i < len) { sum += arr[i]; i++;}
-    return parseFloat((sum / len).toFixed(1));
-  };
 
   return (
     <Container maxW={"95vw"} py={12}>
@@ -82,9 +78,9 @@ export default function Article() {
               <Rating
                   precision={0.1}
                   name="read-only"
-                  value={average(article.appreciation)}
+                  value={appreciation}
                   readOnly
-                />
+                  />
             </Stack>
           </Stack>
         </Stack>
