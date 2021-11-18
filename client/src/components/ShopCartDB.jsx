@@ -5,19 +5,18 @@ import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { moreQuantity, lessQuantity, deleteFromCart, deleteCart } from "../utils/shopCartDb";
-import { setTotal } from "../store/total";
+import { setAmount } from "../store/order";
 
 const ShopCartDB = () => {
     const [cart, setCart] = useState({list: [], total: 0});
     const [aux, setAux] = useState(true);
     const user = useSelector(state => state.user);
-    const total = useSelector(state => state.total);
+    const order = useSelector(state => state.order);
     const toast = useToast();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const itemsBg = useColorModeValue("gray.100", "gray.900");
     const isMounted = useRef(false);
-    const order = useSelector(({ order }) => order);
     
     useEffect(() => {
         axios.get(`/api/cart/${user._id}`)
@@ -36,7 +35,7 @@ const ShopCartDB = () => {
                     })
                     .then(carrito => {
                         setCart({...carrito})
-                        dispatch(setTotal(carrito.total || 0));
+                        dispatch(setAmount(carrito.total || 0));
                     })
                 });
             }
@@ -48,7 +47,7 @@ const ShopCartDB = () => {
     useEffect(() => {
         if (isMounted.current) {
             const products = []
-            dispatch(setTotal(cart.total || 0));
+            dispatch(setAmount(cart.total || 0));
             cart.list.map((cartItem) =>{
                 products.push({productId: cartItem.product._id, quantity: cartItem.quantity})
             })
@@ -61,7 +60,7 @@ const ShopCartDB = () => {
         <>
         <Flex align="center" justify="center">
             <Heading fontSize={"4xl"} m="5">My Cart</Heading>
-            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {total}</Heading>
+            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {order.amount}</Heading>
         </Flex>
             <Divider orientation="horizontal" mb="5" />
         <Flex>

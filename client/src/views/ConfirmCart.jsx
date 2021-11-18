@@ -7,15 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { setStatus } from "../store/order";
 import { setProducts } from "../store/order";
-import { setTotal } from "../store/total";
 import { resetOrder } from "../store/order";
 
 const ConfirmCart = function () {
     const {id, token} = useParams()
     const navigate = useNavigate();
-    const total = useSelector(({ total }) => total);
     const order = useSelector(({ order }) => order);
-    const address = useSelector(({ address }) => address);
     const dispatch = useDispatch();
     const [state, setState] = useState(false);
 
@@ -23,13 +20,13 @@ const ConfirmCart = function () {
         axios.get(`http://localhost:8080/api/order/confirm/${id}/${token}`)
         .then(res => res.data )
         .then(cart => {
-            dispatch(setProducts({list: cart.products, total}));
+            dispatch(setProducts(cart.products));
             dispatch(setStatus("confirmed"));
         })
         .then(() => {
+            console.log("this is order",order)
             axios.post("/api/order/add", {...order})
             .then(() => {
-                dispatch(setTotal(0))
                 dispatch(resetOrder());
                 axios.delete(`http://localhost:8080/api/cart/${id}`)
                 setState(true);
