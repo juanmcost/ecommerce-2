@@ -1,21 +1,22 @@
-import { FaDollarSign } from "react-icons/fa";
-import { IoAnalyticsSharp } from "react-icons/io5";
-import { BiCategoryAlt } from "react-icons/bi";
-import { useEffect } from "react";
 import Reviews from "../containers/Reviews";
 import Carousel from "../components/Carousel";
 import Feature from "../components/Feature";
-import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { FaDollarSign } from "react-icons/fa";
 import { getProduct } from "../store/product";
+import { useParams } from "react-router";
+import { useEffect } from "react";
 import Rating from "@material-ui/lab/Rating";
+import { BiCategoryAlt } from "react-icons/bi";
+import { IoAnalyticsSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import currencyConverter from "../utils/currencyConverter";
 import {
   Container, SimpleGrid, Flex, Heading, Text,
   Stack, StackDivider, Icon, useColorModeValue,
 } from "@chakra-ui/react";
-import currencyConverter from "../utils/currencyConverter";
 
 export default function Article() {
+  window.scroll(0, 0)
   const { id } = useParams();
   const article = useSelector(({ product }) => product);
   const appreciation = parseFloat(article.value);
