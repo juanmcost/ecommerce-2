@@ -5,7 +5,6 @@ import RemoveProduct from '../../common/Admin/RemoveProduct';
 import EditProduct from '../../common/Admin/EditProduct';
 import NewProduct from '../../common/Admin/NewProduct';
 import UserManager from '../../common/Admin/UserManager';
-import Stats from '../../common/Admin/Stats';
 import AdminSidebar from './AdminSideBar';
 
 const AdminPanel = () => {

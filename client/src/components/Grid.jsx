@@ -14,7 +14,7 @@ const ProductsGrid = () => {
         });
     }, []);
 
-    if (!products.length) return <Spinner />;
+    //if (!products.length) return <Spinner />;
 
     return (
         <SimpleGrid minChildWidth="30%" spacing={6} mt="50" mb="50">
