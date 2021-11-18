@@ -1,4 +1,4 @@
-import { Button, useToast, Image, Heading, Divider, useColorModeValue } from "@chakra-ui/react";
+import { Button, useToast, Image, Heading, Divider, useColorModeValue, AspectRatio, Text } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,6 @@ const ShopCart = () => {
         const jsonCart = localStorage.getItem('carrito');
         let carrito = JSON.parse(jsonCart);
         let total = 0;
-        console.log("storedCart:",carrito);
 
         if (carrito === null) {
             carrito = {
@@ -40,21 +39,20 @@ const ShopCart = () => {
             <Heading ml="auto" fontSize={"2xl"} mr="5">Total: $ {cart.total}</Heading>   
         </Flex>
             <Divider orientation="horizontal" mb="2" />
+            {cart.list.length===0? <Center><Text fontSize={"lg"} color={"gray.600"}>no products added</Text></Center>:<></> }
         <Flex>
-            <Box>
+            <Box w="full">
                 {cart.list.map((prod, i) => (
-                    <Grid templateColumns="repeat(3, 1fr)" align="center" key={i} bg={itemsBg} rounded={"lg"} m="5">
-                        <Stack direction="row" align="center" mr="5">
-                            <Center m="3">
-                                <Image
-                                boxSize="80%"
-                                rounded={"lg"}
-                                src={prod.product.img[0]}
-                                alt={prod.product.title}
-                                />
-                            </Center>
-                            <Center>{prod.product.title}</Center>
-                        </Stack>
+                    <Grid templateColumns="repeat(4, 1fr)" align="center" key={i} bg={itemsBg} rounded={"lg"} m="5">
+                        <AspectRatio maxW={["200px"]} ratio={1} m="5">
+                            <Image
+                            rounded={"lg"}
+                            src={prod.product.img[0]}
+                            alt={prod.product.title}
+                            objectFit="contain"
+                            />
+                        </AspectRatio>
+                        <Center mr="auto">{prod.product.title}</Center>
                         <Stack direction={"row"} align="center" spacing={3}>
                             <Button onClick={()=>lessQuantity(i, cart, aux, setCart, setAux, toast)} >-</Button>
                             <p>Quantity: {prod.quantity} </p>

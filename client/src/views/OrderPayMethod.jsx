@@ -9,13 +9,12 @@ import {
     Image,
   } from "@chakra-ui/react"; // import chackra
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 import cardIcons from "../assets/cardIcons.png";
 import paypalIcon from "../assets/logo-Paypal.png"
 import mercadoPago from "../assets/mercadoPago.png"
 import RenderCardForm from "../components/CreditCardForm";
 import RenderPayPalForm from "../components/PayPalForm";
+import RenderMercadoPagoForm from "../components/MercadoPagoForm";
 
 const OrderPayMethod = function () {
     const [method, setMethod] = useState("card");
@@ -53,7 +52,7 @@ const OrderPayMethod = function () {
                                 justify={"space-between"}
                                 >
                                     <Flex>
-                                        <Radio value="card">card</Radio>
+                                        <Radio value="card">Credit card</Radio>
                                         <Image w="15%" ml="2" src={cardIcons} objectFit="contain" />
                                     </Flex>
                                     <Flex>
@@ -69,6 +68,7 @@ const OrderPayMethod = function () {
                         </Stack>
                         {method === "card"? <RenderCardForm handleCardInput={handleCardInput} /> : <></>}
                         {method === "paypal"? <RenderPayPalForm /> : <></>}
+                        {method === "mercadoPago"? <RenderMercadoPagoForm /> : <></>}
                     </Box>
                 </Stack>
             </Flex>

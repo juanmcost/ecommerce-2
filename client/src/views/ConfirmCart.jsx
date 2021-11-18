@@ -49,7 +49,17 @@ const ConfirmCart = function () {
                 </Button>
             </Stack>
             :
-            <></>}
+            <Stack align={"center"} mt="50">
+                <Heading fontSize={"4xl"}>Oops! Something went wrong :(</Heading>
+                <Text fontSize={"lg"} color={"gray.600"}>if you are trying to confirm an order try to refresh the page</Text>
+                <Button
+                    variant="outline"
+                    colorScheme="teal"
+                    onClick={()=>navigate(`/home`)}
+                >
+                    back to home
+                </Button>
+            </Stack>}
         </>
     )
 }
