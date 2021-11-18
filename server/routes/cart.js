@@ -11,6 +11,6 @@ router.post('/' , CartController.createCart);
 
 router.put('/:id', CartController.updateCart);
 
-router.delete('/:id', checkAuthAndAuthorization, CartController.deleteCart);
+router.delete('/:id', CartController.deleteCart);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from '../store/product'
+import { createProduct } from '../store/product'
 
 export const MultiUploader = () => {
 	const { product } = useSelector(product => product)
@@ -19,7 +19,7 @@ export const MultiUploader = () => {
 	// 	console.log(formData.append)
 	// 	console.log('DOS', formData);
 	// 	setUploding(true);
-	// 	await dispatch(addProduct(formData));
+	// 	await dispatch(createProduct(formData));
 	// 	console.log('PRODUCT', formData.getAll('files'))
 	// 	setUplodedImgs(formData.getAll('files'));
 	// 	setUploding(false);
@@ -33,7 +33,7 @@ export const MultiUploader = () => {
 			formData.append('files', file);
 		});
 		setUploding(true);
-		dispatch(addProduct(formData));
+		dispatch(createProduct(formData));
 		console.log('PRODUCT', formData.getAll('files'));
 		setUplodedImgs(formData.getAll('files'));
 		setUploding(false);

@@ -12,11 +12,13 @@ router.get('/admin/:title', productsController.getProductByTitle);
 
 router.get('/search/:title', productsController.getProductLike);
 
+router.get('/reviews/:id', productsController.getAllReviews);
+
 // user logueado
 
-router.put('/review/:id', auth.checkAuth, productsController.addReview);
+router.put('/review/:id',  productsController.addReview);
 
-router.put('/appreciation/:id', auth.checkAuth, productsController.addAppreciation);
+router.put('/appreciation/:id',  productsController.addAppreciation);
 
 //router.put("/")
 
