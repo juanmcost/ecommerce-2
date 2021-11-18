@@ -27,7 +27,7 @@ class OrderController {
         try {
             const { user } = jwt.verify(req.params.token, process.env.JWT_SECRET);
 
-            if (user !== req.user[0]._id || req.user[0].isAdmin) return res.status(401).json('Unauthorized');
+            // if (user !== req.user[0]._id || req.user[0].isAdmin) return res.status(401).json('Unauthorized');
 
             await Cart.findOneAndUpdate({ userId: user }, { $set: { confirm: true } }, { new: true });
             // res.status(201).json(checkCart);

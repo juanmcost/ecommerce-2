@@ -3,6 +3,7 @@ import React from 'react';
 
 const AdminNavItem = (props) => {
     const { icon, children, ...rest } = props;
+
     return (
         <Flex
             align="center"
@@ -20,12 +21,13 @@ const AdminNavItem = (props) => {
             transition=".15s ease"
             {...rest}
         >
+            {' '}
             {icon && (
                 <Icon
                     mr="2"
                     boxSize="6"
                     _groupHover={{
-                        color: 'gray.300',
+                        color: 'teal.200',
                     }}
                     as={icon}
                 />
