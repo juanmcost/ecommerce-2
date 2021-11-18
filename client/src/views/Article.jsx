@@ -8,26 +8,20 @@ import Feature from "../components/Feature";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../store/product";
-import { getAllReviews } from "../store/review";
 import Rating from "@material-ui/lab/Rating";
 import {
   Container, SimpleGrid, Flex, Heading, Text,
   Stack, StackDivider, Icon, useColorModeValue,
 } from "@chakra-ui/react";
-const currency = Intl.NumberFormat("en-US", {             //Formatear como número
-  style: "currency",
-  currency: "USD",
-});
+import currencyConverter from "../utils/currencyConverter";
 
 export default function Article() {
   const { id } = useParams();
   const article = useSelector(({ product }) => product);
-  const reviews = useSelector(({ review }) => review.data);
-  const appreciation = parseFloat(reviews?.appreciation) || 0
+  const appreciation = parseFloat(article.value);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProduct(id));
-    dispatch(getAllReviews(id));
   }, [dispatch, id]);
 
   return (
@@ -49,13 +43,15 @@ export default function Article() {
           <Stack
             spacing={4}
             divider={
-              <StackDivider borderColor={useColorModeValue("gray.100", "gray.700")}/>
+              <StackDivider
+                borderColor={useColorModeValue("gray.100", "gray.700")}
+              />
             }
           >
             <Feature
               icon={<Icon as={FaDollarSign} color={"green.500"} w={5} h={5} />}
               iconBg={useColorModeValue("green.100", "green.900")}
-              text={currency.format(article.price)}
+              text={currencyConverter(article.price)}
             />
             <Feature
               icon={<Icon as={BiCategoryAlt} color={"blue.500"} w={5} h={5} />}
@@ -76,11 +72,11 @@ export default function Article() {
                 text={`Rating: `}
               />
               <Rating
-                  precision={0.1}
-                  name="read-only"
-                  value={appreciation}
-                  readOnly
-                  />
+                precision={0.1}
+                name="read-only"
+                value={appreciation}
+                readOnly
+              />
             </Stack>
           </Stack>
         </Stack>

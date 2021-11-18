@@ -46,8 +46,10 @@ Product.post('init', function (doc) {
     if (this.appreciation[0]) {
         let num = this.appreciation.length;
         let num2 = this.appreciation.reduce((e, acc) => e + acc);
-        this.value = num2 / num;
-    }
+        this.value = (num2 / num).toFixed(1);
+    } else {
+        this.value = 0;
+    };
 });
 
 module.exports = model('Product', Product);

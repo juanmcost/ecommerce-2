@@ -14,6 +14,7 @@ export const errorToast = (toast, title, description) => {
         status: 'error',
         duration: 2800,
         isClosable: true,
+        description: description,
     });
 };
 

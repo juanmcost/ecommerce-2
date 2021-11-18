@@ -9,19 +9,22 @@ import {
   FormControl,
   FormLabel,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "../hooks/useForm";
-import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../store/review";
 import Rating from "@material-ui/lab/Rating";
+import { errorToast } from "../utils/toastMessages";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ReviewForm() {
+  const { form, handleForm, clearForm } = useForm();
   const username = useSelector((s) => s.user.username);
   const { product } = useSelector((s) => s);
+  const toast = useToast();
   const dispatch = useDispatch();
-  const { form, handleForm, clearForm } = useForm();
   const handleSubmit = () => {
-    if (!username) return alert("You must be logged in to leave a review.");
+    if (!username) return errorToast(toast, "You must be logged in to leave a review.");
     if (form.review && form.appreciation) {
       dispatch(
         addReview({
@@ -32,10 +35,9 @@ export default function ReviewForm() {
       );
       clearForm();
     } else {
-      alert("Make sure to fill all fields.");
+      errorToast(toast, "Make sure to fill all fields.");
     }
   };
-  console.log('%cMyProject%cline:37%cproduct', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px', product)
 
   return (
     <Container w="100%" mt={20} centerContent p="0px">

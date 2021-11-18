@@ -10,6 +10,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+  
   return (
     <>
       <Carousel slides={product.discover} />
