@@ -13,26 +13,29 @@ import {
 import { useForm } from "../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../store/review";
-import Rating from '@material-ui/lab/Rating';
+import Rating from "@material-ui/lab/Rating";
 
 export default function ReviewForm() {
   const username = useSelector((s) => s.user.username);
-  const { product } = useSelector(s => s);
+  const { product } = useSelector((s) => s);
   const dispatch = useDispatch();
-  const { form, handleForm } = useForm();
+  const { form, handleForm, clearForm } = useForm();
   const handleSubmit = () => {
     if (!username) return alert("You must be logged in to leave a review.");
     if (form.review && form.appreciation) {
-      const info = {
-        id: product._id,
-        appreciation: { appreciation: form.appreciation },
-        review: { review: form.review, username: username },
-      };
-      dispatch(addReview(info));
+      dispatch(
+        addReview({
+          id: product._id,
+          appreciation: form.appreciation,
+          review: { review: form.review, username: username },
+        })
+      );
+      clearForm();
     } else {
       alert("Make sure to fill all fields.");
     }
   };
+  console.log('%cMyProject%cline:37%cproduct', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px', product)
 
   return (
     <Container w="100%" mt={20} centerContent p="0px">
@@ -54,18 +57,19 @@ export default function ReviewForm() {
               </Box>
               <Box bg="#F5F5F5" borderRadius="lg" w="95%">
                 <VStack m={8} color="#0B0E3F" spacing={5} align="left">
-                  <Box align="center">
-                  </Box>
+                  <Box align="center"></Box>
                   <FormControl id="review">
                     <FormLabel>Review</FormLabel>
                     <Rating
-                    precision={0.1}
-                    name="appreciation" 
-                    defaultValue={2.5}
-                    size="large" 
-                    onChange={handleForm}
+                      id="rating"
+                      precision={0.1}
+                      name="appreciation"
+                      defaultValue={0}
+                      size="large"
+                      onChange={handleForm}
                     />
                     <Textarea
+                      id="review"
                       name="review"
                       borderColor="gray.300"
                       _hover={{ borderRadius: "gray.300" }}
