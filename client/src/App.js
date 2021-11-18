@@ -1,4 +1,4 @@
-import ShopCartDB from "./components/ShopCartDB";
+import ShopCartDB from "./views/ShopCartDB";
 import React, { useEffect } from "react";
 import Home from "./views/Home";
 import Navbar from "./components/Navbar";
@@ -15,7 +15,7 @@ import OrderAddress from "./views/OrderAddress";
 import OrderPayMethod from "./views/OrderPayMethod";
 import EmailSent from "./views/EmailSent";
 import ConfirmCart from "./views/ConfirmCart";
-import ShopCart from "./components/ShopCart";
+import ShopCart from "./views/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./store/user";

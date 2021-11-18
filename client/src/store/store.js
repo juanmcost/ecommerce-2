@@ -15,26 +15,6 @@ import userReducer from './user'
 import productReducer from './product'
 import reviewReducer from './review'
 import orderReducer from './order';
-import totalReducer from './total';
-/* import addressReducer from './address' */
-
-
-
-// config reducer
-/* 
-const store = configureStore({
-      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-      reducer: {
-            auth: authReducer,
-            user: userReducer,
-            product: productReducer,
-            order: persistedOrderReducer,
-            total: totalReducer,
-            address: addressReducer,
-            review: reviewReducer,
-      }
-});
-*/
 
 const persistConfig = {
       key: 'root',
@@ -42,7 +22,7 @@ const persistConfig = {
       storage,
 }
 
-const persistedOrderReducer = persistReducer(persistConfig, orderReducer)
+const persistedOrderReducer = persistReducer(persistConfig, orderReducer);
 
 const store = configureStore({
       reducer: {
@@ -50,7 +30,6 @@ const store = configureStore({
             user: userReducer,
             product: productReducer,
             order: persistedOrderReducer,
-            total: totalReducer,
             review: reviewReducer,
       },
       middleware: (getDefaultMiddleware) =>
@@ -58,7 +37,7 @@ const store = configureStore({
             serializableCheck: {
                   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
                   },
-            }),
+            }).concat(logger)
 })
 
 export default store; 

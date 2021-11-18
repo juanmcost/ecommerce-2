@@ -16,7 +16,7 @@ import {
 
 const OrderHistory = () => {
   const [order, setOrder] = useState([]);
-
+  
   useEffect(() => {
     fetchOrders();
     async function fetchOrders() {
@@ -24,7 +24,9 @@ const OrderHistory = () => {
       if (data.length) setOrder(data);
     }
   }, []);
-
+  
+  console.log(order)
+  
   return (
     <div>
       <Flex align={"center"} justify={"center"}>
