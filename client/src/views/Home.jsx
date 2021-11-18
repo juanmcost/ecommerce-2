@@ -7,6 +7,9 @@ import { useState } from "react";
 import {   
   Button,
   Text,
+  Link,
+  Box,
+  Image,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
@@ -20,13 +23,19 @@ const Home = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector(state => state.user);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+  };
 
   useEffect(() => {
     const jsonCart = localStorage.getItem('carrito');
     let localCart = JSON.parse(jsonCart);
     if (localCart?.list?.length > 0) setIsOpen(true);
     dispatch(getAllProducts());
-  }, [dispatch]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }, []);
 
   const mergeCart = () => {
     const jsonCart = localStorage.getItem('carrito');
@@ -95,6 +104,21 @@ const Home = () => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+      {scrollPosition > 500 && (<Link href='/#top'>
+            <Box position='fixed'
+                bottom='20px'
+                right={['16px', '20px']}
+                zIndex={1}
+                w="10%"
+                h="10%"
+                bg="green.300"
+                rounded="full"
+                align="center"
+                justify="center"
+            >
+              <Text fontSize="lg" mt="22%" fontWeight="bold">Go Up</Text>
+            </Box>
+        </Link>)}
       <Carousel slides={product.discover} />
       <ProductsGrid />
     </>
