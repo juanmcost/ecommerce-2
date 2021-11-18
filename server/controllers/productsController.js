@@ -95,8 +95,7 @@ class ProductController {
     
     //invalid request
     static async addAppreciation(req, res) {
-        console.log(req.body)
-        const appreciation = parseInt(req.body.appreciation);
+        const appreciation = parseFloat(req.body.appreciation);
         try {
             const { error } = joiProduct.validate({ appreciation });
             if (!error) {
