@@ -61,7 +61,7 @@ const orderReducer = function(state = {status: "", amount: 0}, action){
         }
       case RESET:
         {
-          return {status: ""};
+          return {status: "", amount: 0};
         }
       default:
           return state;

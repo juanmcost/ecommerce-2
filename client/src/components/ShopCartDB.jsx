@@ -66,7 +66,7 @@ const ShopCartDB = () => {
             <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {order.amount}</Heading>
         </Flex>
             <Divider orientation="horizontal" mb="5" />
-                {showSpinner?<Center><Spinner size="xl"/></Center>: <></>}
+                {showSpinner?<Center><Spinner color="green.300" size="xl"/></Center>: <></>}
                 {cart.list.length===0 && !showSpinner? <Center><Text fontSize={"lg"} color={"gray.600"}>no products added</Text></Center>:<></> }
         <Flex>
             <Box>
@@ -75,7 +75,7 @@ const ShopCartDB = () => {
                         <Stack direction="row" align="center" mr="5">
                             <Center m="3">
                                 <Image
-                                boxSize="80%"
+                                boxSize="200px"
                                 rounded={"lg"}
                                 src={prod.product.img[0]}
                                 alt={prod.product.title}
