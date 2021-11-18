@@ -1,24 +1,20 @@
-import { Box, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import NewProduct from '../../common/Admin/NewProduct';
+import { Box, Drawer, DrawerContent, DrawerOverlay, Flex, Container, useDisclosure } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 
+import RemoveProduct from '../../common/Admin/RemoveProduct';
+import EditProduct from '../../common/Admin/EditProduct';
+import NewProduct from '../../common/Admin/NewProduct';
+import UserManager from '../../common/Admin/UserManager';
 import AdminSidebar from './AdminSideBar';
 
 const AdminPanel = () => {
-    const [viewState, setViewState] = useState('');
-    const [article, setArticle] = useState({
-        img: 'https://lh3.googleusercontent.com/proxy/PrkIbopHtY7FxjV18loFcgmD_3mo1800NeHT_9mwK1TJQMqX5SSlW6Ljr5VG3tmcolQCzrkVYu9f4STCuBMWHyE0-MetLoxuy3Slh0-MqyXx',
-    });
+    const [view, setView] = useState('');
     const sidebar = useDisclosure();
 
     return (
         <>
             <Box as="section" bg="gray.700" minH="84vh">
-                <AdminSidebar
-                    display={{ base: 'none', md: 'unset' }}
-                    view={viewState}
-                    setview={setViewState}
-                />
+                <AdminSidebar display={{ base: 'none', md: 'unset' }} view={view} setview={setView} />
 
                 <Drawer isOpen={sidebar.isOpen} onClose={sidebar.onClose} placement="left">
                     <DrawerOverlay />
@@ -27,7 +23,24 @@ const AdminPanel = () => {
                     </DrawerContent>
                 </Drawer>
                 <Box ml={{ base: 0, md: 40 }} transition=".3s ease">
-                    <NewProduct article={article}></NewProduct>
+                    <Container
+                        maxW="70vw"
+                        h="83vh"
+                        maxH="83vh"
+                        py={12}
+                        position="relative"
+                        marginLeft="10rem"
+                    >
+                        {view === 'new' ? (
+                            <NewProduct />
+                        ) : view === 'edit' ? (
+                            <EditProduct />
+                        ) : view === 'remove' ? (
+                            <RemoveProduct />
+                        ) : (
+                            <UserManager />
+                        )}
+                    </Container>
                 </Box>
             </Box>
         </>

@@ -13,7 +13,7 @@ import axios from "axios";
 import { validateCard } from "../utils/cardsValidation";
 import { useToast } from "@chakra-ui/react";
 
-const RenderCardForm = (handleCardInput) => {
+const RenderCardForm = ({handleCardInput}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const toast = useToast();

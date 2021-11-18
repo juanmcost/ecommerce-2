@@ -58,6 +58,23 @@ class UserController {
         }
     }
 
+    static async unsetAdmin(req, res) {
+        try {
+            const unsetAdmin = await User.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $set: {
+                        isAdmin: false,
+                    },
+                },
+                { new: true }
+            );
+            return unsetAdmin ? res.status(201).json(unsetAdmin) : res.status(400).json('Bad update');
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+    }
+
     static async deleteUser(req, res) {
         try {
             const deleted = await User.findByIdAndUpdate(
