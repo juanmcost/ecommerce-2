@@ -9,7 +9,9 @@ router.get('/:id', checkAuthAndAdmin, UserController.getUser);
 
 router.put('/:id', checkAuthAndAuthorization, UserController.editUser);
 
-router.put('/admin/:id', checkAuthAndAdmin, UserController.setAdmin);
+router.put('/admin/set/:id', checkAuthAndAdmin, UserController.setAdmin);
+
+router.put('/admin/unset/:id', checkAuthAndAdmin, UserController.unsetAdmin);
 
 router.delete('/:id', checkAuthAndAuthorization, UserController.deleteUser);
 
