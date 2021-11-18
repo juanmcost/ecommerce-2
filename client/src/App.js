@@ -10,6 +10,8 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Profile from "./views/Profile";
 import Admin from "./views/Admin.jsx";
+import SearchList from "./components/SearchList"
+import OrderHistory from "./components/OrderHistory"
 import { Route, Routes } from "react-router-dom";
 import Article from "./views/Article";
 import MyProducts from "./views/MyProducts";
@@ -42,7 +44,9 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route exact path="/profile" element={<Profile />} />
+        <Route exact path="/profile/order_history" element={<OrderHistory />} />
+        <Route path="/search_list" element={<SearchList />} />
         <Route path="/myProducts" element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
         <Route path="/myProducts/newProduct" element={<NewProduct />} />

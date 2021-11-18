@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Text, Flex, Box  } from "@chakra-ui/react";
+import { getProductTitle } from "../store/product"
+import { Avatar, Input, Text, Flex, Box  } from "@chakra-ui/react";
 import {
   AutoComplete,
   AutoCompleteInput,
@@ -13,8 +14,10 @@ import axios from "axios"
 const Search = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [prod, setProd] = useState([]);
     const [current, setCurrent] = useState({});
+    const [press, setPress] = useState('')
 
     useEffect(() => {
         fetchProducts();
@@ -30,6 +33,20 @@ const Search = () => {
             const { data } = await axios.get(`/api/product/search/${current}`);
         }
     }, [current]);
+
+    const handlePress = async (event) =>{
+        if(event.key == 'Enter'){
+            event.preventDefault();
+            try {
+                await dispatch(getProductTitle(current))
+                  .then(() => {
+                    navigate('/search_list')
+                  })
+              } catch (error) {
+                console.log({ error });
+              }
+        }
+    }
     return (
     <>
             <Flex ml='10' w='35%'>
@@ -39,6 +56,7 @@ const Search = () => {
                         placeholder="Search a product"
                         autoFocus
                         onChange={(e) => setCurrent(e.target.value)}
+                        onKeyDown={handlePress}
                     />
                     <AutoCompleteList>
                         {prod ? prod.map((element, oid) => (
@@ -47,6 +65,7 @@ const Search = () => {
                                 value={element.title}
                                 align="center"
                                 onClick={(e)=> navigate(`/articles/${element._id}`)}
+                                
                             >
                                 <Avatar size="sm" name={element.img[0]} src={element.img[0]} />
                                 <Text ml="4">{element.title}</Text>
