@@ -4,7 +4,7 @@ const OrderController = require('../controllers/orderController');
 const { checkAuth, checkAuthAndAuthorization } = require('../middlewares/auth');
 const { checkStatusOrder } = require('../middlewares/order');
 
-router.get('/:id', checkAuthAndAuthorization, OrderController.returnOrders);
+router.get('/history', OrderController.returnOrders);
 
 router.get('/confirm/:id/:token', OrderController.confirmCart);
 
