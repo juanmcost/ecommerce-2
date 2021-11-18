@@ -1,4 +1,4 @@
-import { Box, Drawer, DrawerContent, DrawerOverlay, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Drawer, DrawerContent, DrawerOverlay, useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import NewProduct from '../../common/Admin/NewProduct';
 

@@ -8,13 +8,10 @@ import {
   Stack,
   Table,
   Text,
-  Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   useColorModeValue,
 } from "@chakra-ui/react";
 

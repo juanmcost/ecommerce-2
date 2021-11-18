@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Button, useToast, Image, Heading, Divider, useColorModeValue, Skeleton } from "@chakra-ui/react";
+import { Button, useToast, Image, Heading, Divider, useColorModeValue} from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";

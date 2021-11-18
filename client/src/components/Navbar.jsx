@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+
 import Logo from "../assets/logo.svg";
 import { Link as ReactLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -17,28 +17,27 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
+
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
   Divider,
-  Collapse,
+
   Popover,
   PopoverContent,
   PopoverTrigger,
   Icon,
   Image,
-  InputGroup,
-  Input,
-  InputLeftElement,
+
+
+
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { FaShoppingCart, FaSearch } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();

@@ -11,10 +11,10 @@ import {
     useToast,
     AspectRatio
   } from '@chakra-ui/react';
-  import { useDispatch, useSelector } from 'react-redux';
+  import { useSelector } from 'react-redux';
   import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
   import { FiShoppingCart } from 'react-icons/fi';
-  import { successToast, errorToast } from "../utils/toastMessages";
+  import { successToast } from "../utils/toastMessages";
   import axios from "axios";
   import { Link } from 'react-router-dom';
   //import { sumTotal } from "../store/total";
