@@ -11,7 +11,8 @@ import {
     Image,
     FormControl,
     FormLabel,
-    Input
+    Input,
+    FormHelperText
   } from "@chakra-ui/react"; // import chackra
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,18 +20,56 @@ import {useNavigate} from "react-router-dom"
 import { setPayMethod } from "../store/order";
 import cardIcons from "../assets/cardIcons.png";
 import paypalIcon from "../assets/logo-Paypal.png"
+import mercadoPago from "../assets/mercadoPago.png"
+import axios from "axios";
+import { validateCard } from "../utils/cardsValidation";
+import { useToast } from "@chakra-ui/react";
+import { setProducts } from "../store/order";
+import { setStatus } from "../store/order";
 
 const OrderPayMethod = function () {
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const order = useSelector((state) => state.order)
-    const user = useSelector((state) => state.user)
     const [method, setMethod] = useState("card");
+    const [cardForm, setCardForm] = useState({});
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const toast = useToast();
+    const total = useSelector(({ total }) => total);
+    const user = useSelector(({ user }) => user);
+    const order = useSelector(({ order }) => order);
     
-
+    const handleCardInput = (event) => {
+        setCardForm({
+            ...cardForm,
+            [event.target.name]: event.target.value,
+        });
+    };
+    
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(setPayMethod(method));
+        if (true/* validateCard(e.target.cardNumber.value, toast )*/) {
+            axios.post(`/api/order/confirm`)
+            .then(() => navigate(`/emailsent`))
+            .catch(() => alert("sorry ther was an error"));
+            /* axios.get(`/api/cart/${user._id}`)
+            .then(res => {
+                dispatch(setPayMethod(method));
+                dispatch(setProducts({list: res.data.products, total}));
+                dispatch(setStatus("confirmed"));
+            })
+            .then(() => {
+                axios.post("/api/order/add", {...order})
+                .then(() => axios.post(`/api/order/confirm`))
+                .then(() => navigate(`/emailsent`))
+                .catch(() => alert("sorry ther was an error"));
+            }); */
+        }
+    }
+        
     return (
-        <form >
+        <form onSubmit={(e) => handleSubmit(e)}>
             <Flex
                 minH={"100vh"}
                 align={"center"}
@@ -58,53 +97,67 @@ const OrderPayMethod = function () {
                                 >
                                     <Flex>
                                         <Radio value="card">Card</Radio>
-                                        <Image w="15%" src={cardIcons} objectFit="contain" />
+                                        <Image w="15%" ml="2" src={cardIcons} objectFit="contain" />
                                     </Flex>
                                     <Flex>
                                         <Radio value="paypal">PayPal</Radio>
-                                        <Image w="10%" ml="2"src={paypalIcon} objectFit="contain" />
+                                        <Image w="10%" ml="2"src={paypalIcon} objectFit="contain" bg="white" rounded/>
+                                    </Flex>
+                                    <Flex>
+                                        <Radio value="mercadoPago">Mercado Pago</Radio>
+                                        <Image w="10%" ml="2"src={mercadoPago} objectFit="contain" />
                                     </Flex>
                                 </Stack>
                             </RadioGroup>
 
                             {
                                 method === "card" ? (
-                                    <Stack>
-                                        <FormControl>
-                                            <FormLabel>Card number</FormLabel>
-                                            <Input
-                                                name="cardNumber"
-                                                placeholder="1234 4567 7891 1234"
-                                            />
-                                        </FormControl>
-                                        <FormControl>
-                                            <FormLabel>Name on card</FormLabel>
-                                            <Input
-                                                name="cardNumber"
-                                                placeholder="John Snow"
-                                            />
-                                        </FormControl>
-                                        <Stack
-                                        direction={{ base: "column", sm: "row" }}
-                                        align={"start"}
-                                        justify={"space-between"}
-                                        >
-                                            <FormControl id="expiryDate" isRequired>
-                                                <FormLabel>Expiry Date</FormLabel>
+                                    
+                                        <Stack>
+                                            <FormControl id="cardNumber" isRequired >
+                                                <FormLabel>Card number</FormLabel>
                                                 <Input
-                                                    name="expiryDate"
-                                                    placeholder="07/10"
+                                                    name="cardNumber"
+                                                    placeholder="1234 4567 7891 1234"
+                                                    onChange={handleCardInput}
+                                                    type="number"
+                                                />
+                                                <FormHelperText mb="1">We accept VISA, Mastercard and American Express</FormHelperText>
+                                            </FormControl>
+                                            <FormControl id="cardName" isRequired>
+                                                <FormLabel>Name on card</FormLabel>
+                                                <Input
+                                                    name="cardName"
+                                                    placeholder="John Snow"
+                                                    onChange={handleCardInput}
+                                                    type="text"
                                                 />
                                             </FormControl>
-                                            <FormControl id="securityCode" isRequired>
-                                                <FormLabel>Security code</FormLabel>
-                                                <Input
-                                                    name="securityCode"
-                                                    placeholder="***"
-                                                />
-                                            </FormControl>
+                                            <Stack
+                                            direction={{ base: "column", sm: "row" }}
+                                            align={"start"}
+                                            justify={"space-between"}
+                                            >
+                                                <FormControl id="expiryDate" isRequired>
+                                                    <FormLabel>Expiry Date</FormLabel>
+                                                    <Input
+                                                        name="expiryDate"
+                                                        placeholder="07/10"
+                                                        onChange={handleCardInput}
+                                                        type="date"
+                                                    />
+                                                </FormControl>
+                                                <FormControl id="securityCode" isRequired>
+                                                    <FormLabel>Security code</FormLabel>
+                                                    <Input
+                                                        name="securityCode"
+                                                        placeholder="***"
+                                                        onChange={handleCardInput}
+                                                        type="password"
+                                                    />
+                                                </FormControl>
+                                            </Stack>
                                         </Stack>
-                                    </Stack>
                                 )
                                 :
                                 <></>

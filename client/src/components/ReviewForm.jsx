@@ -8,20 +8,20 @@ import {
   VStack,
   FormControl,
   FormLabel,
-  Select,
   Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../store/review";
+import Rating from '@material-ui/lab/Rating';
 
 export default function ReviewForm() {
-  const username = useSelector((s) => s.user?.username || "Anonymous");
-  const { product } = useSelector(state => state);
+  const username = useSelector((s) => s.user.username);
+  const { product } = useSelector(s => s);
   const dispatch = useDispatch();
-  const options = [5, 4, 3, 2, 1];
   const { form, handleForm } = useForm();
   const handleSubmit = () => {
+    if (!username) return alert("You must be logged in to leave a review.");
     if (form.review && form.appreciation) {
       const info = {
         id: product._id,
@@ -49,29 +49,22 @@ export default function ReviewForm() {
               <Box py={{ base: 5, sm: 5, md: 8, lg: 5 }}>
                 <Heading>Review this article</Heading>
                 <Text mt={{ sm: 3, md: 3, lg: 5 }} color="blue.300">
-                  Leave your product opinion down here to help others!
+                  Leave your thoughts on this product down here to help others!
                 </Text>
               </Box>
               <Box bg="#F5F5F5" borderRadius="lg" w="95%">
                 <VStack m={8} color="#0B0E3F" spacing={5} align="left">
-                  <FormControl id="appreciation" maxW="20rem">
-                    <FormLabel>Personal rating</FormLabel>
-                    <Select
-                      name="appreciation"
-                      w="7rem"
-                      borderColor="gray.300"
-                      _hover={{ borderRadius: "gray.300" }}
-                      placeholder="Appreciation"
-                      onChange={handleForm}
-                      isRequired
-                    >
-                      {options.map((e) => (
-                        <option key={e}>{e}</option>
-                      ))}
-                    </Select>
-                  </FormControl>
+                  <Box align="center">
+                  </Box>
                   <FormControl id="review">
                     <FormLabel>Review</FormLabel>
+                    <Rating
+                    precision={0.1}
+                    name="appreciation" 
+                    defaultValue={2.5}
+                    size="large" 
+                    onChange={handleForm}
+                    />
                     <Textarea
                       name="review"
                       borderColor="gray.300"

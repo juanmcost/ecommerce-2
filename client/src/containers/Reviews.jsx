@@ -5,22 +5,17 @@ import {
   Flex,
   Icon,
   SimpleGrid,
-	Text,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import ReviewCard from "../components/ReviewCard";
 import ReviewForm from "../components/ReviewForm";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllReviews } from "../store/review";
+import { useSelector } from "react-redux";
 
 export default function Reviews() {
-  const dispatch = useDispatch();
-  const reviews = useSelector((state) => state.reviews?.data || null);
-  const id = window.location.pathname.split("/").slice(-1)[0];
-  useEffect(() => {
-    dispatch(getAllReviews(id));
-  }, []);
+  const reviews = useSelector((s) => {
+    return s.review.data?.reviews?.length > 0 ? s.review.data.reviews : null;                //Esto dentifica si tiene o no tiene reviews.
+  });
 
   return (
     <Container maxW="100%">
@@ -73,9 +68,7 @@ export default function Reviews() {
             ))}
           </SimpleGrid>
         ) : (
-          <Text p='5vw'>
-						Oops! There are no reviews for this product yet.
-					</Text>
+          <Text p="5vw">Oops! There are no reviews for this product yet.</Text>
         )}
         <Box>
           <Icon viewBox="0 0 40 35" mt={14} boxSize="15" color={"purple.400"}>

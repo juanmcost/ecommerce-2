@@ -22,7 +22,7 @@ axios({
 //--add Review
 
 export const getAllReviews = createAsyncThunk("GET_REVIEWS", (id) => {
-  return axios.get( `http://localhost:8080/api/product/reviews/${id}` );
+	return  axios.get( `http://localhost:8080/api/product/reviews/${id}` );
 });
 
 //--Config Reducer

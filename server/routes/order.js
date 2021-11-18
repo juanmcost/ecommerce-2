@@ -6,10 +6,10 @@ const { checkStatusOrder } = require('../middlewares/order');
 
 router.get('/history', OrderController.returnOrders);
 
-router.get('/confirm/:id/:token', checkAuth, OrderController.confirmCart);
+router.get('/confirm/:id/:token', OrderController.confirmCart);
 
 router.post('/confirm', checkAuth, OrderController.confirm); //para confirmar el carrito
 
-router.post('/add', checkStatusOrder, OrderController.createOrder);
+router.post('/add', OrderController.createOrder);
 
 module.exports = router;

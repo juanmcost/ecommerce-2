@@ -5,18 +5,14 @@ import { getAllProducts } from "../store/product";
 import { useEffect } from "react";
 
 const Home = () => {
+  const product = useSelector(s => s.product);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
-  
-  const { product } = useSelector((product) => product);
-  let slides = [];
-  // product.forEach(i => slides.push(i.img[0]))
-
+  }, [dispatch]);
   return (
     <>
-      <Carousel slides={slides} />
+      <Carousel slides={product.discover} />
       <ProductsGrid />
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getProductTitle } from "../store/product"
+import { getProductTitle } from "../../store/product"
 import { Avatar, Input, Text, Flex, Box  } from "@chakra-ui/react";
 import {
   AutoComplete,
@@ -22,8 +22,8 @@ const Search = () => {
     useEffect(() => {
         fetchProducts();
         async function fetchProducts() {
-            const { data } = await axios.get('/api/product');
-            if (data.length) setProd(data);
+            const { data }  = await axios.get('/api/product');
+            if (data.products.length) setProd(data.products);
         }
     }, []);
 

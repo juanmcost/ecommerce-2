@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { sendLogoutRequest } from "../store/user";
-import Search from "./Search";
+import Search from "./Search/Search";
 import {
   Box,
   Flex,
@@ -43,17 +43,15 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  console.log(location);
-
-  const handleLogout = () => {
-    axios
-      .get("/api/auth/logout")
-      .then(({ data }) => {
-        dispatch(sendLogoutRequest(data));
-        navigate("/home");
-      })
-      .catch((err) => ({ err: err.message }));
-  };
+    const handleLogout = () => {
+        axios
+            .get('/api/auth/logout')
+            .then(({ data }) => {
+                dispatch(sendLogoutRequest(data));
+                navigate('/home');
+            })
+            .catch((err) => ({ err: err.message }));
+    };
 
   const subCategories = {
     cellphones_by_brand: ["Samsung", "LG", "Motorola", "Apple"],
