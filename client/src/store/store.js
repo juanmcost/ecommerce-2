@@ -15,7 +15,6 @@ import userReducer from './user'
 import productReducer from './product'
 import reviewReducer from './review'
 import orderReducer from './order';
-import totalReducer from './total';
 
 const persistConfig = {
       key: 'root',
@@ -25,15 +24,12 @@ const persistConfig = {
 
 const persistedOrderReducer = persistReducer(persistConfig, orderReducer);
 
-/* const persistedTotalReducer = persistReducer(persistConfig, totalReducer) */
-
 const store = configureStore({
       reducer: {
             auth: authReducer,
             user: userReducer,
             product: productReducer,
             order: persistedOrderReducer,
-            /* total: persistedTotalReducer, */
             review: reviewReducer,
       },
       middleware: (getDefaultMiddleware) =>

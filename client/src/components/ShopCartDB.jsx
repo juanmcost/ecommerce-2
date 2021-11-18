@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { Button, useToast, Image, Heading, Divider, useColorModeValue, Skeleton } from "@chakra-ui/react";
+import { Button, useToast, Image, Heading, Divider, useColorModeValue, Spinner, Text } from "@chakra-ui/react";
 import { Flex, Stack, Center, Box, Grid } from "@chakra-ui/layout";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -10,6 +10,7 @@ import { setAmount } from "../store/order";
 const ShopCartDB = () => {
     const [cart, setCart] = useState({list: [], total: 0});
     const [aux, setAux] = useState(true);
+    const [showSpinner, setShowSpinner] = useState(true);
     const user = useSelector(state => state.user);
     const order = useSelector(state => state.order);
     const toast = useToast();
@@ -29,6 +30,7 @@ const ShopCartDB = () => {
                     axios.get(`/api/product/${res.data.products[i].productId}`)
                     .then(res => res.data)
                     .then(item => {
+                        setShowSpinner(false);
                         carrito.list.push({product: item, quantity: cartItem.quantity});
                         carrito.total += item.price * cartItem.quantity;
                         return carrito
@@ -39,6 +41,7 @@ const ShopCartDB = () => {
                     })
                 });
             }
+            else setShowSpinner(false);
         })
         .catch(err => console.log(err))
 
@@ -63,6 +66,8 @@ const ShopCartDB = () => {
             <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {order.amount}</Heading>
         </Flex>
             <Divider orientation="horizontal" mb="5" />
+                {showSpinner?<Center><Spinner size="xl"/></Center>: <></>}
+                {cart.list.length===0 && !showSpinner? <Center><Text fontSize={"lg"} color={"gray.600"}>no products added</Text></Center>:<></> }
         <Flex>
             <Box>
                 {cart.list.map((prod, i) => (
