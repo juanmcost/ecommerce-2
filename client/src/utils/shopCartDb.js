@@ -34,6 +34,7 @@ export const deleteCart = (aux, setter, auxSetter, userId, toast) => {
     .then(() => errorToast(toast, "user cart deleted"))
     .then(()=>{
         setter({list: [], total: 0});
-        aux===true ? auxSetter(false) : auxSetter(true);
+        if (!auxSetter) return;
+        else aux===true ? auxSetter(false) : auxSetter(true);
     })
 }
