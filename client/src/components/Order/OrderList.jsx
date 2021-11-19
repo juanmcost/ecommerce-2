@@ -1,61 +1,36 @@
-import React from "react";
-import {
-  Box,
-  Divider,
-  Flex,
-  Heading,
-  Stack,
-  Table,
-  Text,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import OrderProduct from "./OrderProduct";
+import { Button, Table, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { IoIosArrowDown } from "react-icons/io";
 
 const OrderList = (prop) => {
-  console.log(`prop`, prop);
-  const { address, products, payMethod, amount } = prop.item;
-  console.log(address);
-  console.log(products);
-  console.log(payMethod);
-  console.log(amount);
+  const { products, amount } = prop.item;
+  const [toggle, setToggle] = useState(false);
+
+  const handleClick = () => {
+    setToggle(!toggle);
+  };
 
   return (
-    <Box
-      rounded={"lg"}
-      w={600}
-      m={20}
-      bg={useColorModeValue("white", "gray.600")}
-      boxShadow={"lg"}
-      p={8}
-    >
-      <Text align={"left"}>Datos de cuenta</Text>
-      <Divider orientation="horizontal" />
-      <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Th>Username</Th>
-            <Td isNumeric>1</Td>
-          </Tr>
-          <Tr>
-            <Th>Email</Th>
-            <Td isNumeric>1</Td>
-          </Tr>
-        </Tbody>
-      </Table>
-    </Box>
+    <>
+      <Tr>
+        <Th>
+          <Button onClick={handleClick}>
+            <IoIosArrowDown />
+          </Button>
+        </Th>
+        <Td isNumeric>${amount}</Td>
+      </Tr>
+      {toggle ? (
+        <Tr>
+          <Table variant="simple">
+            {products.map((elem, i) => (
+              <OrderProduct key={i} item={elem} />
+            ))}
+          </Table>
+        </Tr>
+      ) : null}
+    </>
   );
 };
 

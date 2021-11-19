@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Avatar, Text, Flex } from '@chakra-ui/react';
+import { Avatar, Text, Flex, Box } from '@chakra-ui/react';
 import {
     AutoComplete,
     AutoCompleteInput,
@@ -8,69 +8,55 @@ import {
     AutoCompleteList,
 } from '@choc-ui/chakra-autocomplete';
 
-import NewProduct from './NewProduct';
-import Spinner from './Spinner';
-
 const EditProduct = () => {
+    // 1- search a product
+    // 2- on success => show view
+    // 3- on edit success => clear form
+    // 4- redirect?
+
     const [prod, setProd] = useState([]);
-    const [input, setInput] = useState('');
-    const [toggle, setToggle] = useState(false);
     const [current, setCurrent] = useState({});
 
     useEffect(() => {
         fetchProducts();
         async function fetchProducts() {
-            try {
-                const {
-                    data: { products },
-                } = await axios.get('/api/product');
-                products.length && setProd(products);
-            } catch (error) {
-                console.error({ error });
-            }
+            const { data } = await axios.get('/api/product');
+            if (data.length) setProd(data);
         }
     }, []);
 
     useEffect(() => {
-        input.length >= 3 && fetchProduct();
+        fetchProduct();
         async function fetchProduct() {
-            setCurrent({});
-            setToggle(true);
-            try {
-                const { data } = await axios.get(`/api/product/admin/${input}`);
-                data.length && setCurrent(data[0]);
-            } catch (error) {
-                console.error({ error });
-            }
+            const { data } = await axios.get(`/api/product/admin/${current}`);
+            console.log(data);
         }
-    }, [input]);
+    }, [current]);
 
     return (
         <>
-            <Flex direction="column" flex="2" margin="0 auto" h="100%">
+            <Flex direction="column" flex="2" margin="0 auto">
                 <AutoComplete rollNavigation>
                     <AutoCompleteInput
                         variant="filled"
                         placeholder="Search a product"
                         autoFocus
-                        onChange={(e) => setInput(e.target.value)}
+                        onChange={(e) => setCurrent(e.target.value)}
                     />
                     <AutoCompleteList>
-                        {prod.map(({ title, img }, i) => (
+                        {prod.map((element, oid) => (
                             <AutoCompleteItem
-                                key={`option-${i}`}
-                                value={title}
+                                key={`option-${oid}`}
+                                value={element.title}
                                 align="center"
-                                onClick={(e) => setInput(e.target.innerText)}
+                                onClick={(e) => setCurrent(e.target.innerText)}
                             >
-                                <Avatar size="sm" name={img[0]} src={img[0]} />
-                                <Text ml="4">{title}</Text>
+                                <Avatar size="sm" name={element.img[0]} src={element.img[0]} />
+                                <Text ml="4">{element.title}</Text>
                             </AutoCompleteItem>
                         ))}
                     </AutoCompleteList>
                 </AutoComplete>
-                {!current._id && toggle ? <Spinner /> : null}
-                {current._id ? <NewProduct article={current} type="edit" art_id={current._id} /> : null}
             </Flex>
         </>
     );

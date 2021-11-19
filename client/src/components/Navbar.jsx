@@ -1,11 +1,9 @@
-import { ReactNode } from "react";
 import Logo from "../assets/logo.svg";
-import { Link as ReactLink, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link as ReactLink, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { sendLogoutRequest } from "../store/user";
 import Search from "./Search/Search";
+import { sendLogoutRequest } from "../store/user";
 import {
   Box,
   Flex,
@@ -17,49 +15,43 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
   Divider,
-  Collapse,
   Popover,
   PopoverContent,
   PopoverTrigger,
   Icon,
   Image,
-  InputGroup,
-  Input,
-  InputLeftElement,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { FaShoppingCart, FaSearch } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
-    const handleLogout = () => {
-        axios
-            .get('/api/auth/logout')
-            .then(({ data }) => {
-                dispatch(sendLogoutRequest(data));
-                navigate('/home');
-            })
-            .catch((err) => ({ err: err.message }));
-    };
+  const handleLogout = () => {
+    axios
+      .get("/api/auth/logout")
+      .then(({ data }) => {
+        dispatch(sendLogoutRequest(data));
+        navigate("/home");
+      })
+      .catch((err) => ({ err: err.message }));
+  };
 
   const subCategories = {
-    cellphones_by_brand: ["Samsung", "LG", "Motorola", "Apple"],
+    cellphones_by_brand: ["Xiaomi", "LG", "Motorola", "Apple"],
     consoles_and_videogames: [
-      "consoles",
+      "consola",
       "games",
       "accesories",
-      "Xbox Series X",
+      "Xbox",
     ],
     gaming_PC: ["mouses", "keyboards", "pads"],
     informatics: [
@@ -115,7 +107,7 @@ export default function Navbar() {
                   >
                     <Avatar
                       size={"sm"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
+                      src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.blow-ent.com%2Fwp-content%2Fuploads%2F2020%2F07%2Fjeff-bezos-1140x570.jpeg&f=1&nofb=1"}
                     />
                   </MenuButton>
                 ) : (
@@ -128,7 +120,7 @@ export default function Navbar() {
                   <Center>
                     <Avatar
                       size={"2xl"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
+                      src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.blow-ent.com%2Fwp-content%2Fuploads%2F2020%2F07%2Fjeff-bezos-1140x570.jpeg&f=1&nofb=1"}
                     />
                   </Center>
                   <br />
@@ -139,17 +131,16 @@ export default function Navbar() {
                   ) : null}
                   <br />
                   <MenuDivider />
-                  {user.isAdmin ? (
-                    <Link as={ReactLink} to="/admin">
-                      <MenuItem>Admin</MenuItem>
-                    </Link>
-                  ) : null}
                   <MenuItem>
                     <Link as={ReactLink} to="/profile">
                       Your Profile
                     </Link>
                   </MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
+                  <MenuItem>
+                    <Link as={ReactLink} to="/profile/order_history">
+                      Your Orders
+                    </Link>
+                  </MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </MenuList>
               </Menu>
@@ -168,10 +159,9 @@ export default function Navbar() {
                   <Stack align={"center"}>
                     {subCategories[category].map((sub, i) => (
                       <Link
-                        as={ReactLink}
-                        to={`/categories/${category}/${sub
+                        href={`/category/${sub
                           .split(" ")
-                          .join("_")}`}
+                          .join("_").toLowerCase()}`}
                         style={{ textDecoration: "none" }}
                         key={i}
                       >

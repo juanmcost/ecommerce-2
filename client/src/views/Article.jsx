@@ -1,4 +1,4 @@
-import Reviews from "../containers/Reviews";
+import Reviews from "../components/Reviews";
 import Carousel from "../components/Carousel";
 import Feature from "../components/Feature";
 import { FaDollarSign } from "react-icons/fa";
