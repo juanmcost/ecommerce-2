@@ -1,17 +1,16 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const findOrCreate = require('mongoose-findorcreate');
+
 const User = new Schema(
     {
         email: {
             type: String,
-            required: true,
             unique: true,
+            required: true,
         },
         username: {
             type: String,
             required: true,
-            unique: true,
         },
         password: {
             type: String,
@@ -26,6 +25,12 @@ const User = new Schema(
         phone: {
             type: Number,
         },
+        image: {
+            type: String,
+        },
+        adress: {
+            type: String,
+        },
         isAdmin: {
             type: Boolean,
             default: false,
@@ -33,6 +38,15 @@ const User = new Schema(
         status: {
             type: Boolean,
             default: true,
+        },
+        facebookId: {
+            type: String,
+            default: null,
+        },
+        googleId: { type: String, default: null },
+
+        fullname: {
+            type: String,
         },
     },
     { timestamps: true }
@@ -51,7 +65,5 @@ User.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, 12);
     return next();
 });
-
-User.plugin(findOrCreate);
 
 module.exports = model('User', User);

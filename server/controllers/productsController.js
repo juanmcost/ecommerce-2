@@ -1,13 +1,12 @@
 const Product = require('../models/Products');
 const { joiProduct } = require('../utils/joi');
-const defaultProfilePicture = 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg'
 
 class ProductController {
     static async getAllProduct(req, res) {
         try {
             const products = await Product.find();
-            const discover = products.map(i => i?.img[0])
-            res.json({products, discover});
+            const discover = products.map((i) => i?.img[0]);
+            res.json({ products, discover });
         } catch (error) {
             res.status(500).json({ error });
         }
@@ -22,7 +21,7 @@ class ProductController {
         }
     }
 
-    static async getProductByTitle(req, res) {
+    static async getProductTitle(req, res) {
         try {
             const product = await Product.find({ title: req.params.title });
             res.json(product);
@@ -30,8 +29,7 @@ class ProductController {
             res.status(500).json({ error });
         }
     }
-
-    static async getProductLike(req, res) {
+    static async getProductByLike(req, res) {
         try {
             const product = await Product.find({ title: { $regex: '.*' + req.params.title + '.*' } });
             res.json(product);
@@ -44,29 +42,6 @@ class ProductController {
         try {
             const products = await Product.find({ category: { $in: [req.params.tag] } });
             res.json(products);
-        } catch (error) {
-            res.status(500).json({ error });
-        }
-    }
-
-    static async getAllReviews(req, res) {
-        // const reviews = [];
-        try {
-            const product = await Product.findById( req.params.id );
-            const appreciation = (() => {
-                const arr = product.appreciation;
-                if (!arr.length) return 0;
-                let [len, i, sum] = [arr?.length, 0, 0];               //Calcular promedio de apprecations
-                while (i < len) { sum += arr[i]; i++;}
-                return (sum / len).toFixed(1);
-            })();
-            const reviews = product.reviews.map(e => { return {   
-                    username: e.username,
-                    review: e.review,
-                    img: 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg',
-                };
-            });
-            res.status(200).send( {appreciation, reviews} );
         } catch (error) {
             res.status(500).json({ error });
         }
@@ -92,7 +67,55 @@ class ProductController {
             res.status(500).json({ error });
         }
     }
-    
+
+    static async getAllReviews(req, res) {
+        // const reviews = [];
+        try {
+            const product = await Product.findById(req.params.id);
+            const appreciation = (() => {
+                const arr = product.appreciation;
+                if (!arr.length) return 0;
+                let [len, i, sum] = [arr?.length, 0, 0]; //Calcular promedio de apprecations
+                while (i < len) {
+                    sum += arr[i];
+                    i++;
+                }
+                return (sum / len).toFixed(1);
+            })();
+            const reviews = product.reviews.map((e) => {
+                return {
+                    username: e.username,
+                    review: e.review,
+                    img: 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg',
+                };
+            });
+            res.status(200).send({ appreciation, reviews });
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+    }
+
+    // user logueado
+    static async addReview(req, res) {
+        try {
+            const { username, review } = req.body;
+            const newReview = await Product.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $push: {
+                        reviews: {
+                            $each: [{ username, review }],
+                        },
+                    },
+                },
+                { new: true }
+            );
+            res.status(200).send(newReview);
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+    }
+
     //invalid request
     static async addAppreciation(req, res) {
         const appreciation = parseFloat(req.body.appreciation);
@@ -154,5 +177,4 @@ class ProductController {
         }
     }
 }
-
 module.exports = ProductController;

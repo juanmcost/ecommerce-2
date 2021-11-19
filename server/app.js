@@ -10,8 +10,9 @@ const router = require('./routes/');
 const client = require('./config/db');
 const setupController = require('./controllers/seedController');
 
-require('./config/passport-local');
+require('./config/passport-fb');
 require('./config/passport-google');
+require('./config/passport-local');
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.use(
         },
     })
 );
+
+app.use(express.static(__dirname + './public'));
 
 app.use(passport.initialize());
 app.use(passport.session());

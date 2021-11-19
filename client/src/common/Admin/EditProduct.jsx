@@ -21,9 +21,10 @@ const EditProduct = () => {
         fetchProducts();
         async function fetchProducts() {
             try {
-                const { data } = await axios.get('/api/product');
-                if (data.length) return setProd(data);
-                return;
+                const {
+                    data: { products },
+                } = await axios.get('/api/product');
+                products.length && setProd(products);
             } catch (error) {
                 console.error({ error });
             }
@@ -37,8 +38,7 @@ const EditProduct = () => {
             setToggle(true);
             try {
                 const { data } = await axios.get(`/api/product/admin/${input}`);
-                if (data.length) return setCurrent(data[0]);
-                return;
+                data.length && setCurrent(data[0]);
             } catch (error) {
                 console.error({ error });
             }

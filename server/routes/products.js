@@ -8,17 +8,17 @@ router.get('/category/:tag', productsController.getTags);
 
 router.get('/:id', productsController.getProduct);
 
-router.get('/admin/:title', productsController.getProductByTitle);
+router.get('/admin/:title', productsController.getProductTitle);
 
-router.get('/search/:title', productsController.getProductLike);
+router.get('/search/:title', productsController.getProductByLike);
 
 router.get('/reviews/:id', productsController.getAllReviews);
 
 // user logueado
 
-router.put('/review/:id',  productsController.addReview);
+router.put('/review/:id', auth.checkAuth, productsController.addReview);
 
-router.put('/appreciation/:id',  productsController.addAppreciation);
+router.put('/appreciation/:id', auth.checkAuth, productsController.addAppreciation);
 
 //router.put("/")
 

@@ -37,9 +37,9 @@ const AdminPanel = () => {
                             <EditProduct />
                         ) : view === 'remove' ? (
                             <RemoveProduct />
-                        ) : (
+                        ) : view === 'users' ? (
                             <UserManager />
-                        )}
+                        ) : null}
                     </Container>
                 </Box>
             </Box>

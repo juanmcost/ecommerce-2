@@ -1,5 +1,6 @@
 const User = require("../models/Users");
 const { joiSchema } = require("../utils/joi");
+const sendEmail = require("../utils/email");
 
 class AuthController {
   // Register
