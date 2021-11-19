@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProductTitle } from '../../store/product';
-import { Avatar, Input, Text, Flex, Box } from '@chakra-ui/react';
+import { Avatar, Text, Flex } from '@chakra-ui/react';
+import { FaSearch } from "react-icons/fa";
+
 import {
     AutoComplete,
     AutoCompleteInput,
@@ -16,7 +18,18 @@ const Search = () => {
     const dispatch = useDispatch();
     const [prod, setProd] = useState([]);
     const [current, setCurrent] = useState({});
-    const [press, setPress] = useState('');
+    const [width, setWidth] = useState(window.innerWidth);
+    const isMobile = width <= 768;
+    useEffect(() => {
+        window.addEventListener("resize", handleWindowSizeChange);
+        return () => {
+          window.removeEventListener("resize", handleWindowSizeChange);
+        };
+      }, []);
+  
+    function handleWindowSizeChange() {
+      setWidth(window.innerWidth);
+    }
 
     useEffect(() => {
         fetchProducts();
@@ -47,7 +60,7 @@ const Search = () => {
     };
     return (
         <>
-            <Flex ml="10" w="35%">
+            <Flex ml="10" w={!isMobile && "10em"}>
                 <AutoComplete rollNavigation>
                     <AutoCompleteInput
                         variant="filled"
@@ -56,7 +69,7 @@ const Search = () => {
                         onChange={(e) => setCurrent(e.target.value)}
                         onKeyDown={handlePress}
                     />
-                    <AutoCompleteList>
+                    <AutoCompleteList w={!isMobile && "30em"}>
                         {prod
                             ? prod.map((element, oid) => (
                                   <AutoCompleteItem

@@ -39,6 +39,7 @@ const Carousel = ({ slides }) => {
 
   return (
     <Flex
+      minW="382px"
       w="full"
       bg={useColorModeValue("gray.200", "gray.600")}
       p={10}
