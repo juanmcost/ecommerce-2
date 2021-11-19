@@ -13,9 +13,7 @@ import ReviewForm from "../components/ReviewForm";
 import { useSelector } from "react-redux";
 
 export default function Reviews() {
-  const reviews = useSelector((s) => {
-    return s.review.data?.reviews?.length > 0 ? s.review.data.reviews : null;                //Esto dentifica si tiene o no tiene reviews.
-  });
+  const reviews = useSelector(({product}) => product.reviews);
 
   return (
     <Container maxW="100%">
