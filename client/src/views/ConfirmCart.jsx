@@ -14,7 +14,7 @@ const ConfirmCart = function () {
     const navigate = useNavigate();
     const order = useSelector(({ order }) => order);
     const dispatch = useDispatch();
-    const [state, setState] = useState(false);
+    const [state, setState] = useState("empty");
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/order/confirm/${id}/${token}`)
@@ -29,14 +29,24 @@ const ConfirmCart = function () {
             .then(() => {
                 dispatch(resetOrder());
                 axios.delete(`http://localhost:8080/api/cart/${id}`)
-                setState(true);
+                setState("confirmed");
             })
+            .catch(err => {
+                console.log(err)
+                dispatch(resetOrder());
+                setState("error")
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(resetOrder());
+            setState("error")
         });
     }, [])
 
     return (
         <>
-        {state? 
+        {state === "confirmed"? 
             <Stack align={"center"} mt="50">
                 <Heading fontSize={"4xl"}>Thank you for your purchase!</Heading>
                 <Text fontSize={"lg"} color={"gray.600"}>we have registered your order succesfully</Text>
@@ -48,10 +58,11 @@ const ConfirmCart = function () {
                     back to home
                 </Button>
             </Stack>
-            :
+            :<></>}
+        {state === "error"?
             <Stack align={"center"} mt="50">
                 <Heading fontSize={"4xl"}>Oops! Something went wrong :(</Heading>
-                <Text fontSize={"lg"} color={"gray.600"}>if you are trying to confirm an order try to refresh the page</Text>
+                <Text fontSize={"lg"} color={"gray.600"}>Your order has not been processed</Text>
                 <Button
                     variant="outline"
                     colorScheme="teal"
@@ -59,7 +70,8 @@ const ConfirmCart = function () {
                 >
                     back to home
                 </Button>
-            </Stack>}
+            </Stack>
+            :<></>}
         </>
     )
 }
