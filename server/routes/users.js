@@ -5,13 +5,15 @@ const { checkAuthAndAdmin, checkAuthAndAuthorization, checkAuth } = require("../
 
 router.get("/", checkAuth, UserController.getAllUsers);
 
-router.get("/:id", checkAuthAndAdmin, UserController.getUser);
+router.get("/:id", checkAuth, UserController.getUser);
 
 router.put("/:id", checkAuthAndAuthorization, UserController.editUser);
 
 router.put("/admin/:id", checkAuthAndAdmin, UserController.setAdmin);
 
-//router.delete("/:id", checkAuth, UserController.deleteUser);
-router.delete("/:id", checkAuth, UserController.deleteUser1);
+router.put("/profile/edit", UserController.editMyAccount);
+
+router.delete("/:id", checkAuthAndAdmin, UserController.deleteUser);
+router.delete("/profile/:id", UserController.deleteUser);
 
 module.exports = router;

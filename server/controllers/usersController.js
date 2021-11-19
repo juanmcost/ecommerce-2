@@ -58,6 +58,23 @@ class UserController {
     }
   }
 
+  static async editMyAccount(req, res) {
+    try {
+      req.body.password ? (req.body.password = bcrypt.hashSync(req.body.password, 12)) : null;
+      const user = await User.findByIdAndUpdate(
+        req.body._id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+
+      return user ? res.status(201).json(user) : res.status(400).json("Bad update");
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  }
+
   static async deleteUser(req, res) {
     try {
       const deleted = await User.findByIdAndUpdate(

@@ -37,6 +37,10 @@ const User = new Schema(
     facebookId: String,
     googleId: String,
     image: String,
+    adress: String,
+    fullname: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

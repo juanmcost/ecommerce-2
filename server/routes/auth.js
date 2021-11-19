@@ -12,42 +12,18 @@ router.post("/signin", passport.authenticate("local"), AuthController.login);
 
 router.get("/logout", checkAuth, AuthController.logOut);
 
-<<<<<<< HEAD
-router.get('/me', checkAuth, AuthController.login);
-
-//router.post("/facebook", passport.authenticate("facebook"), AuthController.login);
-
-router.get('/logout', checkAuth, AuthController.logOut);
-=======
 router.get(
   "/google",
   passport.authenticate("google", {
     scope: ["profile", "email", "openid"],
   })
 );
->>>>>>> main
 
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/signin" }),
   AuthController.login
 );
-
-router.post("/send-email", async (req, res) => {
-  const { name, email, phone, message } = req.body;
-  contentHTML = `
-      <h1>User Information</h1>
-      <ul>
-      <li> Username: ${name}</li>
-      <li> user Email: ${email}</li>
-      <li> Phone: ${phone} </li>
-      </ul>
-      <p>${message}</p>
-      `;
-
-  console.log(contentHTML);
-  res.send("received");
-});
 
 router.get("/facebook", passport.authenticate("facebook"));
 
