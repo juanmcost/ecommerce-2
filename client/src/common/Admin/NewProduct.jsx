@@ -22,10 +22,9 @@ import { useNavigate } from 'react-router-dom';
 import Feature from '../../components/Feature';
 import { toastDelete, toastAdd } from '../../utils/toastMessages.js';
 
-const NewProduct = ({ article }) => {
+const NewProduct = ({ article, art_id, type }) => {
     const user = useSelector(({ user }) => user);
     const toast = useToast();
-    const navigate = useNavigate();
 
     const [img, setImg] = useState('');
     const [title, setTitle] = useState('');
@@ -49,17 +48,38 @@ const NewProduct = ({ article }) => {
             const { data } = await axios.get(`/api/product/admin/${title}`);
             if (data.length) return toastDelete(toast, 'Error at create!');
 
-            //if not
+            //if not exist
             const res = await axios.post('/api/product/add', newProduct);
-            if (res.data.length) toastAdd(toast, 'Success at create!');
-            return navigate('/');
-        } catch (error) {
-            console.error({ error: error.message });
+            return res.status === 201
+                ? toastAdd(toast, 'Success at create!')
+                : toastDelete(toast, 'Error at create!');
+        } catch (err) {
+            toastDelete(toast, 'Error at create!');
         }
     };
 
+    const _handleEdit = async (product) => {
+        try {
+            const res = await axios.put(`/api/product/${art_id}`, product);
+            return res.status === 200
+                ? toastAdd(toast, 'Success at edit!')
+                : toastDelete(toast, 'Error at edit!');
+        } catch (err) {
+            toastDelete(toast, 'Error at edit!');
+        }
+    };
+
+    useEffect(() => {
+        setImg((type && article.img[0]) || '');
+        setTitle((type && article.title) || '');
+        setDescription((type && article.description) || '');
+        setCategory((type && article.category.join(' ')) || '');
+        setPrice((type && article.price) || 0);
+        setColor((type && article.color) || '');
+    }, [article]);
+
     return (
-        <Container maxW="70vw" h="83vh" py={12} position="relative">
+        <>
             <Flex
                 justifyContent={'space-between'}
                 direction="row"
@@ -108,7 +128,7 @@ const NewProduct = ({ article }) => {
                     </Box>
                 </Flex>
 
-                <Stack spacing={10}>
+                <Stack spacing={9}>
                     <InputGroup>
                         <InputLeftAddon
                             children="* Title "
@@ -207,27 +227,26 @@ const NewProduct = ({ article }) => {
                     </InputGroup>
                 </Stack>
             </Flex>
-            <Flex direction="row" justifyContent={'space-around'}>
+            <Flex direction="row" justifyContent={'space-between'} mt="2rem">
                 <Button
                     w="30%"
                     p="6"
                     variant="outline"
                     colorScheme="teal"
                     mr="10rem"
-                    onClick={() => _handleSubmit(newProduct)}
+                    onClick={() => (type && _handleEdit(newProduct)) || _handleSubmit(newProduct)}
                 >
-                    Create Product
+                    {`${(type && 'Edit') || 'Create'} Product`}
                 </Button>
-                <Stack spacing={4} divider={<StackDivider borderColor="gray.700" mt="5rem" />}>
+                <Stack spacing={4} divider={<StackDivider borderColor="gray.700" />}>
                     <Feature
-                        mt="5rem"
                         icon={<Icon as={MdAdminPanelSettings} color={'teal.200'} w={'3rem'} h={'3rem'} />}
                         iconBg="teal.900"
-                        text={`Product created by ${user.username} `}
+                        text={`Product ${(type && 'edited') || 'created'} by ${user.username} `}
                     />
                 </Stack>
             </Flex>
-        </Container>
+        </>
     );
 };
 

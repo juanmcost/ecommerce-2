@@ -1,7 +1,8 @@
 import { Box, Flex, Link } from '@chakra-ui/react';
 import { FaUsers } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
-import { BsGearFill, BsCartPlusFill, BsCartXFill } from 'react-icons/bs';
+import { IoStatsChartSharp } from 'react-icons/io5';
+import { BsCartPlusFill, BsCartXFill } from 'react-icons/bs';
 import { MdHome } from 'react-icons/md';
 import { Link as ReachLink } from 'react-router-dom';
 import React from 'react';
@@ -44,6 +45,8 @@ const AdminSidebar = (props) => (
                 icon={BsCartPlusFill}
                 w="full"
                 justify="center"
+                bg={props.view === 'new' && 'gray.900'}
+                color={(props.view === 'new' && 'white') || 'gray.400'}
                 onClick={(e) => props.setview(e.target.id)}
             >
                 New Product
@@ -53,6 +56,8 @@ const AdminSidebar = (props) => (
                 icon={AiFillEdit}
                 w="full"
                 justify="center"
+                bg={props.view === 'edit' && 'gray.900'}
+                color={(props.view === 'edit' && 'white') || 'gray.400'}
                 onClick={(e) => props.setview(e.target.id)}
             >
                 Edit a Product
@@ -62,6 +67,8 @@ const AdminSidebar = (props) => (
                 icon={BsCartXFill}
                 w="full"
                 justify="center"
+                bg={props.view === 'remove' && 'gray.900'}
+                color={(props.view === 'remove' && 'white') || 'gray.400'}
                 onClick={(e) => props.setview(e.target.id)}
             >
                 Remove Product
@@ -72,18 +79,11 @@ const AdminSidebar = (props) => (
                 icon={FaUsers}
                 w="full"
                 justify="center"
+                bg={props.view === 'users' && 'gray.900'}
+                color={(props.view === 'users' && 'white') || 'gray.400'}
                 onClick={(e) => props.setview(e.target.id)}
             >
                 Users Manager
-            </AdminNavItem>
-            <AdminNavItem
-                id="config"
-                icon={BsGearFill}
-                w="full"
-                justify="center"
-                onClick={(e) => props.setview(e.target.id)}
-            >
-                Settings
             </AdminNavItem>
         </Flex>
     </Box>

@@ -10,6 +10,8 @@ router.get("/:id", productsController.getProduct);
 
 router.get("/search/:title", productsController.getProductTitle);
 
+router.get("/reviews/:id", productsController.getAllReviews);
+
 // user logueado
 
 router.put("/review/:id", auth.checkAuth, productsController.addReview);

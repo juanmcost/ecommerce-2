@@ -8,17 +8,36 @@ import {
   VStack,
   FormControl,
   FormLabel,
-  Select,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "../hooks/useForm";
+import { addReview } from "../store/review";
+import Rating from "@material-ui/lab/Rating";
+import { errorToast } from "../utils/toastMessages";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ReviewForm() {
-  const options = [5, 4, 3, 2, 1];
-  const { form, handleForm } = useForm();
-  // const handleSubmit = () => {
-  //console.log(form);																//toDo handleSubmit (incluir user)
-  // }
+  const { form, handleForm, clearForm } = useForm();
+  const username = useSelector((s) => s.user.username);
+  const { product } = useSelector((s) => s);
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    if (!username) return errorToast(toast, "You must be logged in to leave a review.");
+    if (form.review && form.appreciation) {
+      dispatch(
+        addReview({
+          id: product._id,
+          appreciation: form.appreciation,
+          review: { review: form.review, username: username },
+        })
+      );
+      clearForm();
+    } else {
+      errorToast(toast, "Make sure to fill all fields.");
+    }
+  };
 
   return (
     <Container w="100%" mt={20} centerContent p="0px">
@@ -35,30 +54,24 @@ export default function ReviewForm() {
               <Box py={{ base: 5, sm: 5, md: 8, lg: 5 }}>
                 <Heading>Review this article</Heading>
                 <Text mt={{ sm: 3, md: 3, lg: 5 }} color="blue.300">
-                  Leave your product opinion down here to help others!
+                  Leave your thoughts on this product down here to help others!
                 </Text>
               </Box>
               <Box bg="#F5F5F5" borderRadius="lg" w="95%">
                 <VStack m={8} color="#0B0E3F" spacing={5} align="left">
-                  <FormControl id="rating" maxW="20rem">
-                    <FormLabel>Personal rating</FormLabel>
-                    <Select
-                      name="rating"
-                      w="7rem"
-                      borderColor="gray.300"
-                      _hover={{ borderRadius: "gray.300" }}
-                      placeholder="Rating"
-                      onChange={handleForm}
-                      isRequired
-                    >
-                      {options.map((e) => (
-                        <option key={e}>{e}</option>
-                      ))}
-                    </Select>
-                  </FormControl>
+                  <Box align="center"></Box>
                   <FormControl id="review">
                     <FormLabel>Review</FormLabel>
+                    <Rating
+                      id="rating"
+                      precision={0.1}
+                      name="appreciation"
+                      defaultValue={0}
+                      size="large"
+                      onChange={handleForm}
+                    />
                     <Textarea
+                      id="review"
                       name="review"
                       borderColor="gray.300"
                       _hover={{ borderRadius: "gray.300" }}
@@ -70,6 +83,7 @@ export default function ReviewForm() {
                   </FormControl>
                   <FormControl id="submit" float="right">
                     <Button
+                      onClick={handleSubmit}
                       variant="solid"
                       bg="#1A202C"
                       color="white"

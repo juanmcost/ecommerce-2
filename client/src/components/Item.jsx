@@ -1,193 +1,117 @@
 import {
-    Flex,
-    Circle,
-    Box,
-    Image,
-    Badge,
-    useColorModeValue,
-    Icon,
-    Tooltip,
-    Button,
-    useToast,
-    AspectRatio
-  } from '@chakra-ui/react';
-  import { useSelector } from 'react-redux';
-  import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
-  import { FiShoppingCart } from 'react-icons/fi';
-  import { successToast, errorToast } from "../utils/toastMessages";
-  import axios from "axios";
-  import { Link } from 'react-router-dom';
+  Flex,
+  Circle,
+  Box,
+  Image,
+  Badge,
+  useColorModeValue,
+  Icon,
+  Tooltip,
+  Button,
+  useToast,
+  AspectRatio,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { FiShoppingCart } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import Rating from "../components/Rating";
+import addToCart from "../utils/addToCart";
+const data = {
+  isNew: true,
+  imageURL:
+    "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80",
+  name: "Wayfarer Classic",
+  price: 4.5,
+  rating: 4.2,
+  numReviews: 34,
+};
 
+function Item({ item }) {
+  const user = useSelector(({ user }) => user);
+  const toast = useToast();
   
-  const data = {
-    isNew: true,
-    imageURL:
-      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
-    name: 'Wayfarer Classic',
-    price: 4.5,
-    rating: 4.2,
-    numReviews: 34,
-  };
-  
-  function Rating({ rating, numReviews }) {
-    return (
-      <Box d="flex" alignItems="center">
-        {Array(5)
-          .fill('')
-          .map((_, i) => {
-            const roundedRating = Math.round(rating * 2) / 2;
-            if (roundedRating - i >= 1) {
-              return (
-                <BsStarFill
-                  key={i}
-                  style={{ marginLeft: '1' }}
-                  color={i < rating ? 'teal.500' : 'gray.300'}
-                />
-              );
-            }
-            if (roundedRating - i === 0.5) {
-              return <BsStarHalf key={i} style={{ marginLeft: '1' }} />;
-            }
-            return <BsStar key={i} style={{ marginLeft: '1' }} />;
-          })}
-        <Box as="span" ml="2" color="gray.600" fontSize="sm">
-          {numReviews} review{numReviews > 1 && 's'}
+  return (
+    <Flex alignItems="center" justifyContent="center">
+      <Box
+        bg={useColorModeValue("white", "gray.800")}
+        maxW="sm"
+        borderWidth="1px"
+        rounded="lg"
+        shadow="lg"
+        position="relative"
+      >
+        {data.isNew && (
+          <Circle
+            size="10px"
+            position="absolute"
+            top={2}
+            right={2}
+            bg="red.200"
+          />
+        )}
+
+        <Link to={`/articles/${item._id}`}>
+          <AspectRatio minH="400px" ratio={1}>
+            <Image
+              src={item.img[0]}
+              alt={`Picture of ${item.title}`}
+              roundedTop="lg"
+              objectFit="contain"
+            />
+          </AspectRatio>
+        </Link>
+
+        <Box p="6">
+          <Box d="flex" alignItems="baseline">
+            {data.isNew && (
+              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+                New
+              </Badge>
+            )}
+          </Box>
+          <Flex mt="1" justifyContent="space-between" alignContent="center">
+            <Box
+              fontSize="2xl"
+              fontWeight="semibold"
+              as="h4"
+              lineHeight="tight"
+              isTruncated
+            >
+              {item.title}
+            </Box>
+            <Tooltip
+              label="Add to cart"
+              bg="white"
+              placement={"top"}
+              color={"gray.800"}
+              fontSize={"1.2em"}
+            >
+              <Button
+                onClick={() => {
+                  addToCart(user, item, toast);
+                }}
+                href={"#"}
+                display={"flex"}
+                bg="none"
+              >
+                <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
+              </Button>
+            </Tooltip>
+          </Flex>
+
+          <Flex justifyContent="space-between" alignContent="center">
+            <Rating rating={item.value} numReviews={item.reviews.length} />
+            <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
+              <Box as="span" color={"gray.600"} fontSize="lg">
+                $
+              </Box>
+              {item.price.toFixed(2)}
+            </Box>
+          </Flex>
         </Box>
       </Box>
-    );
-  }
-  
-  function Item( { item } ) {
+    </Flex>
+  );
+}
 
-    const user= useSelector((state) => state.user)
-    const toast = useToast();
-    
-    const addToCart = () => {
-      if (user.username){
-        let newList = [];
-
-        axios.get(`http://localhost:8080/api/cart/${user._id}`)
-        .then(response => response.data)
-        .then(dbCart => {
-          if (dbCart === null) {
-            newList.push({productId: item._id});
-            axios.post(`http://localhost:8080/api/cart/`, {products: newList, userId: user._id})
-            .then(() => successToast(toast, "product added to cart!"))
-            .catch(err => console.log(err));
-          }
-          else {
-            let aux = false
-            dbCart.products.forEach(el => {
-              if (el.productId === item._id) {
-                aux = true
-                el.quantity++;
-                return axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products]})
-                .then(() => successToast(toast, "summed to cart!"))
-              }
-            })
-            if (!aux) {  
-              axios.put(`http://localhost:8080/api/cart/${user._id}`, {products: [...dbCart.products, {productId: item._id}]})
-              .then((res) => {
-                successToast(toast, "product added to cart!");
-              })
-            }
-          }
-        })
-      }
-      else {
-        const jsonCart = localStorage.getItem('carrito');
-        let carrito = JSON.parse(jsonCart);
-        if (carrito === null) carrito = {list: [], total: 0};
-        let aux = false
-          carrito.list.forEach(el => {
-            if (el.product._id === item._id) {
-              aux = true
-              el.quantity++;
-              localStorage.setItem('carrito', JSON.stringify(carrito));
-              successToast(toast, "summed to cart!")
-              return;
-            }
-          })
-          if (!aux) {  
-            carrito.list.push({product: item, quantity: 1}); 
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            successToast(toast, "product added to cart!");
-          }
-        }
-    }
-
-    return (
-      <Flex alignItems="center" justifyContent="center">
-        <Box
-          bg={useColorModeValue('white', 'gray.800')}
-          maxW="sm"
-          borderWidth="1px"
-          rounded="lg"
-          shadow="lg"
-          position="relative">
-          {data.isNew && (
-            <Circle
-              size="10px"
-              position="absolute"
-              top={2}
-              right={2}
-              bg="red.200"
-            />
-          )}
-          
-          <Link to={`/articles/${item._id}`}>
-            <AspectRatio minH="400px" ratio={1}>
-              <Image
-                src={item.img[0]}
-                alt={`Picture of ${item.title}`}
-                roundedTop="lg"
-                objectFit="contain"
-              />
-            </AspectRatio>
-          </Link>
-  
-          <Box p="6">
-            <Box d="flex" alignItems="baseline">
-              {data.isNew && (
-                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                  New
-                </Badge>
-              )}
-            </Box>
-            <Flex mt="1" justifyContent="space-between" alignContent="center">
-              <Box
-                fontSize="2xl"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated>
-                {item.title}
-              </Box>
-              <Tooltip
-                label="Add to cart"
-                bg="white"
-                placement={'top'}
-                color={'gray.800'}
-                fontSize={'1.2em'}>
-                <Button onClick={()=>{addToCart()}} href={'#'} display={'flex'} bg="none">
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
-                </Button>
-              </Tooltip>
-            </Flex>
-  
-            <Flex justifyContent="space-between" alignContent="center">
-              <Rating rating={data.rating} numReviews={data.numReviews} />
-              <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-                <Box as="span" color={'gray.600'} fontSize="lg">
-                  $
-                </Box>
-                {item.price.toFixed(2)}
-              </Box>
-            </Flex>
-          </Box>
-        </Box>
-      </Flex>
-    );
-  }
-  
-  export default Item;
+export default Item;

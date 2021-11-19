@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from '../store/product'
+import { createProduct } from '../store/product'
 
 export const MultiUploader = () => {
 	const { product } = useSelector(product => product)
@@ -10,20 +10,6 @@ export const MultiUploader = () => {
 	const id="multi-uploader"
 	const [isUploding, setUploding] = useState(false);
 	const [uploadedImgs, setUplodedImgs] = useState([]);
-	// const handleChange = async e => {
-	// 	let { files } = e.target;
-	// 	let formData = new FormData();
-	// 	for (let i = 0; i < files.length; i++) {
-	// 		formData.append('files', files[i]);
-	// 	}
-	// 	console.log(formData.append)
-	// 	console.log('DOS', formData);
-	// 	setUploding(true);
-	// 	await dispatch(addProduct(formData));
-	// 	console.log('PRODUCT', formData.getAll('files'))
-	// 	setUplodedImgs(formData.getAll('files'));
-	// 	setUploding(false);
-	// };
 
 	const handleChange = async e => {
 		console.log(e.target)
@@ -33,7 +19,7 @@ export const MultiUploader = () => {
 			formData.append('files', file);
 		});
 		setUploding(true);
-		dispatch(addProduct(formData));
+		dispatch(createProduct(formData));
 		console.log('PRODUCT', formData.getAll('files'));
 		setUplodedImgs(formData.getAll('files'));
 		setUploding(false);

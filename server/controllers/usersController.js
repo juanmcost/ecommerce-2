@@ -58,18 +58,18 @@ class UserController {
     }
   }
 
-  static async editMyAccount(req, res) {
+  static async unsetAdmin(req, res) {
     try {
-      req.body.password ? (req.body.password = bcrypt.hashSync(req.body.password, 12)) : null;
-      const user = await User.findByIdAndUpdate(
-        req.body._id,
+      const unsetAdmin = await User.findByIdAndUpdate(
+        req.params.id,
         {
-          $set: req.body,
+          $set: {
+            isAdmin: false,
+          },
         },
         { new: true }
       );
-
-      return user ? res.status(201).json(user) : res.status(400).json("Bad update");
+      return unsetAdmin ? res.status(201).json(unsetAdmin) : res.status(400).json("Bad update");
     } catch (error) {
       res.status(500).json({ error });
     }
@@ -86,15 +86,6 @@ class UserController {
         },
         { new: true }
       );
-      return deleted ? res.status(204).json(deleted) : null;
-    } catch (error) {
-      res.status(500).json({ error });
-    }
-  }
-
-  static async deleteUser1(req, res) {
-    try {
-      const deleted = await User.findByIdAndDelete(req.params.id);
       return deleted ? res.status(204).json(deleted) : null;
     } catch (error) {
       res.status(500).json({ error });

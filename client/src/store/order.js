@@ -4,16 +4,20 @@ import {
   const SET_ADDRESS = "SET_ADDRESS"
   const SET_PRODUCTS = "SET_PRODUCTS"
   const SET_PAYMETHOD = "SET_PAYMETHOD"
+  const SET_STATUS = "SET_STATUS"
+  const SET_AMOUNT = "SET_AMOUNT"
+  const RESET = "RESET"
   
 //---------------CONFIG ORDER -------------- \\
-
-//--Config Logout
 
 export const setAddress = createAction(SET_ADDRESS);
 export const setProducts = createAction(SET_PRODUCTS);
 export const setPayMethod = createAction(SET_PAYMETHOD);
+export const setStatus = createAction(SET_STATUS);
+export const setAmount = createAction(SET_AMOUNT);
+export const resetOrder = createAction(RESET);
   
-const orderReducer = function(state = {}, action){
+const orderReducer = function(state = {status: "", amount: 0}, action){
   switch(action.type){
       case SET_ADDRESS:
         {
@@ -28,8 +32,7 @@ const orderReducer = function(state = {}, action){
           const {payload} = action
           return {
             ...state,
-            products: payload.list,
-            amount: payload.total
+            products: payload
           };
         }
       case SET_PAYMETHOD:
@@ -39,6 +42,26 @@ const orderReducer = function(state = {}, action){
             ...state,
             payMethod: payload
           };
+        }
+      case SET_STATUS:
+        {
+          const {payload} = action
+          return {
+            ...state,
+            status: payload
+          };
+        }
+      case SET_AMOUNT:
+        {
+          const {payload} = action
+          return {
+            ...state,
+            amount: payload
+          }
+        }
+      case RESET:
+        {
+          return {status: "", amount: 0};
         }
       default:
           return state;
