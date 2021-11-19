@@ -19,18 +19,18 @@ import ShopCart from "./components/ShopCart";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./store/user";
-import AdminPanel from './components/Admin/AdminPanel';
-
+import AdminPanel from "./components/Admin/AdminPanel";
+import { MyPurchases } from "./views/MyPurchases";
 const App = () => {
-    const dispatch = useDispatch();
-    const user = useSelector(({ user }) => user);
-    console.log('useSelector', user);
-    useEffect(() => {
-        axios.get('/api/auth/me').then((user) => {
-            console.log('user app', user);
-            if (user.data) dispatch(getUser(user.data[0]));
-        });
-    }, []);
+  const dispatch = useDispatch();
+  const user = useSelector(({ user }) => user);
+  console.log("useSelector", user);
+  useEffect(() => {
+    axios.get("/api/auth/me").then((user) => {
+      console.log("user app", user);
+      if (user.data) dispatch(getUser(user.data[0]));
+    });
+  }, []);
 
   return (
     <div>
@@ -43,13 +43,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/mypurchases" element={<MyPurchases />} />
         <Route path="/myProducts" element={<MyProducts />} />
         <Route path="/myCart" element={<ShopCart />} />
         <Route path="/myProducts/newProduct" element={<NewProduct />} />
-        <Route
-          path="/myProducts/ModifyProduct/:id"
-          element={<ModifyProduct />}
-        />
+        <Route path="/myProducts/ModifyProduct/:id" element={<ModifyProduct />} />
         <Route path={`/${user.username}/myCart`} element={<ShopCartDB />} />
         <Route path={`/cart`} element={<ShopCart />} />
         <Route
@@ -57,12 +55,8 @@ const App = () => {
           element={<>{/* <productsByCategory id={categoryId} /> */}</>}
         />{" "}
         <Route exact path="/articles/:id" element={<Article />} />
-        <Route path="/new_order/address" element={
-          user.username? <OrderAddress /> : <Login />
-        } />
-        <Route path="/new_order/paymethod" element={
-          user.username? <OrderPayMethod /> : <Login />
-        } />
+        <Route path="/new_order/address" element={user.username ? <OrderAddress /> : <Login />} />
+        <Route path="/new_order/paymethod" element={user.username ? <OrderPayMethod /> : <Login />} />
       </Routes>
     </div>
   );
