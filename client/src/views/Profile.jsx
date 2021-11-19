@@ -5,17 +5,21 @@ import {
   Flex,
   Stack,
   Table,
-<<<<<<< HEAD
   Text,
-=======
->>>>>>> d57b80e4f146635931aec20733656c95d46cb9b0
   Tbody,
   Tr,
   Th,
   Td,
   useColorModeValue,
+  Image,
+  VStack,
+  Heading,
+  Grid,
+  GridItem,
+  Button,
+  Input,
+  FormControl,
 } from "@chakra-ui/react";
-import { Image, VStack, Heading, Text, Grid, GridItem, Button, Input, FormControl } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
@@ -56,14 +60,20 @@ export const Profile = () => {
             navigate("/home");
           })
           .catch((err) => ({ err: err.message }));
-        axios.delete(`http://localhost:8080/api/user/profile/${user._id}`).then((data) => console.log(data));
+        axios
+          .delete(`http://localhost:8080/api/user/profile/${user._id}`)
+          .then((data) => console.log(data));
       }
     });
   };
 
   const handleModify = (e) => {
     axios
-      .put("http://localhost:8080/api/user/profile/edit", { username: data, email: data1, _id: user._id })
+      .put("http://localhost:8080/api/user/profile/edit", {
+        username: data,
+        email: data1,
+        _id: user._id,
+      })
       .then((data) => {
         window.location.reload();
       });
@@ -71,7 +81,11 @@ export const Profile = () => {
 
   const handleModify2 = (e) => {
     axios
-      .put("http://localhost:8080/api/user/profile/edit", { phone: data, fullname: data1, _id: user._id })
+      .put("http://localhost:8080/api/user/profile/edit", {
+        phone: data,
+        fullname: data1,
+        _id: user._id,
+      })
       .then((data) => {
         window.location.reload();
       });
@@ -95,9 +109,9 @@ export const Profile = () => {
 
   return (
     <Grid placeItems="left">
-      <Link to="/profile/mypurchases">
+      <Link to="/profile/order_history">
         <Button w="200px" colorScheme="teal" variant="outline" margin="8px">
-          my purchases
+          My orders
         </Button>
       </Link>
       <VStack>
@@ -153,20 +167,32 @@ export const Profile = () => {
                   <Tr>
                     <Th>Username</Th>
                     <FormControl onChange={(e) => setData(e.target.value)}>
-                      <Input defaultValue={user.username} placeholder="Username" size="sm" />
+                      <Input
+                        defaultValue={user.username}
+                        placeholder="Username"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
                   <Tr>
                     <Th>Email</Th>
 
                     <FormControl onChange={(e) => setData1(e.target.value)}>
-                      <Input defaultValue={user.email} placeholder="email" size="sm" />
+                      <Input
+                        defaultValue={user.email}
+                        placeholder="email"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
                   <Button marginTop="5px" onClick={handleModify}>
                     Save
                   </Button>
-                  <Button marginTop="5px" marginLeft="5px" onClick={() => setClick(false)}>
+                  <Button
+                    marginTop="5px"
+                    marginLeft="5px"
+                    onClick={() => setClick(false)}
+                  >
                     Cancel
                   </Button>
                 </Tbody>
@@ -198,7 +224,9 @@ export const Profile = () => {
                 <Tbody>
                   <Tr>
                     <Th>Fullname</Th>
-                    <Td isNumeric>{user.fullname ? user.fullname : user.username}</Td>
+                    <Td isNumeric>
+                      {user.fullname ? user.fullname : user.username}
+                    </Td>
                   </Tr>
 
                   <Tr>
@@ -211,19 +239,31 @@ export const Profile = () => {
                   <Tr>
                     <Th>Fullname</Th>
                     <FormControl onChange={(e) => setData1(e.target.value)}>
-                      <Input defaultValue={user.fullname} placeholder="Fullname" size="sm" />
+                      <Input
+                        defaultValue={user.fullname}
+                        placeholder="Fullname"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
                   <Tr>
                     <Th>Phone</Th>
                     <FormControl onChange={(e) => setData(e.target.value)}>
-                      <Input defaultValue={user.phone} placeholder="Phone" size="sm" />
+                      <Input
+                        defaultValue={user.phone}
+                        placeholder="Phone"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
                   <Button marginTop="5px" onClick={handleModify2}>
                     Save
                   </Button>
-                  <Button marginTop="5px" marginLeft="5px" onClick={() => setCLick2(false)}>
+                  <Button
+                    marginTop="5px"
+                    marginLeft="5px"
+                    onClick={() => setCLick2(false)}
+                  >
                     Cancel
                   </Button>
                 </Tbody>
@@ -271,26 +311,42 @@ export const Profile = () => {
                   <Tr>
                     <Th>Country</Th>
                     <FormControl onChange={(e) => setData(e.target.value)}>
-                      <Input defaultValue={user.country} placeholder="country" size="sm" />
+                      <Input
+                        defaultValue={user.country}
+                        placeholder="country"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
                   <Tr>
                     <Th>City</Th>
                     <FormControl onChange={(e) => setData1(e.target.value)}>
-                      <Input defaultValue={user.city} placeholder="City" size="sm" />
+                      <Input
+                        defaultValue={user.city}
+                        placeholder="City"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
                   <Tr>
                     <Th>Adress</Th>
                     <FormControl onChange={(e) => setData2(e.target.value)}>
-                      <Input defaultValue={user.adress} placeholder="Adress" size="sm" />
+                      <Input
+                        defaultValue={user.adress}
+                        placeholder="Adress"
+                        size="sm"
+                      />
                     </FormControl>
                   </Tr>
 
                   <Button marginTop="5px" onClick={handleModify3}>
                     Save
                   </Button>
-                  <Button marginTop="5px" marginLeft="5px" onClick={() => setClick3(false)}>
+                  <Button
+                    marginTop="5px"
+                    marginLeft="5px"
+                    onClick={() => setClick3(false)}
+                  >
                     Cancel
                   </Button>
                 </Tbody>
@@ -301,7 +357,13 @@ export const Profile = () => {
       </Flex>
 
       <Stack align="center" direction="row" spacing={4}>
-        <Button onClick={alertDelete} left="600" colorScheme="red" margin="12px" variant="solid">
+        <Button
+          onClick={alertDelete}
+          left="600"
+          colorScheme="red"
+          margin="12px"
+          variant="solid"
+        >
           delete account
         </Button>
       </Stack>
