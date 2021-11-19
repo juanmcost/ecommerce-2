@@ -38,7 +38,7 @@ const RemoveProduct = () => {
         }
     };
 
-    useEffect(() => axios.get('/api/product').then(({ data }) => setProducts(data)), []);
+    useEffect(() => axios.get('/api/product').then(({ data }) => setProducts(data.products)), []);
 
     if (!products.length) return <Spinner />;
     return (
