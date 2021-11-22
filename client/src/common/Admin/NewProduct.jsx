@@ -15,9 +15,10 @@ import {
 import axios from 'axios';
 import { BsPlusCircle } from 'react-icons/bs';
 import { MdAdminPanelSettings } from 'react-icons/md';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {useEffect} from 'react'
 
 import Feature from '../../components/Feature';
 import { toastDelete, toastAdd } from '../../utils/toastMessages.js';

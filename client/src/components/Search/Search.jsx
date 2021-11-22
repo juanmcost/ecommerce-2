@@ -6,12 +6,12 @@ import { Avatar, Text, Flex } from '@chakra-ui/react';
 import { FaSearch } from "react-icons/fa";
 
 import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
-import axios from 'axios';
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+import axios from "axios";
 
 const Search = () => {
     const navigate = useNavigate();
@@ -31,20 +31,20 @@ const Search = () => {
       setWidth(window.innerWidth);
     }
 
-    useEffect(() => {
-        fetchProducts();
-        async function fetchProducts() {
-            const { data } = await axios.get('/api/product');
-            if (data.products.length) setProd(data.products);
-        }
-    }, []);
+  useEffect(() => {
+    fetchProducts();
+    async function fetchProducts() {
+      const { data } = await axios.get("/api/product");
+      if (data.products.length) setProd(data.products);
+    }
+  }, []);
 
-    useEffect(() => {
-        fetchProduct();
-        async function fetchProduct() {
-            const { data } = await axios.get(`/api/product/search/${current}`);
-        }
-    }, [current]);
+  useEffect(() => {
+    fetchProduct();
+    async function fetchProduct() {
+      const { data } = await axios.get(`/api/product/search/${current}`);
+    }
+  }, [current]);
 
     const handlePress = async (event) => {
         if (event.key == 'Enter') {

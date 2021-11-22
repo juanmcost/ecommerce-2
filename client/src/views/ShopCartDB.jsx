@@ -37,8 +37,8 @@ const ShopCartDB = () => {
                     .then(res => res.data)
                     .then(item => {
                         setShowSpinner(false);
-                        carrito.list.push({product: item, quantity: cartItem.quantity});
-                        carrito.total += item.price * cartItem.quantity;
+                        carrito?.list.push({product: item, quantity: cartItem.quantity});
+                        carrito.total += item?.price * cartItem.quantity;
                         return carrito
                     })
                     .then(carrito => {
@@ -84,19 +84,19 @@ const ShopCartDB = () => {
                         <AspectRatio maxW={["200px"]} ratio={1} m="5">
                             <Image
                             rounded={"lg"}
-                            src={prod.product.img[0]}
-                            alt={prod.product.title}
+                            src={prod.product?.img[0]}
+                            alt={prod.product?.title}
                             objectFit="contain"
                             />
                         </AspectRatio>
-                        <Center mr="auto">{prod.product.title}</Center>
+                        <Center mr="auto">{prod.product?.title}</Center>
                         <Stack direction={"row"} align="center" spacing={3}>
                             <Button onClick={()=>lessQuantity(i, cart, aux, setCart, setAux, toast)}>-</Button>
                             <p>Quantity: {prod.quantity} </p>
                             <Button onClick={()=>moreQuantity(i, cart, aux, setCart, setAux)}>+</Button>
                         </Stack>
                         <Stack align="center" justify="center">
-                            <Box>$ {prod.product.price}</Box>
+                            <Box>$ {prod.product?.price}</Box>
                             <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>Delete product</Button>
                         </Stack>
                     </Grid>

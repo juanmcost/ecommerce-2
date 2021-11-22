@@ -1,9 +1,7 @@
 import Logo from "../assets/logo.svg";
-import { Link as ReactLink, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link as ReactLink, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { sendLogoutRequest } from "../store/user";
 import Search from "./Search/Search";
 import { useState, useEffect } from "react";
 import {
@@ -61,12 +59,12 @@ export default function Navbar() {
   };
 
   const subCategories = {
-    cellphones_by_brand: ["Samsung", "LG", "Motorola", "Apple"],
+    cellphones_by_brand: ["Xiaomi", "LG", "Motorola", "Apple"],
     consoles_and_videogames: [
-      "consoles",
+      "consola",
       "games",
       "accesories",
-      "Xbox Series X",
+      "Xbox",
     ],
     gaming_PC: ["mouses", "keyboards", "pads"],
     informatics: [
