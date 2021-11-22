@@ -1,11 +1,15 @@
 import react, { useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sendLoginRequest } from "../store/user";
 import { successToast, errorToast } from "../utils/toastMessages";
+import { FaFacebook, FaGoogle } from "react-icons/fa"; //import react-icons
+import axios from 'axios'
 import {
   Flex,
+  Center,
   Box,
+  Divider,
   useToast,
   FormControl,
   FormLabel,
@@ -27,7 +31,7 @@ export default function Login() {
   //-----SEND LOGIN----------------
   const toast = useToast();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const [form, setValues] = useState({
@@ -51,7 +55,7 @@ export default function Login() {
         .then((res) => {
           if (res.payload) {
             successToast(toast, `Welcome ${res.payload.username}`);
-            navigate('/home')
+            navigate("/home");
           } else {
             errorToast(toast, `Wrong email or password`);
           }
@@ -62,6 +66,14 @@ export default function Login() {
       console.log({ error });
     }
   };
+  const handleFacebook = () => {
+    const data = axios.get('/api/auth/facebook')
+    console.log(data)
+  }
+  const handleGoogle= () => {
+    const data = axios.get('/api/auth/google/callback')
+    console.log(data)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -98,7 +110,7 @@ export default function Login() {
                   <Input
                     name="password"
                     placeholder="*******"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     onChange={handleInput}
                   />
                   <InputRightElement width="4.5rem">
@@ -134,10 +146,39 @@ export default function Login() {
                     bg: "blue.500",
                   }}
                   type="button"
-                  onClick={(e)=> {e.preventDefault(); navigate('/register')} }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/register");
+                  }}
                 >
                   Sign Up
                 </Button>
+                <Divider />
+                <Button
+                  colorScheme="facebook"
+                  leftIcon={<FaFacebook />}
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                  // onClick={handleFacebook}
+                >
+                  Facebook
+                </Button>
+                <Center>
+                  <Button
+                    w={"full"}
+                    maxW={"md"}
+                    variant={"outline"}
+                    leftIcon={<FaGoogle />}
+                    onClick={handleGoogle}
+                  >
+                    <Center>
+                      <Text>Google</Text>
+                    </Center>
+                  </Button>
+                </Center>
               </Stack>
             </Stack>
           </Box>

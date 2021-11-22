@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OrderProduct from "./OrderProduct";
-import { Button, Table, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Button, Table, Tr, Th, Td } from "@chakra-ui/react";
 import { IoIosArrowDown } from "react-icons/io";
 
 const OrderList = (prop) => {

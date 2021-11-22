@@ -3,7 +3,7 @@ import ProductsGrid from "../components/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../store/product";
 import { useEffect, useState } from "react";
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowUp } from "react-icons/io";
 import {
   Button,
   Text,
@@ -60,7 +60,6 @@ const Home = () => {
       .get(`/api/cart/${user._id}`)
       .then((res) => res.data)
       .then((dbCart) => {
-        console.log("this is dBCART cart", dbCart);
         if (dbCart !== null) {
           dbCart = dbCart.products;
 
@@ -75,7 +74,6 @@ const Home = () => {
             if (!alreadyIn) dbCart.push({ ...localItem });
           });
 
-          console.log("im putting this", dbCart);
           axios.put(`/api/cart/${user._id}`, { products: dbCart });
         } else
           axios.post(`http://localhost:8080/api/cart/`, {
@@ -119,15 +117,18 @@ const Home = () => {
             bottom="20px"
             right={["16px", "20px"]}
             zIndex={1}
-            h="10%"
-            w="5%"
+            w="7em"
+            h="3em"
             bg="green.300"
             rounded="full"
-            align="center" 
+            align="center"
             justify="center"
-            fontSize="30"
+            cursor="pointer"
+            onClick={() => window.scroll(0, 0)}
           >
-              <IoIosArrowUp />
+            <Text fontSize="lg" mt="0.55em" fontWeight="bold">
+              Go Up
+            </Text>
           </Box>
         </Link>
       )}

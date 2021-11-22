@@ -1,37 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProductTitle } from '../../store/product';
-import { Avatar, Input, Text, Flex, Box } from '@chakra-ui/react';
+import { Avatar, Text, Flex } from '@chakra-ui/react';
+import { FaSearch } from "react-icons/fa";
+
 import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
-import axios from 'axios';
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "@choc-ui/chakra-autocomplete";
+import axios from "axios";
 
 const Search = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [prod, setProd] = useState([]);
     const [current, setCurrent] = useState({});
-    const [press, setPress] = useState('');
-
+    const [width, setWidth] = useState(window.innerWidth);
+    const isMobile = width <= 768;
     useEffect(() => {
-        fetchProducts();
-        async function fetchProducts() {
-            const { data } = await axios.get('/api/product');
-            if (data.products.length) setProd(data.products);
-        }
-    }, []);
+        window.addEventListener("resize", handleWindowSizeChange);
+        return () => {
+          window.removeEventListener("resize", handleWindowSizeChange);
+        };
+      }, []);
+  
+    function handleWindowSizeChange() {
+      setWidth(window.innerWidth);
+    }
 
-    useEffect(() => {
-        fetchProduct();
-        async function fetchProduct() {
-            const { data } = await axios.get(`/api/product/search/${current}`);
-        }
-    }, [current]);
+  useEffect(() => {
+    fetchProducts();
+    async function fetchProducts() {
+      const { data } = await axios.get("/api/product");
+      if (data.products.length) setProd(data.products);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProduct();
+    async function fetchProduct() {
+      const { data } = await axios.get(`/api/product/search/${current}`);
+    }
+  }, [current]);
 
     const handlePress = async (event) => {
         if (event.key == 'Enter') {
@@ -47,7 +60,7 @@ const Search = () => {
     };
     return (
         <>
-            <Flex ml="10" w="35%">
+            <Flex ml="10" w={!isMobile && "10em"}>
                 <AutoComplete rollNavigation>
                     <AutoCompleteInput
                         variant="filled"
@@ -56,7 +69,7 @@ const Search = () => {
                         onChange={(e) => setCurrent(e.target.value)}
                         onKeyDown={handlePress}
                     />
-                    <AutoCompleteList>
+                    <AutoCompleteList w={!isMobile && "30em"}>
                         {prod
                             ? prod.map((element, oid) => (
                                   <AutoCompleteItem

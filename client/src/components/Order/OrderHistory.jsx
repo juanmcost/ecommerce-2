@@ -46,6 +46,7 @@ const OrderHistory = () => {
                   <Tr>
                     <Th>Order</Th>
                     <Th >Amount</Th>
+                    <Th isNumeric>Date</Th>
                   </Tr>
                 </Thead>
                 <Tbody>

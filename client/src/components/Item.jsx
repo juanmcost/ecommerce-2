@@ -29,7 +29,7 @@ const data = {
 function Item({ item }) {
   const user = useSelector(({ user }) => user);
   const toast = useToast();
-  
+
   return (
     <Flex alignItems="center" justifyContent="center">
       <Box
@@ -51,7 +51,7 @@ function Item({ item }) {
         )}
 
         <Link to={`/articles/${item._id}`}>
-          <AspectRatio minH="400px" ratio={1}>
+          <AspectRatio minH="100px" ratio={1}>
             <Image
               src={item.img[0]}
               alt={`Picture of ${item.title}`}

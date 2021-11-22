@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"; // import history
 import { useForm } from "react-hook-form";
 import { sendLoginRequest } from "../store/user"; // import login
 import { FaFacebook, FaGoogle } from "react-icons/fa"; //import react-icons
-import { GoMarkGithub } from "react-icons/go"; // import react-icons
 import { successToast } from "../utils/toastMessages";
 import {
   Flex,
@@ -16,12 +15,10 @@ import {
   FormLabel,
   Input,
   Stack,
-
   Button,
   Heading,
   Text,
   useColorModeValue,
-
 } from "@chakra-ui/react"; // import chakra
 import axios from "axios"; // import axios
 
@@ -51,20 +48,38 @@ export default function Register() {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-} = useForm();
+  } = useForm();
 
-function onSubmit(form) {
-  const {email, username, password} = form
-    axios.post('http://localhost:8080/api/auth/signup', { email, password, username }).then((res) => {
+  function onSubmit(form) {
+    const { email, username, password } = form;
+    axios
+      .post("http://localhost:8080/api/auth/signup", {
+        email,
+        password,
+        username,
+      })
+      .then((res) => {
         console.log(res);
         if (res.status === 200) {
-            dispatch(sendLoginRequest({ email, password })).then((res) => {
-                successToast(toast, 'Account created', `Yor account has been created. Enjoy!`);
-                navigate('/home')
-            });
+          dispatch(sendLoginRequest({ email, password })).then((res) => {
+            successToast(
+              toast,
+              "Account created",
+              `Yor account has been created. Enjoy!`
+            );
+            navigate("/home");
+          });
         }
-    });
-}
+      });
+  }
+  
+  const handleFacebook = () => {
+    const data = axios.get('/api/auth/facebook')
+    console.log(data)
+  }
+  const handleGoogle= () => {
+    axios.get('http://localhost:8080/api/auth/google')
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -175,6 +190,7 @@ function onSubmit(form) {
                   _hover={{
                     bg: "blue.500",
                   }}
+                  onClick={handleFacebook}
                 >
                   Facebook
                 </Button>
@@ -184,21 +200,10 @@ function onSubmit(form) {
                     maxW={"md"}
                     variant={"outline"}
                     leftIcon={<FaGoogle />}
+                    onClick={handleGoogle}
                   >
                     <Center>
                       <Text>Sign in with Google</Text>
-                    </Center>
-                  </Button>
-                </Center>
-                <Center>
-                  <Button
-                    w={"full"}
-                    maxW={"md"}
-                    variant={"outline"}
-                    leftIcon={<GoMarkGithub />}
-                  >
-                    <Center>
-                      <Text>Sign in with Github</Text>
                     </Center>
                   </Button>
                 </Center>
