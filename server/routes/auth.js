@@ -1,43 +1,47 @@
-const router = require("express").Router();
-const { authorize } = require("passport");
-const passport = require("passport");
-const AuthController = require("../controllers/authController");
-const { checkAuth } = require("../middlewares/auth");
+const router = require('express').Router();
+const passport = require('passport');
+const axios = require('axios');
 
-router.get("/me", checkAuth, AuthController.login);
+const AuthController = require('../controllers/authController');
+const { checkAuth } = require('../middlewares/auth');
 
-router.post("/signup", AuthController.register);
+router.get('/me', checkAuth, AuthController.login);
 
-router.post("/signin", passport.authenticate("local"), AuthController.login);
+router.post('/signup', AuthController.register);
 
-router.get("/logout", checkAuth, AuthController.logOut);
+router.post('/signin', passport.authenticate('local'), AuthController.login);
+
+router.get('/logout', checkAuth, AuthController.logOut);
 
 router.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email", "openid"],
-  })
+    '/google',
+    passport.authenticate('google', {
+        scope: ['profile', 'email', 'openid'],
+    }),
+    (req, res) => {
+        console.log(req);
+    }
 );
 
 router.get(
-  "/google/callback",
-  passport.authenticate("google", { failureRedirect: "/signin" }),
-  AuthController.login
+    '/google/callback',
+    passport.authenticate('google', { failureRedirect: '/signin' }),
+    AuthController.login
 );
 
-router.get("/facebook", passport.authenticate("facebook"));
+router.get('/facebook', passport.authenticate('facebook'));
 
 router.get(
-  "/facebook/secret",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
+    '/facebook/secret',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
 
-  AuthController.login
+    AuthController.login
 );
 
-router.get("/userface", (req, res) => {
-  console.log(req.user, "esto es la respuesta");
-  if (req.user) res.send(req.user);
+router.get('/userface', (req, res) => {
+    console.log(req.user, 'esto es la respuesta');
+    if (req.user) res.send(req.user);
 
-  res.send("aca no hay nada");
+    res.send('aca no hay nada');
 });
 module.exports = router;

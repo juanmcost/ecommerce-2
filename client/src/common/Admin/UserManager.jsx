@@ -57,9 +57,13 @@ const RemoveProduct = () => {
     };
 
     useEffect(() => {
-        axios.get('/api/user').then(({ data }) => setUsers(data));
+        axios.get('/api/user').then(({ data }) => {
+            console.log(data);
+            setUsers(data);
+        });
+
         setAdmin(false);
-    }, [admin]);
+    }, []);
 
     if (!users.length) return <Spinner />;
 

@@ -5,8 +5,7 @@ class ProductController {
     static async getAllProduct(req, res) {
         try {
             const products = await Product.find();
-            const discover = products.map((i) => i?.img[0]);
-            res.json({ products, discover });
+            res.json({ products });
         } catch (error) {
             res.status(500).json({ error });
         }

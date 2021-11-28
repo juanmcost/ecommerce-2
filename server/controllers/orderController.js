@@ -41,7 +41,6 @@ class OrderController {
 
     // Create Order
     static async createOrder(req, res) {
-        console.log('heeeere');
         try {
             const { products, payMethod, amount, address } = req.body; // products must be an array
             console.log(req.body);
