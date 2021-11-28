@@ -71,7 +71,7 @@ export default function Navbar() {
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-                <Flex h={16} alignItems={'center'}>
+                <Flex h={16} w="full" alignItems={'center'}>
                     <Link as={ReactLink} to="/home">
                         <Box boxSize={10}>
                             <Image src={Logo} alt="Segun Adebayo" />
@@ -80,7 +80,7 @@ export default function Navbar() {
 
                     <Search />
 
-                    <Flex alignItems={'center'} ml="50%">
+                    <Flex alignItems={'center'} ml="69%">
                         <Stack direction={'row'} spacing={7} alignItems={'center'}>
                             <Button onClick={toggleColorMode} bg="none" rounded="full">
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}

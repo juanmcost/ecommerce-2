@@ -23,7 +23,7 @@ export default function Article() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProduct(id));
-  }, [dispatch, id]);
+  }, [dispatch]);
 
   return (
     <Container maxW={"95vw"} py={12}>

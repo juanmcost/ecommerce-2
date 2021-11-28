@@ -8,8 +8,8 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import ReviewCard from "../components/ReviewCard";
-import ReviewForm from "../components/ReviewForm";
+import ReviewCard from "./ReviewCard";
+import ReviewForm from "./ReviewForm";
 import { useSelector } from "react-redux";
 
 export default function Reviews() {

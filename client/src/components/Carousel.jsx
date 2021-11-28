@@ -72,7 +72,7 @@ const Carousel = ({ slides }) => {
                 )}
                 {currentSlide < total - 2 && (
                     <Text {...arrowStyles} right="0" onClick={nextSlide}>
-                        &#10095; {console.log(currentSlide, '', total)}
+                        &#10095;
                     </Text>
                 )}
             </Flex>
