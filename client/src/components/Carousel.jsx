@@ -47,13 +47,22 @@ const Carousel = ({ slides, type }) => {
     return (
         <Flex w="95vw" bg="white" alignItems="center" m={2} justifyContent="center" borderRadius={'10px'}>
             <Flex w="full" overflow="hidden" pos="relative">
-                <Flex w="470px" ml={currentSlide > 0 && `-${currentSlide * 50}%`} transition="all 0.5s">
+                <Flex
+                    w={(type && '350px') || '470px'}
+                    maxH="full"
+                    ml={currentSlide > 0 && `-${currentSlide * 50}%`}
+                    transition="all 0.5s"
+                >
                     {slides &&
                         slides.length &&
                         slides.map((item, sid) => {
                             if (type === 'article') {
                                 return (
-                                    <Box key={`slide-${sid}`} boxSize="60%" flex="none">
+                                    <Box
+                                        key={`slide-${sid}`}
+                                        boxSize={total === 1 ? 'full' : 'full'}
+                                        flex="none"
+                                    >
                                         <Flex justify="center" h="100%">
                                             <Image src={item} h="100%" backgroundSize="cover" />
                                         </Flex>
@@ -62,12 +71,12 @@ const Carousel = ({ slides, type }) => {
                             }
                             if (item.category && item.category.includes('samsung')) {
                                 return (
-                                    <Box key={`slide-${sid}`} boxSize="full" flex="none" h="full">
+                                    <Box key={`slide-${sid}`} boxSize="full" flex="none" h="95%" mt={2}>
                                         <Link as={ReactLink} to={`/articles/${item._id}`}>
                                             <Flex
                                                 justify="center"
-                                                h="full"
                                                 w="95%"
+                                                h="100%"
                                                 direction="column"
                                                 boxShadow="2xl"
                                                 align="center"
