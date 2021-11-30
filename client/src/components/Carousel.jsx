@@ -3,14 +3,13 @@ import { Text, Box, Flex, Image, Link } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 
 const Carousel = ({ slides, type }) => {
-    console.log(slides);
     const arrowStyles = {
         cursor: 'pointer',
         pos: 'absolute',
         top: '50%',
-        w: '50px',
+        w: '35px',
         mt: '-22px',
-        p: '16px',
+        p: '8px',
         color: 'white',
         fontWeight: 'bold',
         fontSize: '33px',
@@ -45,10 +44,18 @@ const Carousel = ({ slides, type }) => {
     };
 
     return (
-        <Flex w="95vw" bg="white" alignItems="center" m={2} justifyContent="center" borderRadius={'10px'}>
+        <Flex
+            w="95vw"
+            bg="white"
+            alignItems="center"
+            m={2}
+            justifyContent="center"
+            borderRadius={'10px'}
+            boxShadow={'lg'}
+        >
             <Flex w="full" overflow="hidden" pos="relative">
                 <Flex
-                    w={(type && '350px') || '470px'}
+                    w={(total < 2 && 'full') || (type && '350px') || '470px'}
                     maxH="full"
                     ml={currentSlide > 0 && `-${currentSlide * 50}%`}
                     transition="all 0.5s"
@@ -58,11 +65,7 @@ const Carousel = ({ slides, type }) => {
                         slides.map((item, sid) => {
                             if (type === 'article') {
                                 return (
-                                    <Box
-                                        key={`slide-${sid}`}
-                                        boxSize={total === 1 ? 'full' : 'full'}
-                                        flex="none"
-                                    >
+                                    <Box key={`slide-${sid}`} boxSize={total < 2 ? 'full' : 'full'} flex="none">
                                         <Flex justify="center" h="100%">
                                             <Image src={item} h="100%" backgroundSize="cover" />
                                         </Flex>
@@ -78,6 +81,7 @@ const Carousel = ({ slides, type }) => {
                                                 w="95%"
                                                 h="100%"
                                                 direction="column"
+                                                borderRadius="10px"
                                                 boxShadow="2xl"
                                                 align="center"
                                                 transition="all 0.4s ease"
@@ -98,13 +102,13 @@ const Carousel = ({ slides, type }) => {
                         })}
                 </Flex>
                 {currentSlide !== 0 || type ? (
-                    <Text {...arrowStyles} left="0" onClick={prevSlide}>
+                    <Text {...arrowStyles} left="0" onClick={prevSlide} display={total < 2 && 'none'}>
                         &#10094;
                     </Text>
                 ) : null}
 
                 {currentSlide < total - 4 || type ? (
-                    <Text {...arrowStyles} right="0" onClick={nextSlide}>
+                    <Text {...arrowStyles} right="0" onClick={nextSlide} display={total < 2 && 'none'}>
                         &#10095;
                     </Text>
                 ) : null}

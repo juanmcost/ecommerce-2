@@ -8,8 +8,7 @@ import {
     Button,
     Text,
     Box,
-    Link,
-    Image,
+    Icon,
     AlertDialog,
     AlertDialogOverlay,
     AlertDialogContent,
@@ -18,6 +17,7 @@ import {
     AlertDialogFooter,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import 'animate.css';
 
 const Home = () => {
     const { products } = useSelector((s) => s.product);
@@ -25,6 +25,7 @@ const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
     const user = useSelector((state) => state.user);
     const [scrollPosition, setScrollPosition] = useState(0);
+
     const handleScroll = () => {
         const position = window.pageYOffset;
         setScrollPosition(position);
@@ -96,9 +97,7 @@ const Home = () => {
                             There are products left in the local cart!
                         </AlertDialogHeader>
 
-                        <AlertDialogBody>
-                            Do you want to move the products to your personal cart?
-                        </AlertDialogBody>
+                        <AlertDialogBody>Do you want to move the products to your personal cart?</AlertDialogBody>
                         <AlertDialogFooter>
                             <Button onClick={() => setIsOpen(false)}>
                                 <Text overflow="hidden">No, leave my cart as it is</Text>
@@ -110,25 +109,32 @@ const Home = () => {
                     </AlertDialogContent>
                 </AlertDialogOverlay>
             </AlertDialog>
-            {scrollPosition > 500 && (
-                <Link href="#top">
-                    <Box
-                        position="fixed"
-                        bottom="20px"
-                        right={['16px', '20px']}
-                        zIndex={1}
-                        h="10%"
-                        w="5%"
-                        bg="green.300"
-                        rounded="full"
-                        align="center"
-                        justify="center"
-                        fontSize="30"
-                    >
-                        <IoIosArrowUp />
-                    </Box>
-                </Link>
-            )}
+
+            <Box
+                className={
+                    (scrollPosition > 80 && 'animate__animated animate__bounceInDown') ||
+                    'animate__animated animate__bounceOutUp'
+                }
+                position="fixed"
+                bottom="20px"
+                right={['16px', '20px']}
+                zIndex={1}
+                h="10%"
+                w="5%"
+                bg="teal.200"
+                rounded="full"
+                py={1}
+                display={scrollPosition < 80 && 'none'}
+                fontSize="30"
+                align="center"
+                justifyContent="center"
+                cursor="pointer"
+                transition="all 0.3s ease"
+                onClick={() => window.scrollTo(0, 0)}
+            >
+                <Icon as={IoIosArrowUp} h={'90%'} w={'90%'} color="teal.900" />
+            </Box>
+
             <Carousel slides={products} />
             <ProductsGrid />
         </>

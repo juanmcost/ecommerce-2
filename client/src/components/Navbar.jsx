@@ -29,6 +29,14 @@ import {
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { FaShoppingCart } from 'react-icons/fa';
 
+const subCategories = {
+    Cellphones: ['Xiaomi', 'LG', 'Motorola', 'Apple'],
+    Consoles: ['Consoles', 'Games', 'Accesories'],
+    Gaming: ['Mouses', 'Keyboards', 'Pads'],
+    Informatics: ['Notebooks', 'Tablets', 'Monitors', 'Printers', 'Cartridges', 'All in one and Desktop PC'],
+    Computer_Accessories: ['Connectivity', 'Webcam', 'Speakers', 'Stabilizers', 'Backpacks and Notebook Bags'],
+};
+
 export default function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
     const navigate = useNavigate();
@@ -45,27 +53,6 @@ export default function Navbar() {
             .catch((err) => ({ err: err.message }));
     };
 
-    const subCategories = {
-        cellphones_by_brand: ['Xiaomi', 'LG', 'Motorola', 'Apple'],
-        consoles_and_videogames: ['consola', 'games', 'accesories', 'Xbox'],
-        gaming_PC: ['mouses', 'keyboards', 'pads'],
-        informatics: [
-            'notebooks',
-            'tablets',
-            'monitors',
-            'printers',
-            'cartridges',
-            'all in one and desktop PC',
-        ],
-        computer_accessories: [
-            'connectivity',
-            'webcam',
-            'speakers',
-            'stabilizers',
-            'backpacks and notebook bags',
-        ],
-    };
-
     const user = useSelector((state) => state.user);
 
     return (
@@ -73,7 +60,7 @@ export default function Navbar() {
             <Flex h={16} w="full" alignItems={'center'} justifyContent={'space-between'} maxW="100vw">
                 <Link as={ReactLink} to="/home">
                     <Box boxSize={10}>
-                        <Image src={Logo} alt="Segun Adebayo" />
+                        <Image src={Logo} />
                     </Box>
                 </Link>
 
@@ -88,13 +75,7 @@ export default function Navbar() {
                     </Link>
                     <Menu>
                         {user.email ? (
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}
-                            >
+                            <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
                                 <Avatar
                                     size={'sm'}
                                     src={
