@@ -22,6 +22,7 @@ import AdminPanel from './components/Admin/AdminPanel';
 import SearchList from './components/Search/SearchList';
 import OrderHistory from './components/Order/OrderHistory';
 import Category from './components/Category/Category';
+import './app.css';
 
 const App = () => {
     const dispatch = useDispatch();

@@ -58,7 +58,7 @@ typings/
 
 # dotenv environment variables file
 .env
-env
+./env
 
 # dist bundles 
 backend/public/bundle.js
