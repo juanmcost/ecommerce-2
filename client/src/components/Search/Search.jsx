@@ -5,12 +5,7 @@ import { getProductTitle } from '../../store/product';
 import { Avatar, Text, Flex } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 
-import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
+import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from '@choc-ui/chakra-autocomplete';
 import axios from 'axios';
 
 const Search = () => {
@@ -65,6 +60,7 @@ const Search = () => {
             <Flex mr={margin} w={!isMobile && '10em'} transition="all 0.5s ease">
                 <AutoComplete rollNavigation>
                     <AutoCompleteInput
+                        borderColor={'gray.800'}
                         variant="filled"
                         placeholder="Search a product..."
                         textAlign={'center'}

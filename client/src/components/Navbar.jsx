@@ -127,7 +127,14 @@ export default function Navbar() {
                     {Object.keys(subCategories).map((category, i) => (
                         <Popover trigger={'hover'} key={i}>
                             <PopoverTrigger bg="none" on>
-                                <Button bg="none">{category.split('_').join(' ')}</Button>
+                                <Button
+                                    borderBottomWidth="0"
+                                    transition={'all .3s ease-in-out'}
+                                    _hover={{ borderBottomColor: 'gray.500', borderBottomWidth: '2px' }}
+                                    bg="none"
+                                >
+                                    {category.split('_').join(' ')}
+                                </Button>
                             </PopoverTrigger>
                             <PopoverContent>
                                 <Stack align={'center'}>

@@ -26,10 +26,8 @@ import axios from 'axios';
 export default function Article() {
     window.scroll(0, 0);
     const { id } = useParams();
-    // const article = useSelector(({ product }) => product);
     const [article, setArticle] = useState({});
     const appreciation = parseFloat(article.value);
-    const dispatch = useDispatch();
     useEffect(() => {
         axios.get(`/api/product/${id}`).then(({ data }) => setArticle(data));
     }, [id]);
@@ -70,7 +68,7 @@ export default function Article() {
                     </Stack>
                 </Stack>
             </SimpleGrid>
-            <Reviews mt={15} />
+            <Reviews mt={15} product={article} />
         </Container>
     );
 }
