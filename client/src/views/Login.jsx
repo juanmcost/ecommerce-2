@@ -129,7 +129,7 @@ export default function Login() {
                                 >
                                     Sign in
                                 </Button>
-                                {/* <Button
+                                <Button
                                     bg={'blue.400'}
                                     color={'white'}
                                     _hover={{
@@ -144,6 +144,7 @@ export default function Login() {
                                     Sign Up
                                 </Button>
                                 <Divider />
+                                {/*
                                 <Button
                                     colorScheme="facebook"
                                     leftIcon={<FaFacebook />}

@@ -64,7 +64,7 @@ const Profile2 = () => {
                         navigate('/home');
                     })
                     .catch((err) => ({ err: err.message }));
-                axios.delete(`http://localhost:8080/api/user/profile/${user._id}`).then((data) => console.log(data));
+                axios.delete(`api/user/profile/${user._id}`).then((data) => console.log(data));
             }
         });
     };
@@ -82,7 +82,7 @@ const Profile2 = () => {
                 address: address === '' ? user.address : address,
             },
         };
-        console.log(input);
+        console.log({ input });
         dispatch(editUser(input));
     };
 
@@ -95,12 +95,21 @@ const Profile2 = () => {
             </VStack>
             <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                 <GridItem colSpan={2} h="10" bg="teal" />
-                <Button boxShadow={'lg'} colorScheme="teal" variant="outline" margin="2px" px={12} letterSpacing={2}>
-                    My orders
-                </Button>
+                <Link to="/profile/order_history" align="center">
+                    <Button
+                        boxShadow={'lg'}
+                        colorScheme="teal"
+                        variant="outline"
+                        margin="2px"
+                        px={12}
+                        letterSpacing={2}
+                    >
+                        My orders
+                    </Button>
+                </Link>
                 <GridItem colStart={4} colEnd={6} h="10" bg="teal" />
             </Grid>
-            <Link to="/profile/order_history"></Link>
+
             <Flex align={'center'} justify={'center'}>
                 <Stack align="center" spacing={8} maxW={150} py={12}>
                     <Stack align={''}>
@@ -272,8 +281,8 @@ const Profile2 = () => {
                                         <Td isNumeric>{user.city ? user.city : '-'}</Td>
                                     </Tr>
                                     <Tr>
-                                        <Th>Adress</Th>
-                                        <Td isNumeric>{user.adress ? user.adress : '-'}</Td>
+                                        <Th>Address</Th>
+                                        <Td isNumeric>{user.address ? user.address : '-'}</Td>
                                     </Tr>
                                 </Tbody>
                             ) : (
@@ -291,17 +300,17 @@ const Profile2 = () => {
                                         </FormControl>
                                     </Tr>
                                     <Tr>
-                                        <Th>Adress</Th>
+                                        <Th>Address</Th>
                                         <FormControl onChange={(e) => setAddress(e.target.value)}>
-                                            <Input defaultValue={user.adress} placeholder="Address" size="sm" />
+                                            <Input defaultValue={user.address} placeholder="Address" size="sm" />
                                         </FormControl>
                                     </Tr>
 
                                     <Button
                                         marginTop="5px"
                                         onClick={() => {
-                                            setClick3(!click);
                                             handleModify();
+                                            setClick3(!click3);
                                         }}
                                     >
                                         Save
