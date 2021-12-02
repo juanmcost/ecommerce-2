@@ -19,15 +19,11 @@ router.get(
         scope: ['profile', 'email', 'openid'],
     }),
     (req, res) => {
-        console.log(req);
+        res.redirect('http://localhost:3000/home');
     }
 );
 
-router.get(
-    '/google/callback',
-    passport.authenticate('google', { failureRedirect: '/signin' }),
-    AuthController.login
-);
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/signin' }), AuthController.login);
 
 router.get('/facebook', passport.authenticate('facebook'));
 

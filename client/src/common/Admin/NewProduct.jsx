@@ -18,7 +18,7 @@ import { MdAdminPanelSettings } from 'react-icons/md';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {useEffect} from 'react'
+import { useEffect } from 'react';
 
 import Feature from '../../components/Feature';
 import { toastDelete, toastAdd } from '../../utils/toastMessages.js';
@@ -51,9 +51,7 @@ const NewProduct = ({ article, art_id, type }) => {
 
             //if not exist
             const res = await axios.post('/api/product/add', newProduct);
-            return res.status === 201
-                ? toastAdd(toast, 'Success at create!')
-                : toastDelete(toast, 'Error at create!');
+            return res.status === 201 ? toastAdd(toast, 'Success at create!') : toastDelete(toast, 'Error at create!');
         } catch (err) {
             toastDelete(toast, 'Error at create!');
         }
@@ -62,9 +60,7 @@ const NewProduct = ({ article, art_id, type }) => {
     const _handleEdit = async (product) => {
         try {
             const res = await axios.put(`/api/product/${art_id}`, product);
-            return res.status === 200
-                ? toastAdd(toast, 'Success at edit!')
-                : toastDelete(toast, 'Error at edit!');
+            return res.status === 200 ? toastAdd(toast, 'Success at edit!') : toastDelete(toast, 'Error at edit!');
         } catch (err) {
             toastDelete(toast, 'Error at edit!');
         }
@@ -81,14 +77,7 @@ const NewProduct = ({ article, art_id, type }) => {
 
     return (
         <>
-            <Flex
-                justifyContent={'space-between'}
-                direction="row"
-                w="100%"
-                h="80%"
-                align="center"
-                marginLeft={5}
-            >
+            <Flex justifyContent={'space-between'} direction="row" w="100%" h="80%" align="center" marginLeft={5}>
                 <Flex direction="column" justifyContent={'space-between'} flex={1} mr="20px">
                     {img.length < 10 ? (
                         <Icon
@@ -102,8 +91,8 @@ const NewProduct = ({ article, art_id, type }) => {
                             cursor="pointer"
                         />
                     ) : (
-                        <Box w="70%" h="80%" mb="1.8rem">
-                            <Image src={img} />
+                        <Box w="70%" h="80%" mb="1.8rem" align="center">
+                            <Image src={img} mt={12} maxH="330px" maxW="250px" />
                         </Box>
                     )}
 

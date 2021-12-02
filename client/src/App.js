@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Home from './views/Home';
 import Login from './views/Login';
-import Profile from './views/Profile';
+import Profile from './components/Profile';
 import Admin from './views/Admin.jsx';
 import Article from './views/Article';
 import ShopCart from './views/ShopCart';
@@ -43,8 +43,8 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route exact path="/profile" element={<Profile />} />
-                <Route exact path="/profile/order_history" element={<OrderHistory />} />
+                <Route exact path="/profile" element={!user._id ? <NotFound /> : <Profile />} />
+                <Route exact path="/profile/order_history" element={!user._id ? <NotFound /> : <OrderHistory />} />
                 <Route path="/search_list" element={<SearchList />} />
                 <Route path="/myProducts" element={<MyProducts />} />
                 <Route path="/myCart" element={<ShopCart />} />

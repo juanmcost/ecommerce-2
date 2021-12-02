@@ -31,8 +31,7 @@ export default function Register() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const reUser = /^[a-zA-Z0-9_.-]*$/;
-    const reSp = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~*]/;
+    const reUser = /^[a-zA-Z0-9]*$/;
 
     const [form, setValues] = useState({
         email: '',
@@ -53,6 +52,7 @@ export default function Register() {
 
     function onSubmit(form) {
         const { email, username, password } = form;
+        console.log(form);
         axios.post('http://localhost:8080/api/auth/signup', { email, password, username }).then((res) => {
             if (res.status === 200) {
                 dispatch(sendLoginRequest({ email, password })).then((res) => {
@@ -70,26 +70,15 @@ export default function Register() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Flex
-                minH={'100vh'}
-                align={'center'}
-                justify={'center'}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-            >
+            <Flex minH={'100vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
                 <Stack spacing={8} mx={'auto'} maxW={400} py={12} px={6}>
                     <Stack align={'center'}>
                         <Heading fontSize={'4xl'}>Register account</Heading>
                     </Stack>
-                    <Box
-                        rounded={'lg'}
-                        w={400}
-                        bg={useColorModeValue('white', 'gray.700')}
-                        boxShadow={'lg'}
-                        p={8}
-                    >
+                    <Box rounded={'lg'} w={400} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
                         <Stack spacing={4}>
                             <FormControl
-                                isInvalid={reSp.test(form.username) && errors.username}
+                                isInvalid={!reUser.test(form.username) && errors.username}
                                 id="username"
                                 isRequired
                             >
@@ -111,9 +100,7 @@ export default function Register() {
                                     type="text"
                                     onChange={handleInput}
                                 />
-                                <FormErrorMessage>
-                                    {errors.username && errors.username.message}
-                                </FormErrorMessage>
+                                <FormErrorMessage>{errors.username && errors.username.message}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={errors.email} id="email" isRequired>
                                 <FormLabel>Email address</FormLabel>
@@ -151,9 +138,7 @@ export default function Register() {
                                     type="password"
                                     onChange={handleInput}
                                 />
-                                <FormErrorMessage>
-                                    {errors.password && errors.password.message}
-                                </FormErrorMessage>
+                                <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                             </FormControl>
                             <Stack spacing={10}>
                                 <Button
@@ -164,8 +149,9 @@ export default function Register() {
                                     }}
                                     type="submit"
                                 >
-                                    Sign in
+                                    Sign up
                                 </Button>
+                                {/*
                                 <Button
                                     colorScheme="facebook"
                                     leftIcon={<FaFacebook />}
@@ -191,17 +177,13 @@ export default function Register() {
                                     </Button>
                                 </Center>
                                 <Center>
-                                    <Button
-                                        w={'full'}
-                                        maxW={'md'}
-                                        variant={'outline'}
-                                        leftIcon={<GoMarkGithub />}
-                                    >
+                                    <Button w={'full'} maxW={'md'} variant={'outline'} leftIcon={<GoMarkGithub />}>
                                         <Center>
                                             <Text>Sign in with Github</Text>
                                         </Center>
                                     </Button>
                                 </Center>
+                                */}
                             </Stack>
                         </Stack>
                     </Box>

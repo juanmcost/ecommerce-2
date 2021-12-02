@@ -28,7 +28,7 @@ const User = new Schema(
         image: {
             type: String,
         },
-        adress: {
+        address: {
             type: String,
         },
         isAdmin: {

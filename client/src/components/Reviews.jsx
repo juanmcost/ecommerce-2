@@ -1,13 +1,10 @@
-import { Box, chakra, Container, Flex, Icon, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, chakra, Container, Flex, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react';
 import ReviewCard from './ReviewCard';
 import ReviewForm from './ReviewForm';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 
 export default function Reviews({ product }) {
-    const [producto, setProducto] = useState({});
     const newReviews = useSelector(({ review }) => review.reviews);
-
     const reviews = product.reviews;
 
     return (
@@ -45,7 +42,7 @@ export default function Reviews({ product }) {
                 </Box>
                 {reviews ? (
                     <SimpleGrid columns={{ base: 1, xl: 2 }} spacing={'20'} mt={16} mx={'auto'}>
-                        {!newReviews.length
+                        {!newReviews
                             ? reviews.map((cardInfo, index) => <ReviewCard {...cardInfo} key={index} index={index} />)
                             : newReviews.map((cardInfo, index) => (
                                   <ReviewCard {...cardInfo} key={index} index={index} />

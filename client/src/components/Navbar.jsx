@@ -27,7 +27,7 @@ import {
     Image,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart, FaUserAlt } from 'react-icons/fa';
 
 const subCategories = {
     Cellphones: ['Xiaomi', 'LG', 'Motorola', 'Apple'],
@@ -76,12 +76,7 @@ export default function Navbar() {
                     <Menu>
                         {user.email ? (
                             <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-                                <Avatar
-                                    size={'sm'}
-                                    src={
-                                        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.blow-ent.com%2Fwp-content%2Fuploads%2F2020%2F07%2Fjeff-bezos-1140x570.jpeg&f=1&nofb=1'
-                                    }
-                                />
+                                <Avatar size={'sm'} src={''} />
                             </MenuButton>
                         ) : (
                             <Link as={ReactLink} to="/login">
@@ -91,12 +86,7 @@ export default function Navbar() {
                         <MenuList alignItems={'center'}>
                             <br />
                             <Center>
-                                <Avatar
-                                    size={'2xl'}
-                                    src={
-                                        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.blow-ent.com%2Fwp-content%2Fuploads%2F2020%2F07%2Fjeff-bezos-1140x570.jpeg&f=1&nofb=1'
-                                    }
-                                />
+                                <Avatar size={'2xl'} src={''} />
                             </Center>
                             <br />
                             {user.username ? (
