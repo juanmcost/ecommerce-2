@@ -21,6 +21,7 @@ const useHome = () => {
         if (localCart?.list?.length > 0) setIsOpen(true);
         dispatch(getAllProducts());
         window.addEventListener('scroll', handleScroll, { passive: true });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -28,7 +29,8 @@ const useHome = () => {
         let localCart = JSON.parse(jsonCart);
         if (localCart?.list?.length > 0) setIsOpen(true);
         dispatch(getAllProducts());
-    }, [dispatch]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const mergeCart = () => {
         const jsonCart = localStorage.getItem('carrito');
@@ -39,6 +41,7 @@ const useHome = () => {
                 productId: cartItem.product._id,
                 quantity: cartItem.quantity,
             });
+            return null;
         });
 
         axios
@@ -55,8 +58,10 @@ const useHome = () => {
                                 dbItem.quantity += localItem.quantity;
                                 alreadyIn = true;
                             }
+                            return null;
                         });
                         if (!alreadyIn) dbCart.push({ ...localItem });
+                        return null;
                     });
 
                     axios.put(`/api/cart/${user._id}`, { products: dbCart });

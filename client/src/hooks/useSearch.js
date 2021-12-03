@@ -33,7 +33,7 @@ const useSearch = () => {
     }, []);
 
     const handlePress = async (event) => {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             event.preventDefault();
             try {
                 await dispatch(getProductTitle(current)).then(() => {

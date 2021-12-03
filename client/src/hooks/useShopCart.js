@@ -17,6 +17,7 @@ const useShopCart = () => {
         } else {
             carrito.list.map((cartItem) => {
                 total += cartItem.product.price * cartItem.quantity;
+                return null;
             });
         }
 

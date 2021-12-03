@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {
     Flex,
-    Center,
     useToast,
     Box,
     FormControl,
@@ -14,7 +13,6 @@ import {
     Stack,
     Button,
     Heading,
-    Text,
     useColorModeValue,
 } from '@chakra-ui/react';
 import axios from 'axios';
@@ -43,7 +41,7 @@ export default function Register() {
     const {
         handleSubmit,
         register,
-        formState: { errors, isSubmitting },
+        formState: { errors },
     } = useForm();
 
     function onSubmit(form) {
@@ -59,10 +57,10 @@ export default function Register() {
         });
     }
 
-    async function goGoogle() {
-        const { data } = await axios.get('http://localhost:8080/api/auth/google');
-        console.log(data);
-    }
+    // async function goGoogle() {
+    //     const { data } = await axios.get('http://localhost:8080/api/auth/google');
+    //     console.log(data);
+    // }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

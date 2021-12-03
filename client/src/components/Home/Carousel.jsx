@@ -14,7 +14,6 @@ const Carousel = ({ slides, type }) => {
         fontWeight: 'bold',
         fontSize: '33px',
         transition: '0.6s ease',
-        borderRadius: '0 3px 3px 0',
         userSelect: 'none',
         bg: 'rgba(0, 0, 0, 0.85);',
         borderRadius: '10px',
@@ -27,14 +26,14 @@ const Carousel = ({ slides, type }) => {
 
     let total = 0;
 
-    const a =
-        slides &&
+    slides &&
         slides.length &&
         slides.map(({ category }) => {
             if ((category && category.includes('samsung')) || type === 'article') {
-                total++;
+                return total++;
             }
-        }).length;
+            return null;
+        });
 
     const prevSlide = () => {
         setCurrentSlide((s) => (s === 0 ? total - 1 : s - 1));

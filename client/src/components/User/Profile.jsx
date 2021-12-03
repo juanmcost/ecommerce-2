@@ -21,7 +21,6 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import perfil from '../../assets/perfil.png';
 import useUserEdit from '../../hooks/useUserEdit';

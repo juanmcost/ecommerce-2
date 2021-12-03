@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { deleteCart } from '../utils/shopCartDb';
 import { setAmount } from '../store/order';
 
@@ -44,10 +43,12 @@ const useShopCartDB = () => {
                                 setCart({ ...carrito });
                                 dispatch(setAmount(carrito.total || 0));
                             });
+                        return null;
                     });
                 } else setShowSpinner(false);
             })
             .catch((err) => console.log(err));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -56,13 +57,14 @@ const useShopCartDB = () => {
             dispatch(setAmount(cart.total || 0));
             if (cart.list.length > 0) {
                 cart.list.map((cartItem) => {
-                    products.push({ productId: cartItem.product._id, quantity: cartItem.quantity });
+                    return products.push({ productId: cartItem.product._id, quantity: cartItem.quantity });
                 });
                 return axios.put(`/api/cart/${user._id}`, { products });
             } else deleteCart(aux, setCart, false, user._id, toast);
         } else {
             isMounted.current = true;
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [aux]);
 
     return { cart, setCart, aux, setAux, showSpinner, order, user, isMounted };

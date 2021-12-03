@@ -18,6 +18,7 @@ const Category = () => {
             const res = await axios.get(`/api/product${tag}`);
             if (res.data.length) setProducts(res.data);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

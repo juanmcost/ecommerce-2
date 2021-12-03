@@ -30,6 +30,7 @@ const App = () => {
         axios.get('/api/auth/me').then((user) => {
             if (user.data) dispatch(getUser(user.data[0]));
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

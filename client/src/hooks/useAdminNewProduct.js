@@ -56,6 +56,8 @@ const useAdminNewProduct = (article, art_id, type) => {
         setCategory((type && article.category.join(' ')) || '');
         setPrice((type && article.price) || 0);
         setColor((type && article.color) || '');
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [article]);
 
     return {

@@ -1,13 +1,11 @@
-import react, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { sendLoginRequest } from '../../store/user';
 import { successToast, errorToast } from '../../utils/toastMessages';
-import { FaFacebook, FaGoogle } from 'react-icons/fa'; //import react-icons
-import axios from 'axios';
+
 import {
     Flex,
-    Center,
     Box,
     Divider,
     useToast,
@@ -23,12 +21,9 @@ import {
     useColorModeValue,
     InputGroup,
     InputRightElement,
-} from '@chakra-ui/react'; // import chackra
+} from '@chakra-ui/react';
 
 export default function Login() {
-    // export default
-
-    //-----SEND LOGIN----------------
     const toast = useToast();
     const dispatch = useDispatch();
     const navigate = useNavigate();
