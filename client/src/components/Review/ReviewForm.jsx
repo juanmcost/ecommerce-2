@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
 export default function ReviewForm({ product }) {
-    const [appreciation, setAppreciation] = useState('');
+    const [appreciation, setAppreciation] = useState(0);
     const [review, setReview] = useState('');
     const username = useSelector(({ user: { username } }) => username);
 
@@ -43,7 +43,7 @@ export default function ReviewForm({ product }) {
             );
 
             setReview('');
-            setAppreciation('');
+            setAppreciation(0);
         } else {
             errorToast(toast, 'Make sure to fill all fields.');
         }
@@ -73,7 +73,7 @@ export default function ReviewForm({ product }) {
                                             defaultValue={0}
                                             size="large"
                                             value={appreciation}
-                                            onChange={(e) => setAppreciation(e.target.value)}
+                                            onChange={(e) => setAppreciation(Number(e.target.value))}
                                         />
                                         <Textarea
                                             id="review"

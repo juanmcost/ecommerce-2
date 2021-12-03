@@ -24,7 +24,7 @@ import axios from 'axios';
 export default function Article() {
     const { id } = useParams();
     const [article, setArticle] = useState({});
-    const appreciation = parseFloat(article.value);
+    const appreciation = Number(article.value);
 
     useEffect(() => {
         window.scroll(0, 0);

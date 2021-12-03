@@ -66,8 +66,8 @@ const RemoveProduct = () => {
                         </Tr>
                     </Thead>
                     <Tbody w="75vw">
-                        {products.map(({ title, price, createdAt, _id }) => (
-                            <Tr>
+                        {products.map(({ title, price, createdAt, _id }, idx) => (
+                            <Tr key={idx}>
                                 <Td>{title}</Td>
                                 <Td></Td>
                                 <Td>{`$ ${price}`}</Td>
