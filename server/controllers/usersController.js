@@ -7,9 +7,9 @@ class UserController {
         try {
             const user = await User.findById(req.params.id, { status: true }).select({ password: 0 });
             const { password, ...userData } = user._doc;
-            res.status(201).json(userData);
+            return res.status(201).json(userData);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -19,7 +19,7 @@ class UserController {
             const users = await User.find({ status: true }).select({ password: 0 });
             return res.json(users);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -37,7 +37,7 @@ class UserController {
 
             return user ? res.status(201).json(user) : res.status(400).json('Bad update');
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -54,7 +54,7 @@ class UserController {
             );
             return newAdmin ? res.status(201).json(newAdmin) : res.status(400).json('Bad update');
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -71,7 +71,7 @@ class UserController {
             );
             return unsetAdmin ? res.status(201).json(unsetAdmin) : res.status(400).json('Bad update');
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -88,7 +88,7 @@ class UserController {
             );
             return deleted ? res.status(204).json(deleted) : null;
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 }

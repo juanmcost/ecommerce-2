@@ -4,39 +4,11 @@ import { Avatar, Text, Flex } from '@chakra-ui/react';
 import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from '@choc-ui/chakra-autocomplete';
 
 import NewProduct from './NewProduct';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../../common/Spinner/Spinner';
+import useAdminEditProduct from '../../hooks/useAdminEditProduct';
 
 const EditProduct = () => {
-    const [prod, setProd] = useState([]);
-    const [input, setInput] = useState('');
-    const [toggle, setToggle] = useState(false);
-    const [current, setCurrent] = useState({});
-
-    useEffect(() => {
-        fetchProducts();
-        async function fetchProducts() {
-            try {
-                const { data } = await axios.get('/api/product');
-                if (data.products.length) return setProd(data.products);
-            } catch (error) {
-                console.error({ error });
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        input.length >= 3 && fetchProduct();
-        async function fetchProduct() {
-            setCurrent({});
-            setToggle(true);
-            try {
-                const { data } = await axios.get(`/api/product/admin/${input}`);
-                if (data.length) return setCurrent(data[0]);
-            } catch (error) {
-                console.error({ error });
-            }
-        }
-    }, [input]);
+    const { prod, setInput, toggle, current } = useAdminEditProduct();
 
     return (
         <>

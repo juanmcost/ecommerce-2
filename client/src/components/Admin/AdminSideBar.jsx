@@ -7,7 +7,7 @@ import { MdHome } from 'react-icons/md';
 import { Link as ReachLink } from 'react-router-dom';
 import React from 'react';
 
-import AdminNavItem from './AdminNavItem';
+import AdminNavItem from '../../common/Admin/AdminNavItem';
 
 const AdminSidebar = (props) => (
     <Box

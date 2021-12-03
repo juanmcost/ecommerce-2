@@ -1,35 +1,19 @@
 import { Button, useToast, Image, Heading, Divider, useColorModeValue, AspectRatio, Text } from '@chakra-ui/react';
 import { Flex, Stack, Center, Box, Grid } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { moreQuantity, lessQuantity, deleteFromCart, deleteCart } from '../utils/shopCart';
+
+import { moreQuantity, lessQuantity, deleteFromCart, deleteCart } from '../../utils/shopCart';
+import useShopCart from '../../hooks/useShopCart';
 
 const ShopCart = () => {
-    const [cart, setCart] = useState({ list: [], total: 0 });
     const [aux, setAux] = useState(true);
+    const { cart, setCart } = useShopCart();
+
     const navigate = useNavigate();
     const toast = useToast();
+
     const itemsBg = useColorModeValue('gray.100', 'gray.900');
-
-    useEffect(() => {
-        const jsonCart = localStorage.getItem('carrito');
-        let carrito = JSON.parse(jsonCart);
-        let total = 0;
-
-        if (carrito === null) {
-            carrito = {
-                list: [],
-                total: 0,
-            };
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-        } else {
-            carrito.list.map((cartItem) => {
-                total += cartItem.product.price * cartItem.quantity;
-            });
-        }
-
-        setCart({ list: carrito.list, total });
-    }, []);
 
     return (
         <>

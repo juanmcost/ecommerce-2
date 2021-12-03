@@ -22,11 +22,12 @@ import {
 import axios from 'axios';
 
 export default function Article() {
-    window.scroll(0, 0);
     const { id } = useParams();
     const [article, setArticle] = useState({});
     const appreciation = parseFloat(article.value);
+
     useEffect(() => {
+        window.scroll(0, 0);
         axios.get(`/api/product/${id}`).then(({ data }) => setArticle(data));
     }, [id]);
 
@@ -48,12 +49,12 @@ export default function Article() {
                         <Feature
                             icon={<Icon as={FaDollarSign} color={'green.500'} w={5} h={5} />}
                             iconBg={useColorModeValue('green.100', 'green.900')}
-                            text={currencyConverter(article.price)}
+                            text={'Price: ' + ((article.price && currencyConverter(article.price)) || '')}
                         />
                         <Feature
                             icon={<Icon as={BiCategoryAlt} color={'blue.500'} w={5} h={5} />}
                             iconBg={useColorModeValue('blue.100', 'blue.900')}
-                            text={`Main category: ${article.category && article.category[0]}`}
+                            text={`Main category: ${(article.category && article.category[0]) || ''} `}
                         />
                         <Stack direction={['row']}>
                             <Feature

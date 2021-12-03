@@ -1,11 +1,11 @@
-import { Box, Drawer, DrawerContent, DrawerOverlay, Flex, Container, useDisclosure } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Box, Drawer, DrawerContent, DrawerOverlay, Container, useDisclosure } from '@chakra-ui/react';
+import React, { useState } from 'react';
 
-import RemoveProduct from '../../common/Admin/RemoveProduct';
-import EditProduct from '../../common/Admin/EditProduct';
-import NewProduct from '../../common/Admin/NewProduct';
-import UserManager from '../../common/Admin/UserManager';
-import AdminSidebar from './AdminSideBar';
+import RemoveProduct from '../components/Admin/RemoveProduct';
+import EditProduct from '../components/Admin/EditProduct';
+import NewProduct from '../components/Admin/NewProduct';
+import UserManager from '../components/Admin/UserManager';
+import AdminSidebar from '../components/Admin/AdminSideBar';
 
 const AdminPanel = () => {
     const [view, setView] = useState('');
@@ -23,14 +23,7 @@ const AdminPanel = () => {
                     </DrawerContent>
                 </Drawer>
                 <Box ml={{ base: 0, md: 40 }} transition=".3s ease">
-                    <Container
-                        maxW="70vw"
-                        h="83vh"
-                        maxH="83vh"
-                        py={12}
-                        position="relative"
-                        marginLeft="10rem"
-                    >
+                    <Container maxW="70vw" h="83vh" maxH="83vh" py={12} position="relative" marginLeft="10rem">
                         {view === 'new' ? (
                             <NewProduct />
                         ) : view === 'edit' ? (

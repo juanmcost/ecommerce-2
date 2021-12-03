@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import {
     Box,
-    useToast,
     ButtonGroup,
     Table,
     Link,
@@ -18,32 +16,17 @@ import {
     InputGroup,
     InputLeftElement,
 } from '@chakra-ui/react';
-import axios from 'axios';
 import { Link as ReachLink } from 'react-router-dom';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { FiEye } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-import { errorToast, successToast } from '../../utils/toastMessages.js';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../../common/Spinner/Spinner';
+import useAdminRemoveProduct from '../../hooks/useAdminRemoveProduct.js';
 
 const RemoveProduct = () => {
-    const [products, setProducts] = useState([]);
-    const [input, setInput] = useState('');
-    const toast = useToast();
+    const { products, setProducts, input, setInput, _handleDelete } = useAdminRemoveProduct();
 
-    const _handleDelete = async (id) => {
-        try {
-            const { status } = await axios.delete(`/api/product/${id}`);
-            if (status === 204) successToast(toast, 'Deleted product', 'Operation completed successfully');
-        } catch (error) {
-            errorToast(toast, 'Error at Delete');
-        }
-    };
-
-    useEffect(() => axios.get('/api/product').then(({ data }) => setProducts(data.products)), []);
-
-    useEffect(() => axios.get(`/api/product/search/${input}`).then(({ data }) => setProducts(data)), [input]);
     if (!products.length) return <Spinner />;
     return (
         <Container maxW="100vw" maxH="83vh" h="83vh">

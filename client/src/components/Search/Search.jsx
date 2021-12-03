@@ -1,60 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getProductTitle } from '../../store/product';
 import { Avatar, Text, Flex } from '@chakra-ui/react';
-import { FaSearch } from 'react-icons/fa';
-
 import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from '@choc-ui/chakra-autocomplete';
-import axios from 'axios';
+
+import useSearch from '../../hooks/useSearch';
 
 const Search = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [prod, setProd] = useState([]);
-    const [current, setCurrent] = useState({});
-    const [width, setWidth] = useState(window.innerWidth);
+    const { isMobile, prod, setCurrent, handlePress } = useSearch();
     const [ancho, setAncho] = useState('12em');
     const [margin, setMargin] = useState('0');
-    const isMobile = width <= 768;
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowSizeChange);
-        return () => {
-            window.removeEventListener('resize', handleWindowSizeChange);
-        };
-    }, []);
 
-    function handleWindowSizeChange() {
-        setWidth(window.innerWidth);
-    }
-
-    useEffect(() => {
-        fetchProducts();
-        async function fetchProducts() {
-            const { data } = await axios.get('/api/product');
-            if (data.products.length) setProd(data.products);
-        }
-    }, []);
-
-    useEffect(() => {
-        fetchProduct();
-        async function fetchProduct() {
-            const { data } = await axios.get(`/api/product/search/${current}`);
-        }
-    }, [current]);
-
-    const handlePress = async (event) => {
-        if (event.key == 'Enter') {
-            event.preventDefault();
-            try {
-                await dispatch(getProductTitle(current)).then(() => {
-                    navigate('/search_list');
-                });
-            } catch (error) {
-                console.log({ error });
-            }
-        }
-    };
     return (
         <>
             <Flex mr={margin} w={!isMobile && '10em'} transition="all 0.5s ease">
