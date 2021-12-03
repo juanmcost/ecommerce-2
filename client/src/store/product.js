@@ -29,7 +29,7 @@ export const getAllProducts = createAsyncThunk('GET_ALL_PRODUCTS', async () => {
 //--GET Product
 
 export const getProduct = createAsyncThunk('GET_PRODUCT', (id) => {
-    return axios.get(`http://localhost:8080/api/product/${id}`).then((res) => res.data);
+    return axios.get(`/api/product/${id}`).then((res) => res.data);
 });
 
 //--GET Product Title
@@ -43,7 +43,7 @@ export const getProductTitle = createAsyncThunk('GET_PRODUCT', async (title) => 
 //--create Product
 
 export const createProduct = createAsyncThunk('CREATE_PRODUCT', (images) => {
-    return axios.post(`http://localhost:8080/api/product/add`, images, fileOptions).then((res) => res.data);
+    return axios.post(`/api/product/add`, images, fileOptions).then((res) => res.data);
 });
 
 export const modifyProduct = createAsyncThunk('UPDATE_PRODUCT', () => {

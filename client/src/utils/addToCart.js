@@ -5,13 +5,13 @@ export default function addToCart(user, item, toast) {
     if (user.username) {
         let newList = [];
         axios
-            .get(`http://localhost:8080/api/cart/${user._id}`)
+            .get(`/api/cart/${user._id}`)
             .then((response) => response.data)
             .then((dbCart) => {
                 if (dbCart === null) {
                     newList.push({ productId: item._id });
                     axios
-                        .post(`http://localhost:8080/api/cart/`, {
+                        .post(`/api/cart/`, {
                             products: newList,
                             userId: user._id,
                         })
@@ -23,7 +23,7 @@ export default function addToCart(user, item, toast) {
                             aux = true;
                             el.quantity++;
                             return axios
-                                .put(`http://localhost:8080/api/cart/${user._id}`, {
+                                .put(`/api/cart/${user._id}`, {
                                     products: [...dbCart.products],
                                 })
                                 .then(() => successToast(toast, 'summed to cart!'));
@@ -31,7 +31,7 @@ export default function addToCart(user, item, toast) {
                     });
                     if (!aux) {
                         axios
-                            .put(`http://localhost:8080/api/cart/${user._id}`, {
+                            .put(`/api/cart/${user._id}`, {
                                 products: [...dbCart.products, { productId: item._id }],
                             })
                             .then((res) => {

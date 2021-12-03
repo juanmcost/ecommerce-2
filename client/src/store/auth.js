@@ -1,27 +1,19 @@
-import { createReducer, createAsyncThunk } from "@reduxjs/toolkit"; // import redux tool-kit
-import axios from "axios"; // import axios
+import { createReducer, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-//---------------CONFIG AUTH -------------- \\
+export const sendRegisterRequest = createAsyncThunk('REGISTER_REQUEST', (prop) => {
+    return axios.post(`/api/auth/signup`, prop).then((res) => res.data);
+});
 
-const API = "http://localhost:8080/api/auth"
+export const sendLogoutRequest = createAsyncThunk('LOGOUT_REQUEST', () => {
+    return axios.get(`/api/auth/logout`).then((res) => res.data);
+});
 
-
-//--Config Register
-
-export const sendRegisterRequest = createAsyncThunk("REGISTER_REQUEST", (prop)=>{
-  return axios.post(`${API}/signup`, prop).then((res)=>res.data);
-})
-
-//--Config Logout
-
-export const sendLogoutRequest = createAsyncThunk("LOGOUT_REQUEST", ()=>{
-  return axios.get(`${API}/logout`).then((res)=>res.data);
-})
-
-//--Config Reducer
-
-const authReducer = createReducer({}, {
-  [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
-})
+const authReducer = createReducer(
+    {},
+    {
+        [sendRegisterRequest.fulfilled]: (state, action) => action.payload,
+    }
+);
 
 export default authReducer;

@@ -13,7 +13,7 @@ const useConfirmCart = (id, token) => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/api/order/confirm/${id}/${token}`)
+            .get(`/api/order/confirm/${id}/${token}`)
             .then((res) => res.data)
             .then((cart) => {
                 dispatch(setProducts(cart.products));
@@ -24,7 +24,7 @@ const useConfirmCart = (id, token) => {
                     .post('/api/order/add', { ...order })
                     .then(() => {
                         dispatch(resetOrder());
-                        axios.delete(`http://localhost:8080/api/cart/${id}`);
+                        axios.delete(`/api/cart/${id}`);
                         setState('confirmed');
                     })
                     .catch(() => {

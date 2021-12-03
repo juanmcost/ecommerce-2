@@ -20,7 +20,7 @@ const useShopCartDB = () => {
             .get(`/api/cart/${user._id}`)
             .then((res) => {
                 if (res.data?.products.length === 0) {
-                    axios.delete(`http://localhost:8080/api/cart/${user._Id}`);
+                    axios.delete(`/api/cart/${user._Id}`);
                     res.data = null;
                 }
 

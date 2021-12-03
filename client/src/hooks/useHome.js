@@ -66,7 +66,7 @@ const useHome = () => {
 
                     axios.put(`/api/cart/${user._id}`, { products: dbCart });
                 } else
-                    axios.post(`http://localhost:8080/api/cart/`, {
+                    axios.post(`/api/cart/`, {
                         products: localCart,
                         userId: user._id,
                     });

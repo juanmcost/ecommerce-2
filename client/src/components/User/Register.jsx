@@ -46,7 +46,7 @@ export default function Register() {
 
     function onSubmit(form) {
         const { email, username, password } = form;
-        axios.post('http://localhost:8080/api/auth/signup', { email, password, username }).then((res) => {
+        axios.post('/api/auth/signup', { email, password, username }).then((res) => {
             if (res.status === 200) {
                 dispatch(sendLoginRequest({ email, password })).then((res) => {
                     successToast(toast, 'Account created', `Yor account has been created. Enjoy!`);
@@ -57,7 +57,7 @@ export default function Register() {
     }
 
     // async function goGoogle() {
-    //     const { data } = await axios.get('http://localhost:8080/api/auth/google');
+    //     const { data } = await axios.get('/api/auth/google');
     //
     // }
 
