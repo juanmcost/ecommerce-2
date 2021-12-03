@@ -1,14 +1,12 @@
-import Reviews from '../components/Reviews';
-import Carousel from '../components/Carousel';
-import Feature from '../components/Feature';
+import Reviews from '../components/Review/Reviews';
+import Carousel from '../components/Home/Carousel';
+import Feature from '../common/Admin/Feature';
 import { FaDollarSign } from 'react-icons/fa';
-import { getProduct } from '../store/product';
 import { useParams } from 'react-router';
 import React, { useEffect, useState } from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { IoAnalyticsSharp } from 'react-icons/io5';
-import { useDispatch, useSelector } from 'react-redux';
 import currencyConverter from '../utils/currencyConverter';
 import {
     Container,

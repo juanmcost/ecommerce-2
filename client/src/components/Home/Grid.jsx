@@ -1,4 +1,4 @@
-import Item from './Item';
+import Item from '../../common/Product/Item';
 import { SimpleGrid } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 

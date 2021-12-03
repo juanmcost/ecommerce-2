@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import Feature from '../../components/Feature';
+import Feature from './Feature';
 import { toastDelete, toastAdd } from '../../utils/toastMessages.js';
 
 const NewProduct = ({ article, art_id, type }) => {

@@ -1,9 +1,9 @@
-import { Flex, Circle, Box, Image, useColorModeValue, Icon, Tooltip, Button, useToast } from '@chakra-ui/react';
+import { Flex, Box, Image, useColorModeValue, Icon, Tooltip, Button, useToast } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-import Rating from '../components/Rating';
-import addToCart from '../utils/addToCart';
+import Rating from '../Review/Rating';
+import addToCart from '../../utils/addToCart';
 
 function Item({ item }) {
     const user = useSelector(({ user }) => user);

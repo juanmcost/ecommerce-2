@@ -1,5 +1,5 @@
 import { Box, chakra, Container, Flex, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react';
-import ReviewCard from './ReviewCard';
+import ReviewCard from '../../common/Review/ReviewCard';
 import ReviewForm from './ReviewForm';
 import { useSelector } from 'react-redux';
 

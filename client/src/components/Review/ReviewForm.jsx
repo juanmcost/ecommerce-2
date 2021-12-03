@@ -11,9 +11,9 @@ import {
     Textarea,
     useToast,
 } from '@chakra-ui/react';
-import { addAppreciation, addReview } from '../store/review';
+import { addAppreciation, addReview } from '../../store/review';
 import Rating from '@material-ui/lab/Rating';
-import { errorToast } from '../utils/toastMessages';
+import { errorToast } from '../../utils/toastMessages';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 

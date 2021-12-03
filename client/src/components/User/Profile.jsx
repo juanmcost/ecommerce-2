@@ -27,9 +27,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { useState } from 'react';
-import { sendLogoutRequest, editUser } from '../store/user';
+import { sendLogoutRequest, editUser } from '../../store/user';
 
-import perfil from '../assets/perfil.png';
+import perfil from '../../assets/perfil.png';
 
 const Profile2 = () => {
     const navigate = useNavigate();

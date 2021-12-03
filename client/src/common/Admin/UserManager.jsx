@@ -24,7 +24,7 @@ import { FiEye } from 'react-icons/fi';
 import { MdAdminPanelSettings } from 'react-icons/md';
 
 import { errorToast, successToast } from '../../utils/toastMessages.js';
-import Spinner from './Spinner';
+import Spinner from '../Spinner/Spinner';
 
 const RemoveProduct = () => {
     const [users, setUsers] = useState([]);

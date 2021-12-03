@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Avatar, Text, Flex } from '@chakra-ui/react';
-import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
+import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from '@choc-ui/chakra-autocomplete';
 
 import NewProduct from './NewProduct';
-import Spinner from './Spinner';
+import Spinner from '../Spinner/Spinner';
 
 const EditProduct = () => {
     const [prod, setProd] = useState([]);

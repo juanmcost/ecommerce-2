@@ -25,7 +25,7 @@ import { FiEye } from 'react-icons/fi';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import { errorToast, successToast } from '../../utils/toastMessages.js';
-import Spinner from './Spinner';
+import Spinner from '../Spinner/Spinner';
 
 const RemoveProduct = () => {
     const [products, setProducts] = useState([]);

@@ -1,11 +1,7 @@
-import React, { useState } from 'react'; // import react
-import { useDispatch } from 'react-redux'; // import dispatch
-import { useNavigate } from 'react-router-dom'; // import history
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { sendLoginRequest } from '../store/user'; // import login
-import { FaFacebook, FaGoogle } from 'react-icons/fa'; //import react-icons
-import { GoMarkGithub } from 'react-icons/go'; // import react-icons
-import { successToast } from '../utils/toastMessages';
 import {
     Flex,
     Center,
@@ -20,13 +16,13 @@ import {
     Heading,
     Text,
     useColorModeValue,
-} from '@chakra-ui/react'; // import chakra
-import axios from 'axios'; // import axios
+} from '@chakra-ui/react';
+import axios from 'axios';
+
+import { sendLoginRequest } from '../../store/user';
+import { successToast } from '../../utils/toastMessages';
 
 export default function Register() {
-    //export default
-
-    //-----SEND Register----------------
     const toast = useToast();
     const dispatch = useDispatch();
     const navigate = useNavigate();

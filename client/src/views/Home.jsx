@@ -1,5 +1,5 @@
-import Carousel from '../components/Carousel';
-import ProductsGrid from '../components/Grid';
+import Carousel from '../components/Home/Carousel';
+import ProductsGrid from '../components/Home/Grid';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../store/product';
 import { useEffect, useState } from 'react';

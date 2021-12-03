@@ -1,8 +1,8 @@
 import react, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { sendLoginRequest } from '../store/user';
-import { successToast, errorToast } from '../utils/toastMessages';
+import { sendLoginRequest } from '../../store/user';
+import { successToast, errorToast } from '../../utils/toastMessages';
 import { FaFacebook, FaGoogle } from 'react-icons/fa'; //import react-icons
 import axios from 'axios';
 import {
@@ -66,14 +66,15 @@ export default function Login() {
             console.log({ error });
         }
     };
-    const handleFacebook = () => {
-        const data = axios.get('/api/auth/facebook');
-        console.log(data);
-    };
-    const handleGoogle = () => {
-        const data = axios.get('/api/auth/google/').then((res) => console.log(res));
-        // console.log(data);
-    };
+
+    // const handleFacebook = () => {
+    //     const data = axios.get('/api/auth/facebook');
+    //     console.log(data);
+    // };
+    // const handleGoogle = () => {
+    //     const data = axios.get('/api/auth/google/').then((res) => console.log(res));
+    //     // console.log(data);
+    // };
 
     return (
         <form onSubmit={handleSubmit}>

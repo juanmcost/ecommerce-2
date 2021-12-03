@@ -2,7 +2,7 @@ import Logo from '../assets/logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as ReactLink, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Search from './Search/Search';
+import Search from '../components/Search/Search';
 import { sendLogoutRequest } from '../store/user';
 import {
     Box,
@@ -27,11 +27,11 @@ import {
     Image,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { FaShoppingCart, FaUserAlt } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const subCategories = {
     Cellphones: ['Xiaomi', 'LG', 'Motorola', 'Apple'],
-    Consoles: ['Consoles', 'Games', 'Accesories'],
+    Consoles: ['Consola', 'Games', 'Accesories'],
     Gaming: ['Mouses', 'Keyboards', 'Pads'],
     Informatics: ['Notebooks', 'Tablets', 'Monitors', 'Printers', 'Cartridges', 'All in one and Desktop PC'],
     Computer_Accessories: ['Connectivity', 'Webcam', 'Speakers', 'Stabilizers', 'Backpacks and Notebook Bags'],
@@ -143,16 +143,8 @@ export default function Navbar() {
                     ))}
                 </Center>
                 {user.isAdmin && location.pathname !== '/admin/v2' ? (
-                    <ReactLink to="/admin/v2">
-                        <Button
-                            border="2px"
-                            // borderColor="red.700"
-                            padding="0 1.7em"
-                            variant="outline"
-                            colorScheme="teal"
-                            //bg="red.700"
-                            //_hover={{ bg: 'red.700' }}
-                        >
+                    <ReactLink to="/admin">
+                        <Button border="2px" padding="0 1.7em" variant="outline" colorScheme="teal">
                             ADMIN PANEL
                         </Button>
                     </ReactLink>

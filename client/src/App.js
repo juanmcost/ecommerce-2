@@ -2,51 +2,48 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import Home from './views/Home';
-import Login from './views/Login';
-import Profile from './components/Profile';
-import Admin from './views/Admin.jsx';
+import Navbar from './views/Navbar';
 import Article from './views/Article';
 import ShopCart from './views/ShopCart';
-import Register from './views/Register';
 import NotFound from './views/NotFound';
-import EmailSent from './views/EmailSent';
-import ShopCartDB from './views/ShopCartDB';
-import MyProducts from './views/MyProducts';
-import ConfirmCart from './views/ConfirmCart';
-import OrderAddress from './views/OrderAddress';
-import OrderPayMethod from './views/OrderPayMethod';
-import { getUser } from './store/user';
-import Navbar from './components/Navbar';
+import EmailSent from './components/Cart/EmailSent';
+import ShopCartDB from './components/Cart/ShopCartDB';
+import ConfirmCart from './components/Cart/ConfirmCart';
+import OrderAddress from './components/Order/OrderAddress';
+import OrderPayMethod from './components/Order/OrderPayMethod';
+import Login from './components/User/Login';
+import Profile from './components/User/Profile';
+import Register from './components/User/Register';
 import AdminPanel from './components/Admin/AdminPanel';
 import SearchList from './components/Search/SearchList';
 import OrderHistory from './components/Order/OrderHistory';
 import Category from './components/Category/Category';
-import './app.css';
+import { getUser } from './store/user';
 
 const App = () => {
     const dispatch = useDispatch();
     const user = useSelector(({ user }) => user);
+
     useEffect(() => {
         axios.get('/api/auth/me').then((user) => {
             if (user.data) dispatch(getUser(user.data[0]));
         });
-    }, [dispatch]);
+    }, []);
 
     return (
         <div>
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/admin/v2" element={<AdminPanel />} />
+                <Route path="/admin" element={<AdminPanel />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route exact path="/profile" element={!user._id ? <NotFound /> : <Profile />} />
                 <Route exact path="/profile/order_history" element={!user._id ? <NotFound /> : <OrderHistory />} />
                 <Route path="/search_list" element={<SearchList />} />
-                <Route path="/myProducts" element={<MyProducts />} />
                 <Route path="/myCart" element={<ShopCart />} />
                 <Route path={`/${user.username}/myCart`} element={<ShopCartDB />} />
                 <Route path={`/cart`} element={<ShopCart />} />
