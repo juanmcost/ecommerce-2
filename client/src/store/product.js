@@ -43,7 +43,6 @@ export const getProductTitle = createAsyncThunk('GET_PRODUCT', async (title) => 
 //--create Product
 
 export const createProduct = createAsyncThunk('CREATE_PRODUCT', (images) => {
-    console.log('IMG', images);
     return axios.post(`http://localhost:8080/api/product/add`, images, fileOptions).then((res) => res.data);
 });
 

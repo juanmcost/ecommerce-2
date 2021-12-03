@@ -35,7 +35,6 @@ router.get(
 );
 
 router.get('/userface', (req, res) => {
-    console.log(req.user, 'esto es la respuesta');
     if (req.user) res.send(req.user);
 
     res.send('aca no hay nada');

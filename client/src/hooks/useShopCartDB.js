@@ -47,7 +47,7 @@ const useShopCartDB = () => {
                     });
                 } else setShowSpinner(false);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

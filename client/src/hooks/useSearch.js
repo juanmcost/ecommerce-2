@@ -40,7 +40,7 @@ const useSearch = () => {
                     navigate('/search_list');
                 });
             } catch (error) {
-                console.log({ error });
+                console.error({ error });
             }
         }
     };

@@ -27,11 +27,7 @@ class OrderController {
         try {
             const { user } = jwt.verify(req.params.token, process.env.JWT_SECRET);
 
-            const cart = await Cart.findOneAndUpdate(
-                { userId: user },
-                { $set: { confirm: true } },
-                { new: true }
-            );
+            const cart = await Cart.findOneAndUpdate({ userId: user }, { $set: { confirm: true } }, { new: true });
 
             return res.send(cart);
         } catch (error) {
@@ -43,7 +39,7 @@ class OrderController {
     static async createOrder(req, res) {
         try {
             const { products, payMethod, amount, address } = req.body; // products must be an array
-            console.log(req.body);
+
             const newOrder = new Order({
                 userId: req.user[0]._id,
                 products,
@@ -68,7 +64,6 @@ class OrderController {
             return res.status(500).json({ error });
         }
     }
-
 }
 
 module.exports = OrderController;

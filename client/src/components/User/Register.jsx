@@ -46,7 +46,6 @@ export default function Register() {
 
     function onSubmit(form) {
         const { email, username, password } = form;
-        console.log(form);
         axios.post('http://localhost:8080/api/auth/signup', { email, password, username }).then((res) => {
             if (res.status === 200) {
                 dispatch(sendLoginRequest({ email, password })).then((res) => {
@@ -59,7 +58,7 @@ export default function Register() {
 
     // async function goGoogle() {
     //     const { data } = await axios.get('http://localhost:8080/api/auth/google');
-    //     console.log(data);
+    //
     // }
 
     return (

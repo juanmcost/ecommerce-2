@@ -119,7 +119,7 @@ export default RemoveProduct;
 
 //             history.push('/search');
 //         } catch (err) {
-//             console.log({ err: err.message });
+//             console.error({ err: err.message });
 //         }
 //     }
 // }

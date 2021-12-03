@@ -14,8 +14,6 @@ const OrderHistory = () => {
         }
     }, []);
 
-    console.log(order);
-
     return (
         <div>
             <Flex align={'center'} justify={'center'}>

@@ -20,7 +20,6 @@ const useConfirmCart = (id, token) => {
                 dispatch(setStatus('confirmed'));
             })
             .then(() => {
-                console.log('this is order', order);
                 axios
                     .post('/api/order/add', { ...order })
                     .then(() => {

@@ -58,17 +58,15 @@ export default function Login() {
 
                 .catch((err) => ({ err: err.message }));
         } catch (error) {
-            console.log({ error });
+            console.error({ error });
         }
     };
 
     // const handleFacebook = () => {
     //     const data = axios.get('/api/auth/facebook');
-    //     console.log(data);
     // };
     // const handleGoogle = () => {
-    //     const data = axios.get('/api/auth/google/').then((res) => console.log(res));
-    //     // console.log(data);
+    //     const data = axios.get('/api/auth/google/').then((res) => res);
     // };
 
     return (

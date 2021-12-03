@@ -12,7 +12,6 @@ passport.use(
         async (email, password, done) => {
             // Match Email's User
             const user = await User.find({ email: email });
-            console.log('esto es user', user);
             if (!user) return done(null, false, { message: 'email not found' });
 
             // Match Password's User
@@ -29,8 +28,6 @@ passport.serializeUser((user, done) => {
     return (user.googleId && done(null, user.googleId)) || done(null, user.facebookId);
 });
 
-//el registro al parecer lo hace bine porque te trae el req.user, el tema seria el logueo
-//fijate que creo que no hcae falta la condicion ya que ya tiene _id el usuario registrado por facebook
 passport.deserializeUser(async (id, done) => {
     User.find({ facebookId: id }).then((userf) => {
         return userf.length
