@@ -31,7 +31,6 @@ const ShopCartDB = () => {
     }, [])
 
     useEffect(() => {
-        console.log("useEffect aux")
         if (isMounted.current) {
             if (cart.list.length > 0) {
                 return axios.put(`/api/cart/${user._id}`, {newCart: cart})
@@ -45,11 +44,10 @@ const ShopCartDB = () => {
         <>
         <Flex align="center" justify="center">
             <Heading fontSize={"4xl"} m="5">My Cart</Heading>
-            <Heading ml="auto" fontSize={"2xl"} mr="5">total: $ {cart.total}</Heading>
+            <Heading ml="auto" fontSize={"2xl"} mr="5">total: {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(Number(cart.total))}</Heading>
         </Flex>
             <Divider orientation="horizontal" mb="5" />
                 {showSpinner?<Center><Spinner color="green.300" size="xl"/></Center>: <></>}
-                {console.log("state",cart)}
                 {cart.list.length===0 && !showSpinner? <Center><Text fontSize={"lg"} color={"gray.600"}>no products added</Text></Center>:<></> }
         <Flex>
             <Box w="full">
@@ -70,7 +68,7 @@ const ShopCartDB = () => {
                             <Button onClick={()=>moreQuantity(i, cart, aux, setCart, setAux)}>+</Button>
                         </Stack>
                         <Stack align="center" justify="center">
-                            <Box>$ {prod.product.price}</Box>
+                            <Box>{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(Number(prod.product.price))}</Box>
                             <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>Delete product</Button>
                         </Stack>
                     </Grid>
