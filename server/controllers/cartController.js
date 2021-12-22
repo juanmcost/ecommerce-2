@@ -48,9 +48,9 @@ class CartController {
     static async allCarts(req, res) {
         try {
             const allCarts = await Cart.find();
-            res.status(200).json(allCarts);
+            return res.status(200).json(allCarts);
         } catch (error) {
-            res.status(500).json(err);
+            return res.status(500).json(err);
         }
     }
 

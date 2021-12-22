@@ -20,8 +20,6 @@ router.put('/review/:id', auth.checkAuth, productsController.addReview);
 
 router.put('/appreciation/:id', auth.checkAuth, productsController.addAppreciation);
 
-//router.put("/")
-
 //admin
 router.post('/add', auth.checkAuthAndAdmin, productsController.addProduct);
 

@@ -11,17 +11,17 @@ passport.use(
             callbackURL: 'http://localhost:8080/api/auth/google/callback',
         },
         async (accessToken, refreshToken, profile, done) => {
-            const user = await User.findOne({ googleId: profile.id }); //lo buscamos en la base de datos y lo devolvemos
+            const user = await User.findOne({ googleId: profile.id });
             if (user) {
                 return done(null, user);
             } else {
-                const user = new User(); //si no existe creamos el usuario
+                const user = new User();
                 (user.email = profile.emails[0].value), (user.username = profile.displayName);
                 user.password = profile.id;
                 user.googleId = profile.id;
                 user.image = profile.photos[0].value;
-                await user.save(); //guardamos en la base de datos
-                done(null, user); //devolvemos el usuario
+                await user.save();
+                done(null, user);
             }
         }
     )

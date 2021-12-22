@@ -1,62 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getProductTitle } from '../../store/product';
-import { Avatar, Input, Text, Flex, Box } from '@chakra-ui/react';
-import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
-import axios from 'axios';
+import { Avatar, Text, Flex } from '@chakra-ui/react';
+import { AutoComplete, AutoCompleteInput, AutoCompleteItem, AutoCompleteList } from '@choc-ui/chakra-autocomplete';
+
+import useSearch from '../../hooks/useSearch';
 
 const Search = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [prod, setProd] = useState([]);
-    const [current, setCurrent] = useState({});
-    const [press, setPress] = useState('');
+    const { isMobile, prod, setCurrent, handlePress } = useSearch();
+    const [ancho, setAncho] = useState('12em');
+    const [margin, setMargin] = useState('0');
 
-    useEffect(() => {
-        fetchProducts();
-        async function fetchProducts() {
-            const { data } = await axios.get('/api/product');
-            if (data.products.length) setProd(data.products);
-        }
-    }, []);
-
-    useEffect(() => {
-        fetchProduct();
-        async function fetchProduct() {
-            const { data } = await axios.get(`/api/product/search/${current}`);
-        }
-    }, [current]);
-
-    const handlePress = async (event) => {
-        if (event.key == 'Enter') {
-            event.preventDefault();
-            try {
-                await dispatch(getProductTitle(current)).then(() => {
-                    navigate('/search_list');
-                });
-            } catch (error) {
-                console.log({ error });
-            }
-        }
-    };
     return (
         <>
-            <Flex ml="10" w="35%">
+            <Flex mr={margin} w={!isMobile && '10em'} transition="all 0.5s ease">
                 <AutoComplete rollNavigation>
                     <AutoCompleteInput
+                        borderColor={'gray.800'}
                         variant="filled"
-                        placeholder="Search a product"
+                        placeholder="Search a product..."
+                        textAlign={'center'}
                         autoFocus
                         onChange={(e) => setCurrent(e.target.value)}
                         onKeyDown={handlePress}
+                        w={ancho}
+                        transition="all 0.5s ease"
+                        onFocus={() => {
+                            setAncho('25em');
+                            setMargin('8em');
+                        }}
+                        onBlur={() => {
+                            setAncho('17em');
+                            setMargin('0');
+                        }}
                     />
-                    <AutoCompleteList>
+                    <AutoCompleteList w={!isMobile && '30em'}>
                         {prod
                             ? prod.map((element, oid) => (
                                   <AutoCompleteItem

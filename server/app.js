@@ -8,7 +8,6 @@ const cors = require('cors');
 
 const router = require('./routes/');
 const client = require('./config/db');
-const setupController = require('./controllers/seedController');
 
 require('./config/passport-fb');
 require('./config/passport-google');
@@ -16,9 +15,15 @@ require('./config/passport-local');
 
 const app = express();
 
-app.use(cors());
+app.use(
+    cors({
+        origin: '*',
+        credentials: true,
+    })
+);
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(volleyball);
 
@@ -41,7 +46,6 @@ app.use(passport.session());
 app.use('/api', router);
 
 client.then(() => {
-    //setupController();
     app.listen(process.env.PORT || 8080, () => {
         console.log('Backend server is running on http://localhost:8080');
     });

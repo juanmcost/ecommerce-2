@@ -1,13 +1,12 @@
 import { Box, Flex, Link } from '@chakra-ui/react';
 import { FaUsers } from 'react-icons/fa';
 import { AiFillEdit } from 'react-icons/ai';
-import { IoStatsChartSharp } from 'react-icons/io5';
 import { BsCartPlusFill, BsCartXFill } from 'react-icons/bs';
 import { MdHome } from 'react-icons/md';
 import { Link as ReachLink } from 'react-router-dom';
 import React from 'react';
 
-import AdminNavItem from './AdminNavItem';
+import AdminNavItem from '../../common/Admin/AdminNavItem';
 
 const AdminSidebar = (props) => (
     <Box

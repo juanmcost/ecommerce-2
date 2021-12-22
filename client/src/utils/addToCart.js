@@ -1,5 +1,5 @@
-import axios from "axios";
-import { successToast } from "../utils/toastMessages";
+import axios from 'axios';
+import { successToast } from '../utils/toastMessages';
 
 export default function addToCart(user, item, toast){
   if (user.username) {
@@ -60,4 +60,4 @@ export default function addToCart(user, item, toast){
       successToast(toast, "Product added to cart!");
     }
   }
-};
+}

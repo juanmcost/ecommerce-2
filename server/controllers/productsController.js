@@ -5,45 +5,44 @@ class ProductController {
     static async getAllProduct(req, res) {
         try {
             const products = await Product.find();
-            const discover = products.map((i) => i?.img[0]);
-            res.json({ products, discover });
+            return res.json({ products });
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
     static async getProduct(req, res) {
         try {
             const product = await Product.findById(req.params.id);
-            res.json(product);
+            return res.json(product);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
     static async getProductTitle(req, res) {
         try {
             const product = await Product.find({ title: req.params.title });
-            res.json(product);
+            return res.json(product);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
     static async getProductByLike(req, res) {
         try {
             const product = await Product.find({ title: { $regex: '.*' + req.params.title + '.*' } });
-            res.json(product);
+            return res.json(product);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
     static async getTags(req, res) {
         try {
             const products = await Product.find({ category: { $in: [req.params.tag] } });
-            res.json(products);
+            return res.json(products);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -62,9 +61,9 @@ class ProductController {
                 },
                 { new: true }
             );
-            res.status(200).send(newReview);
+            return res.status(200).send(newReview);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -89,9 +88,9 @@ class ProductController {
                     img: 'https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg',
                 };
             });
-            res.status(200).send({ appreciation, reviews });
+            return res.status(200).send({ appreciation, reviews });
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -110,9 +109,9 @@ class ProductController {
                 },
                 { new: true }
             );
-            res.status(200).send(newReview);
+            return res.status(200).send(newReview);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -137,7 +136,7 @@ class ProductController {
             }
             return res.status(400).json('Bad Request');
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -146,9 +145,9 @@ class ProductController {
         try {
             const newProduct = await new Product(req.body);
             const savedProduct = await newProduct.save();
-            res.status(201).json(savedProduct);
+            return res.status(201).json(savedProduct);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
@@ -161,19 +160,19 @@ class ProductController {
                 },
                 { new: true }
             );
-            console.log(product);
-            res.status(200).send(product);
+
+            return res.status(200).send(product);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 
     static async removeProduct(req, res) {
         try {
             const product = await Product.findByIdAndDelete(req.params.id);
-            res.status(204).send(product);
+            return res.status(204).send(product);
         } catch (error) {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         }
     }
 }
