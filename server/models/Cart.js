@@ -6,12 +6,16 @@ const Cart = new Schema(
             type: String,
             required: true,
         },
-        products: [
+        list: [
             {
                 productId: { type: String },
                 quantity: { type: Number, default: 1 },
             },
         ],
+        total: { 
+            type: Number, 
+            required: true
+        },
         confirm: {
             type: Boolean,
             default: false,
@@ -20,5 +24,4 @@ const Cart = new Schema(
     { timestamps: true }
 );
 
-// axios.post('', {item: [{productId: 3123, quantity: 2},{},{}]})
 module.exports = model('Cart', Cart);

@@ -153,7 +153,7 @@ export default function Navbar() {
             {Object.keys(subCategories).map((category, i) => (
               <Popover trigger={"hover"} key={i}>
                 <PopoverTrigger bg="none" on>
-                  <Button bg="none">{category.split("_").join(" ")}</Button>
+                  <Button bg="none">{category.replace(/_/g, ' ').replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase())}</Button>
                 </PopoverTrigger>
                 <PopoverContent>
                   <Stack align={"center"}>

@@ -5,7 +5,7 @@ const data = require('../data.json');
 module.exports = () => {
     const seedDB = async () => {
         await User.deleteMany({});
-        //await Product.insertMany(data);
+        await Product.insertMany(data);
     };
     seedDB().then(() => {
         console.log('seed complete');

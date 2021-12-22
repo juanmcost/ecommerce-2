@@ -4,6 +4,11 @@ const sendEmail = require('../utils/email');
 const Cart = require('../models/Cart');
 const Order = require('../models/Order');
 
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
+
+const stripe = require("stripe")(stripeSecretKey);
+
 class OrderController {
     // Send confirmation email
     static async confirm(req, res) {
@@ -41,16 +46,16 @@ class OrderController {
 
     // Create Order
     static async createOrder(req, res) {
-        console.log('heeeere');
+        console.log("im creating order")
         try {
             const { products, payMethod, amount, address } = req.body; // products must be an array
             console.log(req.body);
             const newOrder = new Order({
-                userId: req.user[0]._id,
+                userId: req.user[0]._id || "619af0bb38788191f7d88446",
                 products,
                 payMethod,
                 amount,
-                address,
+                address
             });
             const order = await newOrder.save();
             return res.status(201).json(order);

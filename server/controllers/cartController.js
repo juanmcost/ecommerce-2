@@ -1,14 +1,17 @@
 const Cart = require('../models/Cart');
+const Product = require('../models/Products');
 
 class CartController {
     // Create Cart
     static async createCart(req, res) {
-        const { products, userId } = req.body; // products must be an array
+        const { list, userId, total } = req.body; // products must be an array
         try {
             const cart = new Cart({
                 userId,
-                products,
+                list,
+                total
             });
+            console.log("im saving this:", cart);
             const savedCart = await cart.save();
             return res.status(201).json(savedCart);
         } catch (error) {
@@ -19,8 +22,23 @@ class CartController {
     // Get User Cart
     static async userCart(req, res) {
         try {
+            console.log("im in")
             const cart = await Cart.findOne({ userId: req.params.id });
-            res.status(200).json(cart);
+            console.log("cart:",cart)
+            
+            if (cart !== null) {
+                let realCart = {list: [], total: cart.total}
+                for (let i = 0; i < cart.list.length; i++) {
+                    const cartItem = cart.list[i]  
+                    const realItem = await Product.findById(cartItem.productId)  //change id to real product
+                    realCart.list.push({product: realItem, quantity: cartItem.quantity});
+                    console.log("im pushing!!", realCart)
+                }
+                console.log("ill send this:", realCart)
+                return res.status(200).json({...realCart});
+            }
+            else return res.json(null);
+
         } catch (err) {
             res.status(500).json(err);
         }
@@ -38,12 +56,16 @@ class CartController {
 
     // Update Cart
     static async updateCart(req, res) {
-        const { products } = req.body;
+        const { newCart } = req.body;
         try {
+            let dbCart = {list: [], total: newCart.total};
+            newCart.list.map((cartItem) =>{
+                dbCart.list.push({productId: cartItem.product._id, quantity: cartItem.quantity})
+            })
             const cart = await Cart.findOneAndUpdate(
                 { userId: req.params.id },
                 {
-                    $set: { products: products },
+                    $set: {...dbCart}
                 },
                 { new: true }
             );

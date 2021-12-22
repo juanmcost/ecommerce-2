@@ -6,6 +6,7 @@ import {
   const SET_PAYMETHOD = "SET_PAYMETHOD"
   const SET_STATUS = "SET_STATUS"
   const SET_AMOUNT = "SET_AMOUNT"
+  const GET_ORDER = "GET_ORDER"
   const RESET = "RESET"
   
 //---------------CONFIG ORDER -------------- \\
@@ -15,9 +16,10 @@ export const setProducts = createAction(SET_PRODUCTS);
 export const setPayMethod = createAction(SET_PAYMETHOD);
 export const setStatus = createAction(SET_STATUS);
 export const setAmount = createAction(SET_AMOUNT);
+export const getOrder = createAction(GET_ORDER);
 export const resetOrder = createAction(RESET);
   
-const orderReducer = function(state = {status: "", amount: 0}, action){
+const orderReducer = function(state = {amount: 0}, action){
   switch(action.type){
       case SET_ADDRESS:
         {
@@ -59,6 +61,7 @@ const orderReducer = function(state = {status: "", amount: 0}, action){
             amount: payload
           }
         }
+      case GET_ORDER: return ({...state})
       case RESET:
         {
           return {status: "", amount: 0};

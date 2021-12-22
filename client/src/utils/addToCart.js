@@ -6,42 +6,41 @@ export default function addToCart(user, item, toast){
     let newList = [];
     axios
       .get(`http://localhost:8080/api/cart/${user._id}`)
-      .then((response) => response.data)
+      .then(response => response.data)
       .then((dbCart) => {
-        if (dbCart === null) {
-          newList.push({ productId: item._id });
+        if (dbCart === null) { //-------------------if cart is not created: --------------------------
+          newList.push({ productId: item._id, quantity: 1});
           axios
             .post(`http://localhost:8080/api/cart/`, {
-              products: newList,
+              list: newList,
               userId: user._id,
+              total: item.price
             })
             .then(() => successToast(toast, "Product added to cart!"))
             .catch((err) => console.log(err));
-        } else {
-          let aux = false;
-          dbCart.products.forEach((el) => {
-            if (el.productId === item._id) {
-              aux = true;
-              el.quantity++;
+        } else { //--------------------------if cart already exists: --------------------------
+          dbCart.total += item.price;
+          let isInCart = false;
+
+          dbCart.list.forEach((cartItem) => { 
+            if (cartItem.product._id === item._id) { //is item in cart?
+              isInCart = true;
+              cartItem.quantity++;
               return axios
-                .put(`http://localhost:8080/api/cart/${user._id}`, {
-                  products: [...dbCart.products],
-                })
+                .put(`http://localhost:8080/api/cart/${user._id}`, {newCart: dbCart})
                 .then(() => successToast(toast, "summed to cart!"));
             }
           });
-          if (!aux) {
-            axios
-              .put(`http://localhost:8080/api/cart/${user._id}`, {
-                products: [...dbCart.products, { productId: item._id }],
-              })
-              .then((res) => {
-                successToast(toast, "Product added to cart!");
-              });
+
+          if (!isInCart) {//----------------------if item wasn't in the cart--------------------------
+            dbCart.list.push({product: item, quantity: 1})
+            return axios
+              .put(`http://localhost:8080/api/cart/${user._id}`, {newCart: dbCart})
+              .then(() => successToast(toast, "Product added to cart!"));
           }
         }
       });
-  } else {
+  } else { //if user is not logged in
     const jsonCart = localStorage.getItem("carrito");
     let carrito = JSON.parse(jsonCart);
     if (carrito === null) carrito = { list: [], total: 0 };

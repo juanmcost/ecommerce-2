@@ -7,25 +7,27 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { setStatus } from "../store/order";
 import { setProducts } from "../store/order";
+import { setAmount } from "../store/order";
+import { getOrder } from "../store/order";
 import { resetOrder } from "../store/order";
 
 const ConfirmCart = function () {
     const {id, token} = useParams()
     const navigate = useNavigate();
-    const order = useSelector(({ order }) => order);
     const dispatch = useDispatch();
+    const order = useSelector(state => state.order)
     const [state, setState] = useState("empty");
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/order/confirm/${id}/${token}`)
         .then(res => res.data )
-        .then(cart => {
-            dispatch(setProducts(cart.products));
-            dispatch(setStatus("confirmed"));
-        })
-        .then(() => {
-            console.log("this is order",order)
-            axios.post("/api/order/add", {...order})
+        .then(dbCart => {
+            axios.post("/api/order/add", {
+                address: order.address,
+                payMethod: order.payMethod, 
+                amount: dbCart.total, 
+                products: dbCart.list
+            })
             .then(() => {
                 dispatch(resetOrder());
                 axios.delete(`http://localhost:8080/api/cart/${id}`)
@@ -34,13 +36,12 @@ const ConfirmCart = function () {
             .catch(err => {
                 console.log(err)
                 dispatch(resetOrder());
-                setState("error")
+                setState("addError")
             })
         })
         .catch(err => {
             console.log(err)
-            dispatch(resetOrder());
-            setState("error")
+            setState("confirmError")
         });
     }, [])
 
@@ -59,10 +60,23 @@ const ConfirmCart = function () {
                 </Button>
             </Stack>
             :<></>}
-        {state === "error"?
+        {state === "addError"?
             <Stack align={"center"} mt="50">
                 <Heading fontSize={"4xl"}>Oops! Something went wrong :(</Heading>
                 <Text fontSize={"lg"} color={"gray.600"}>Your order has not been processed</Text>
+                <Button
+                    variant="outline"
+                    colorScheme="teal"
+                    onClick={()=>navigate(`/home`)}
+                >
+                    back to home
+                </Button>
+            </Stack>
+            :<></>}
+        {state === "confirmError"?
+            <Stack align={"center"} mt="50">
+                <Heading fontSize={"4xl"}>Oops! Something went wrong :(</Heading>
+                <Text fontSize={"lg"} color={"gray.600"}>cart not confirmed</Text>
                 <Button
                     variant="outline"
                     colorScheme="teal"

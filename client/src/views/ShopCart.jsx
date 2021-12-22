@@ -36,7 +36,7 @@ const ShopCart = () => {
         <>
         <Flex align="center" justify="center">
             <Heading fontSize={"4xl"} m="5">My Cart</Heading>
-            <Heading ml="auto" fontSize={"2xl"} mr="5">Total: $ {cart.total}</Heading>   
+            <Heading ml="auto" fontSize={"2xl"} mr="5">Total: {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(Number(cart.total))}</Heading>   
         </Flex>
             <Divider orientation="horizontal" mb="2" />
             {cart.list.length===0? <Center><Text fontSize={"lg"} color={"gray.600"}>no products added</Text></Center>:<></> }
@@ -59,7 +59,7 @@ const ShopCart = () => {
                             <Button onClick={()=>moreQuantity(i, cart, aux, setCart, setAux)} >+</Button>
                         </Stack>
                         <Stack align={"center"} justify="center">
-                            <Box>$ {prod.product.price}</Box>
+                            <Box>{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(Number(prod.product.price))}</Box>
                             <Button onClick={()=>deleteFromCart(i, cart, aux, setCart, setAux)}>delete product</Button>
                         </Stack>
                     </Grid>
